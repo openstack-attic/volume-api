@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<products xmlns:xlink="http://www.w3.org/1999/xlink">
+   <latestpdf>openstack-blockstorage-devguide-latest.pdf</latestpdf>
+   <pdfoutname>openstack-blockstorage-devguide-20121217.pdf</pdfoutname>
+   <docname>OpenStack Block Storage Service Developer Guide</docname>
+   <productname>OpenStack Block Storage Service</productname>
+   <webappname>openstack-blockstorage-devguide</webappname>
+   <pominfo>
+      <groupid>com.rackspace.cloud.apidocs</groupid>
+      <artifactid>openstack-block-storage</artifactid>
+      <version>1.0.0-SNAPSHOT</version>
+      <pomname>OpenStack Block Storage Doc Project, 1.0.0-SNAPSHOT</pomname>
+   </pominfo>
+</products>
