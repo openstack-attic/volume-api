@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:exsl="http://exslt.org/common" xmlns:ng="http://docbook.org/docbook-ng" xmlns:fb="http://ogp.me/ns/fb#"><head>
+<meta http-equiv="X-UA-Compatible" content="IE=7"/><link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/><script type="text/javascript" src="scripts/shCore.js"><!----></script><script type="text/javascript">
+               SyntaxHighlighter.config.space = ' ';
+               SyntaxHighlighter.all();
+    </script>
+<title>1.7. Faults - OpenStack Block Storage Service Developer Guide
+   - API v1.0</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"/><meta name="mavenGroupId" content="com.rackspace.cloud.apidocs"/><meta name="mavenArtifactId" content="openstack-block-storage"/><meta name="mavenVersionId" content="1.0.0-SNAPSHOT"/><link rel="home" href="index.html" title="OpenStack Block Storage Service Developer Guide"/><link rel="up" href="General_API_Information-d1e633.html" title="Chapter 1. General API Information"/><link rel="prev" href="datetimeformat.html" title="1.6. Date/Time Format"/><link rel="next" href="volume_status.html" title="1.8. Volume Status"/><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><script type="text/javascript">
+            //The id for tree cookie
+            var treeCookieId = "treeview-1557";
+            var language = "en";
+            var w = new Object();
+            //Localization
+            txt_filesfound = 'Results';
+            txt_enter_at_least_1_char = "You must enter at least one character.";
+            txt_browser_not_supported = "Your browser is not supported. Use of Mozilla Firefox is recommended.";
+            txt_please_wait = "Please wait. Search in progress...";
+            txt_results_for = "Results for: ";
+        </script><style type="text/css">
+            input {
+            margin-bottom: 5px;
+            margin-top: 2px;
+            }
+
+            .folder {
+            display: block;
+            height: 22px;
+            padding-left: 20px;
+            background: transparent url(../common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+            }
+            
+        </style><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="../common/css/positioning.css"/><link rel="stylesheet" type="text/css" href="../common/css/custom.css"/><!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><link rel="stylesheet" type="text/css" href="../common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css"/><link rel="stylesheet" type="text/css" href="../common/jquery/treeview/jquery.treeview.css"/><script type="text/javascript" src="../common/jquery/jquery-1.4.3.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery-ui-1.8.2.custom.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.cookie.js"><!----></script><script type="text/javascript" src="../common/jquery/treeview/jquery.treeview.min.js"><!----></script><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. --></script><script type="text/javascript" src="search/htmlFileList.js"><!----></script><script type="text/javascript" src="search/htmlFileInfoList.js"><!----></script><script type="text/javascript" src="search/nwSearchFnt.js"><!----></script><script type="text/javascript" src="search/stemmers/en_stemmer.js"><!--//make this scalable to other languages as well.--></script><script type="text/javascript" src="search/index-1.js"><!----></script><script type="text/javascript" src="search/index-2.js"><!----></script><script type="text/javascript" src="search/index-3.js"><!----></script></head><body><div id="header"><a onclick="_gaq.push(['_trackEvent', 'Header', 'logo', 'click', 1]);" target="_blank" href="http://www.openstack.org"><img src="../common/images/openstack-logo.png" alt="OpenStack Documentation" width="157" height="47"/></a><h1>1.7. Faults</h1><div id="navheader" align="right"><!----><table class="navLinks"><tr><td><a id="showHideButton" onclick="showHideToc(); _gaq.push(['_trackEvent', 'Header', 'show/hide', 'click', 1]);" class="pointLeft" title="Hide TOC tree">Sidebar
+                            </a></td><td><a accesskey="p" class="navLinkPrevious" onclick="_gaq.push(['_trackEvent', 'Header', 'prevLink', 'click', 1]);" tabindex="5" href="datetimeformat.html">Prev</a>
+				      |
+                                        <a accesskey="u" class="navLinkUp" onclick="_gaq.push(['_trackEvent', 'Header', 'upLink', 'click', 1]);" tabindex="5" href="General_API_Information-d1e633.html">Up</a>
+				  |
+                                    <a accesskey="n" class="navLinkNext" onclick="_gaq.push(['_trackEvent', 'Header', 'nextLink', 'click', 1]);" tabindex="5" href="volume_status.html">Next</a></td></tr></table></div></div><div id="toolbar" class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"><div id="toolbar-left"><p class="breadcrumbs"><a href="http://docs.openstack.org/">OpenStack Manuals</a><a href="index.html">OpenStack Block Storage Service Developer Guide
+   - API v1.0</a></p><a onclick="_gaq.push(['_trackEvent', 'Header', 'pdfDownload', 'click', 1]);" alt="Download a pdf of this document" class="pdficon" href="../openstack-blockstorage-devguide-20121217.pdf"><img src="../common/images/pdf.png"/></a></div></div><div id="content"><div class="statustext"> </div><div class="section"><div xmlns="" class="titlepage"><div><div><h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="DB_faults"> </a>1.7. Faults</h2></div></div></div><p> When an error occurs, the Block Storage Service
+        returns a fault object containing an HTTP error response code
+        that denotes the type of error. In the body of the response,
+        the system will return additional information about the fault. </p><p>The following table lists possible fault types with their
+        associated error codes and descriptions.</p><table rules="all" id="d6e256"><thead><tr align="center">
+            <td colspan="2">Fault Type</td>
+            <td>Associated Error Code</td>
+            <td colspan="3">Description</td>
+          </tr></thead><tbody><tr>
+            <td colspan="2"><code class="code">badRequest</code></td>
+            <td>400</td>
+            <td colspan="3">There was one or more errors in the user
+              request.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">unauthorized</code></td>
+            <td>401</td>
+            <td colspan="3">The supplied token is not authorized to
+              access the resources, either it's expired or
+              invalid.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">forbidden</code></td>
+            <td>403</td>
+            <td colspan="3">Access to the requested resource was
+              denied.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">itemNotFound</code></td>
+            <td>404</td>
+            <td colspan="3">The back-end services did not find
+              anything matching the Request-URI.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">badMethod</code></td>
+            <td>405</td>
+            <td colspan="3">The request method is not allowed for this
+              resource.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">overLimit</code></td>
+            <td>413</td>
+            <td colspan="3">Either the number of entities in the
+              request is larger than allowed limits, or the user has
+              exceeded allowable request rate limits. See the
+                <code class="code">details</code> element for more specifics.
+              Contact support if you think you need higher request
+              rate limits.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">badMediaType</code></td>
+            <td>415</td>
+            <td colspan="3">The requested content type is not
+              supported by this service.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">unprocessableEntity</code></td>
+            <td>422</td>
+            <td colspan="3">The requested resource could not be
+              processed on at the moment.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">instanceFault</code></td>
+            <td>500</td>
+            <td colspan="3">This is a generic server error and the
+              message contains the reason for the error. This error
+              could wrap several error messages and is a catch
+              all.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">notImplemented</code></td>
+            <td>501</td>
+            <td colspan="3">The requested method or resource is not
+              implemented.</td>
+          </tr><tr>
+            <td colspan="2"><code class="code">serviceUnavailable</code></td>
+            <td>503</td>
+            <td colspan="3">The Block Storage Service is not
+              available.</td>
+          </tr></tbody></table><p>
+        The following two <code class="code">instanceFault</code> examples show
+        errors when the server has erred or cannot perform the
+        requested operation:</p><div class="example"><a id="d6e321"> </a><p class="title"><strong>Example 1.5. Example instanceFault Response: XML</strong></p><div class="example-contents"><pre class="programlisting brush: xml; ">
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/xml
+Content-Length: 121
+Date: Mon, 28 Nov 2011 18:19:37 GMT
+
+&lt;instanceFault code="500" xmlns="http://docs.rackspace.com/cbs/api/v1.0"&gt;
+    &lt;message&gt;
+        The server has either erred or is incapable of performing the requested operation.
+    &lt;/message&gt;
+&lt;/instanceFault&gt;
+
+                    </pre></div></div><br class="example-break"/><div class="example"><a id="d6e324"> </a><p class="title"><strong>Example 1.6. Example Fault Response: JSON</strong></p><div class="example-contents"><pre class="programlisting brush: json; ">
+HTTP/1.1 500 Internal Server Error
+Content-Length: 120
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:33:48 GMT
+
+{
+    "instanceFault": {
+        "code": 500,
+        "message": "The server has either erred or is incapable of performing the requested operation."
+    }
+}
+
+                    </pre></div></div><br class="example-break"/><p> The error code (<code class="code">code</code>) is returned in the
+        body of the response for convenience. The <code class="code">message</code>
+        element returns a human-readable message that is appropriate
+        for display to the end user. The <code class="code">details</code> element
+        is optional and may contain information that is useful for
+        tracking down an error, such as a stack trace. The
+          <code class="code">details</code> element may or may not be appropriate
+        for display to an end user, depending on the role and
+        experience of the end user.</p><p>The fault's root element (for example,
+          <code class="code">instanceFault</code>) may change depending on the type
+        of error. </p><p>The following two
+          <code class="code">badRequest</code> examples show errors when the volume
+        size is invalid:</p><div class="example"><a id="d6e336"> </a><p class="title"><strong>Example 1.7. Example badRequest Fault on Volume Size Errors:
+          XML</strong></p><div class="example-contents"><pre class="programlisting brush: xml; ">
+HTTP/1.1 400 None
+Content-Type: application/xml
+Content-Length: 121
+Date: Mon, 28 Nov 2011 18:19:37 GMT
+
+&lt;badRequest code="400" xmlns="http://docs.rackspace.com/cbs/api/v1.0"&gt;
+    &lt;message&gt;
+        Volume 'size' needs to be a positive integer value, -1.0 cannot be accepted.
+    &lt;/message&gt;
+&lt;/badRequest&gt;
+
+                    </pre></div></div><br class="example-break"/><div class="example"><a id="d6e339"> </a><p class="title"><strong>Example 1.8. Example badRequest Fault on Volume Size Errors:
+          JSON</strong></p><div class="example-contents"><pre class="programlisting brush: json; ">
+HTTP/1.1 400 None
+Content-Length: 120
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:33:48 GMT
+
+{
+    "badRequest": {
+        "code": 400,
+        "message": "Volume 'size' needs to be a positive integer value, -1.0 cannot be accepted."
+    }
+}
+
+                    </pre></div></div><br class="example-break"/><p> The next two examples show <code class="code">itemNotFound</code>
+        errors:</p><div class="example"><a id="d6e344"> </a><p class="title"><strong>Example 1.9. Example itemNotFound Fault: XML</strong></p><div class="example-contents"><pre class="programlisting brush: xml; ">
+HTTP/1.1 404 Not Found
+Content-Length: 147
+Content-Type: application/xml; charset=UTF-8
+Date: Mon, 28 Nov 2011 19:50:15 GMT
+
+&lt;itemNotFound code="404" xmlns="http://docs.rackspace.com/cbs/api/v1.0"&gt;
+    &lt;message&gt;
+        The resource could not be found.
+    &lt;/message&gt;
+&lt;/itemNotFound&gt;
+
+                    </pre></div></div><br class="example-break"/><div class="example"><a id="d6e347"> </a><p class="title"><strong>Example 1.10. Example itemNotFound Fault: JSON</strong></p><div class="example-contents"><pre class="programlisting brush: json; ">
+HTTP/1.1 404 Not Found
+Content-Length: 78
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:35:24 GMT
+
+{
+    "itemNotFound": {
+        "code": 404,
+        "message": "The resource could not be found."
+    }
+}
+
+                    </pre></div></div><br class="example-break"/></div><script type="text/javascript" src="../common/main.js"><!----></script><hr/><script language="JavaScript" src="/comments.php?email=david.hendler@rackspace.com" type="text/javascript"><!----></script><noscript>You must have JavaScript enabled to view and post comments.</noscript><hr/><div class="legal"><a href="index.html">Legal notices</a></div></div><div><div id="leftnavigation" style="padding-top:3px; background-color:white;"><div id="tabs"><ul><li><a href="#treeDiv" tabindex="1"><span class="contentsTab">Contents</span></a></li><li><a href="#searchDiv" tabindex="1"><span class="searchTab">Search</span></a></li></ul><div id="treeDiv"><img src="../common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;"/><div id="ulTreeDiv" style="display:none" class="thisisthat"><ul id="tree" class="filetree"><li tabindex="2"><span class="file"><a href="Overview.html">OpenStack API Reference</a></span></li><li tabindex="2"><span class="file"><a href="overview.html">Overview</a></span><ul><li tabindex="2"><span class="file"><a href="Intended_Audience-d1e122.html">1. Intended Audience</a></span></li><li tabindex="2"><span class="file"><a href="Document_Change_History-d1e166.html">2. Document Change History</a></span></li><li tabindex="2"><span class="file"><a href="Additional_Resources-d1e532.html">3. Additional Resources</a></span></li><li tabindex="2"><span class="file"><a href="Concepts.html">4. Concepts</a></span><ul><li tabindex="2"><span class="file"><a href="Concepts.html#Instance">4.1. Instance</a></span></li><li tabindex="2"><span class="file"><a href="Concepts.html#Instance_Type">4.2. Instance Type</a></span></li><li tabindex="2"><span class="file"><a href="Concepts.html#Snapshot">4.3. Snapshot</a></span></li><li tabindex="2"><span class="file"><a href="Concepts.html#Volume">4.4. Volume</a></span></li><li tabindex="2"><span class="file"><a href="Concepts.html#Volumetype">4.5. Volume Type</a></span></li></ul></li></ul></li><li tabindex="2"><span class="file"><a href="General_API_Information-d1e633.html">1. General API Information</a></span><ul><li tabindex="2"><span class="file"><a href="Authentication-d1e647.html">1.1. Authentication</a></span></li><li tabindex="2"><span class="file"><a href="Service_Access_Endpoints-d1e753.html">1.2. Service Access/Endpoints</a></span></li><li tabindex="2"><span class="file"><a href="DB_service_versions.html">1.3. Block Storage Service Versions</a></span><ul><li tabindex="2"><span class="file"><a href="Contract_Version-d1e825.html">1.3.1. Contract Version</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="Request_Response_Types-d1e903.html">1.4. Request/Response Types</a></span></li><li tabindex="2"><span class="file"><a href="Limits-d1e1208.html">1.5. Limits</a></span><ul><li tabindex="2"><span class="file"><a href="Absolute_Limits-d1e1397.html">1.5.1. Absolute Limits</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="datetimeformat.html">1.6. Date/Time Format</a></span></li><li tabindex="2" id="webhelp-currentid"><span class="file"><a href="DB_faults.html">1.7. Faults</a></span></li><li tabindex="2"><span class="file"><a href="volume_status.html">1.8. Volume Status</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="volume.html">2. API Operations</a></span><ul><li tabindex="2"><span class="file"><a href="v1__tenant_id__volumes.html">2.1. Volumes</a></span><ul><li tabindex="2"><span class="file"><a href="POST_createVolume__v1__tenant_id__volumes.html">2.1.1. Create Volume</a></span></li><li tabindex="2"><span class="file"><a href="GET_getVolumesSimple__v1__tenant_id__volumes.html">2.1.2. List Volumes</a></span></li><li tabindex="2"><span class="file"><a href="GET_getVolume__v1__tenant_id__volumes.html">2.1.3. Show Volume</a></span></li><li tabindex="2"><span class="file"><a href="DELETE_deleteVolume__v1__tenant_id__volumes.html">2.1.4. Delete Volume</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="v1__tenant_id__types.html">2.2. Volume types</a></span><ul><li tabindex="2"><span class="file"><a href="GET_getVolumeTypes__v1__tenant_id__types.html">2.2.1. List Volume Types</a></span></li><li tabindex="2"><span class="file"><a href="GET_getVolumeType__v1__tenant_id__types.html">2.2.2. Describe Volume Type</a></span></li></ul></li><li tabindex="2"><span class="file"><a href="v1__tenant_id__snapshots.html">2.3. Snapshots</a></span><ul><li tabindex="2"><span class="file"><a href="POST_createSnapshot__v1__tenant_id__snapshots.html">2.3.1. Create Snapshot</a></span></li><li tabindex="2"><span class="file"><a href="GET_getSnapshotsSimple__v1__tenant_id__snapshots.html">2.3.2. List Snapshots</a></span></li><li tabindex="2"><span class="file"><a href="GET_getSnapshot__v1__tenant_id__snapshots.html">2.3.3. Show Snapshot</a></span></li><li tabindex="2"><span class="file"><a href="DELETE_deleteSnapshot__v1__tenant_id__snapshots.html">2.3.4. Delete Snapshot</a></span></li></ul></li></ul></li></ul></div></div><div id="searchDiv"><div id="search"><form onsubmit="Verifie(ditaSearch_Form);return false" name="ditaSearch_Form" class="searchForm"><fieldset class="searchFieldSet"><legend>Search</legend><center><input id="textToSearch" name="textToSearch" type="text" class="searchText"/> &nbsp; <input onclick="Verifie(ditaSearch_Form)" type="button" class="searchButton" value="Go" id="doSearch"/></center></fieldset></form></div><div id="searchResults"><center/></div><p class="searchHighlight"><a href="#" onclick="toggleHighlight()">Search Highlighter (On/Off)</a></p></div></div></div></div><script type="text/javascript" src="../common/jquery/jquery.qtip-1.0.0-rc3/jquery.qtip-1.0.0-rc3.min.js"><!--jQuery plugin for glossary popups. -->
+                   $('a[title]').qtip({ style: { name: 'cream', tip: true } })
+                </script></body></html>
