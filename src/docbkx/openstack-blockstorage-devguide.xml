@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book [
+<!-- Some useful entities borrowed from HTML -->
+<!ENTITY ndash  "&#x2013;">
+<!ENTITY mdash  "&#x2014;">
+<!ENTITY hellip "&#x2026;">
+
+<!-- Useful for describing APIs -->
+<!ENTITY GET    '<command xmlns="http://docbook.org/ns/docbook">GET</command>'>
+<!ENTITY PUT    '<command xmlns="http://docbook.org/ns/docbook">PUT</command>'>
+<!ENTITY POST   '<command xmlns="http://docbook.org/ns/docbook">POST</command>'>
+<!ENTITY DELETE '<command xmlns="http://docbook.org/ns/docbook">DELETE</command>'>
+<!ENTITY PRODNAME "OpenStack Block Storage Service">
+<!ENTITY PRODABBV "">
+
+<!-- changing authentication endpoints; define entities for US & UK rather than maintaining in text -->
+<!ENTITY ENDPOINT-US "https://auth.api.openstackcloud.com/v2.0/">
+<!ENTITY ENDPOINT-UK "https://lon.identity.api.openstackcloud.com/v1.1/">
+
+<!ENTITY CHECK  '<inlinemediaobject xmlns="http://docbook.org/ns/docbook">
+<imageobject>
+<imagedata fileref="img/Check_mark_23x20_02.svg"
+format="SVG" scale="60"/>
+</imageobject>
+</inlinemediaobject>'>
+
+
+<!ENTITY ARROW  '<inlinemediaobject xmlns="http://docbook.org/ns/docbook">
+<imageobject>
+<imagedata fileref="img/Arrow_east.svg"
+format="SVG" scale="60"/>
+</imageobject>
+</inlinemediaobject>'>
+]>
+<book 
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:m="http://www.w3.org/1998/Math/MathML"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:db="http://docbook.org/ns/docbook"
+  version="5.0" 
+    xml:id="openstack-blockstorage-devguide">
+ <?rax title.font.size="35px" subtitle.font.size="20px"?>
+  <info>
+    <title>&PRODNAME; Developer Guide</title>
+    <titleabbrev>&PRODNAME; Developer Guide</titleabbrev>
+    <copyright>
+      <year>2012</year>
+    </copyright>
+    <releaseinfo>API v1.0</releaseinfo>
+    <productname>&PRODNAME;</productname>
+    <pubdate>2012-12-17</pubdate>
+    <legalnotice role="apache2">
+      <annotation xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns:m="http://www.w3.org/1998/Math/MathML"
+        xmlns:html="http://www.w3.org/1999/xhtml">
+        <remark>Copyright details are filled in by the
+          template.</remark>
+      </annotation>
+    </legalnotice>
+    <abstract>
+      <para>This document is intended for software developers
+        interested in developing applications using the &PRODNAME;
+        Application Programming Interface
+          (<abbrev>API</abbrev>). </para>
+    </abstract>
+    <revhistory xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:m="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml">
+      <revision>
+        <date>2012-12-17</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Edits to initial version; .</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
+        <date>2012-10-17</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Initial release.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+    </revhistory>
+  </info>
+  <preface xml:id="Overview">
+    <title>OpenStack API Reference</title>
+
+    <para>The OpenStack system has several key projects that are
+    separate installations but can work together depending on your
+    cloud needs: OpenStack Compute, OpenStack Object Storage,
+    OpenStack Block Storage,
+    OpenStack Identity Service, and OpenStack Image Service.</para>
+
+    <para>This page covers the basics for working with your OpenStack
+    cloud through the Compute API and Image API after authorizing with
+    the Identity Service API. You can then build a cloud by launching
+    images and assigning metadata to instances, all through an
+    API. Refer to the <link
+    xlink:href="http://docs.openstack.org/api/quick-start/content/">API Quick Start
+    Guide</link> for details about using the APIs referenced here, and
+    go to <link
+    xlink:href="http://docs.openstack.org/api/">docs.openstack.org/api</link>
+    for specifications of each API.
+    </para>
+  </preface>
+  <preface xml:id="overview" xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:html="http://www.w3.org/1999/xhtml">
+    <title>Overview</title>
+    <para>&PRODNAME; is a block-level storage
+      solution that allows customers to mount drives or volumes to
+      their OpenStack Cloud Servers<trademark/>. The
+      two primary use cases are (1) to allow customers to scale their
+      storage independently from their compute resources, and (2)
+      to allow customers to utilize high performance storage to serve
+      database or I/O-intensive applications. 
+    </para>
+    <para>Interactions with Block Storage occur programmatically via the Block 
+      Storage API as described in this Developer Guide.
+    </para>
+    <para>Highlights of &PRODNAME; include:<itemizedlist>
+      <listitem>
+        <para>Mount a drive to a Cloud Server to scale storage
+          without paying for more compute capability.</para>
+      </listitem>
+      </itemizedlist>
+      </para>
+    <note><title>Notes</title>
+      <itemizedlist>
+        <listitem>
+          <para>&PRODNAME; is an add-on feature to
+            OpenStack Nova Compute. </para>
+        </listitem>
+        <listitem>
+          <para>Block Storage is multi-tenant rather than
+            dedicated.</para>
+        </listitem>
+        <listitem>
+          <para>Block Storage allows you to create snapshots
+            that you can save, list, and restore.</para>
+        </listitem>
+      </itemizedlist>
+    </note>
+    <section xml:id="Intended_Audience-d1e122">
+      <title>Intended Audience</title>
+      <para>This Guide is intended to assist software developers who
+        want to develop applications using the Block Storage
+        API. It assumes the reader has a general understanding of
+        storage and is familiar with: </para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>ReSTful web services</para>
+        </listitem>
+        <listitem>
+          <para>HTTP/1.1 conventions</para>
+        </listitem>
+        <listitem>
+          <para>JSON and/or XML data serialization formats</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+    <?hard-pagebreak?>
+    <section xml:id="Document_Change_History-d1e166">
+      <title>Document Change History</title>
+      <para>This version of the Developer Guide replaces and obsoletes
+        all previous versions. The most recent changes are described
+        in the table below:</para>
+      <?rax revhistory?>
+    </section>
+    <section xml:id="Additional_Resources-d1e532">
+      <title>Additional Resources</title>
+
+      <para>You can download the most current versions of the
+        API-related documents from <link
+          xlink:href="http://docs.openstack.com/api/"
+          >docs.openstack.com/api/</link>. 
+      </para>
+      <para>This API uses standard HTTP 1.1 response codes as
+        documented at: <link
+          xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
+          >www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</link>.
+      </para>
+    </section>
+
+    <section xml:id="Concepts">
+    <title>Concepts</title>
+    <?dbhtml stop-chunking?>
+    <para> To use the Block Storage API effectively, you should
+      understand several key concepts: </para>
+    <section xml:id="Instance">
+      <title>Instance</title>
+      <para>An instance is a virtual machine that
+        runs inside the cloud.</para>
+    </section>
+    <section xml:id="Instance_Type">
+      <title>Instance Type</title>
+      <para>An instance type describes the
+        compute, memory and storage capacity of Nova computing
+        instances. In layman's terms, this is the size (in terms of
+        vCPUs, RAM, and so forth) of the virtual server that you will
+        be launching.</para>
+    </section>
+      <section xml:id="Snapshot">
+        <title>Snapshot</title>
+        <para>A snapshot is a point in time copy of the data
+          contained in a volume. 
+        </para>
+      </section>
+    <section xml:id="Volume">
+      <title>Volume</title>
+      <para>A volume is a detachable block
+        storage device. You can think of it as a USB hard drive. It
+        can only be attached to one instance at a time.
+      </para>
+    </section>
+      <section xml:id="Volumetype">
+        <title>Volume Type</title>
+        <para>The volume type is the type of a block storage volume.
+          You may define whatever types work best for you, such as 
+          SATA, SCSCI, SSD, etc. These can be customized or defined
+          by the OpenStack admin.
+        </para>
+        <para>
+          You may also define extra_specs associated with your
+          volume types. For instance, you could have a 
+          VolumeType=SATA, with extra_specs (RPM=10000, RAID-Level=5) .
+          Extra_specs are defined and customized by the admin.
+        </para>
+      </section>      
+      
+    </section>
+  </preface>
+  
+  <chapter xml:id="General_API_Information-d1e633"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:html="http://www.w3.org/1999/xhtml">
+    <title>General API Information</title>
+ <!--   <para> The Block Storage API is implemented using a ReSTful
+      web service interface. Like other products in the Rackspace
+      Cloud suite, Block Storage shares a common token-based
+      authentication system that allows seamless access between
+      products and services. </para>
+    <note>
+      <para> All requests to authenticate against and operate the
+        service are performed using SSL over HTTP (HTTPS) on TCP port
+        443. </para>
+    </note>
+    -->
+    <section xml:id="Authentication-d1e647">
+      <title>Authentication</title>
+      <para security="reviewer">
+        <remark security="reviewer">John - Do we remove this paragraph for OpenStack?</remark>
+        You can use <link xlink:href="http://curl.haxx.se/"
+        >cURL</link> to try the authentication process in two
+        steps: get a token; send the token to a service.
+        <orderedlist>
+          <listitem>
+            <para>Get an authentication token by providing
+              your username and either your API key or your
+              password. Here are examples of both
+              approaches:</para>
+            <para><emphasis>You can request a token by
+              providing your username and your API
+              key.</emphasis></para>
+            <para>
+              <literallayout class="monospaced">curl -X POST https://auth.api.openstackcloud.com/v2.0/tokens -d 
+'{ "auth":{ "RAX-KSKEY:apiKeyCredentials":{ "username":"theUserName", "apiKey":"00a00000a000a0000000a000a00aaa0a" } } }' -H "Content-type: application/json"</literallayout>
+            </para>
+            <para><emphasis>You can request a token by
+              providing your username and your
+              password.</emphasis></para>
+            <para>
+              <literallayout class="monospaced">curl -X POST https://auth.api.openstackcloud.com/v2.0/tokens -d
+'{"auth":{"passwordCredentials":{"username":"theUserName","password":"thePassword"}}}' -H "Content-type: application/json"</literallayout>
+            </para>
+            <para> Successful authentication returns a token
+              which you can use as evidence that your
+              identity has already been authenticated. To
+              use the token, pass it to other services as an
+              <code>X-Auth-Token</code> header. </para>
+            <para> Authentication also returns a service
+              catalog, listing the endpoints you can use for
+              Cloud services. </para>
+          </listitem>
+          <listitem>
+            <para>Use the authentication token to send a GET
+              to a service you would like to use. Here is an
+              example of passing an authentication token to
+              the Cloud Files service, using the Cloud Files
+              service catalog endpoint that was returned
+              along with the token.</para>
+            <para><emphasis>You can use a token and a service endpoint to tell a service that your credentials are valid.</emphasis></para>
+            <para>
+              <literallayout class="monospaced">curl -X GET https://storage101.dfw1.clouddrive.com/v1/MossoCloudFS_aaaaaaaa-bbbb-cccc-dddd-eeeeeeee
+-H 'X-Auth-Token:11111111-aaaa-2222-bbbb-3333cccc4444' --verbose</literallayout>
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
+        <para>Authentication tokens are typically valid for 24 hours.
+          Applications should be designed to re-authenticate after
+          receiving a 401 (Unauthorized) response from a service
+          endpoint. </para>
+        <important>
+          <para>If you are programmatically parsing an authentication
+            response, please be aware that service names are stable
+            for the life of the particular service and can be used as
+            keys. You should also be aware that a user's service
+            catalog can include multiple uniquely-named services which
+            perform similar functions. For example,
+            cloudServersOpenStack is the OpenStack version of compute
+            whereas cloudServers is the legacy version of compute; the
+            same user can have access to both services. In Auth 2.0,
+            the service type attribute can be used as a key by which
+            to recognize similar services; see the tip below.</para>
+        </important>
+        <tip>
+          <para>Beginning with Auth 2.0, the service catalog includes
+            a service type attribute to identify services that perform
+            similar functions but have different names; for example,
+              <code>type="compute"</code> identifies compute services
+            such as cloudServers and cloudServersOpenStack. Some
+            developers have found the service type attribute to be
+            useful in parsing the service catalog. For Auth 2.0 (also
+            known as the Cloud Identity Service), you can see the
+            service type attribute in the "Service Catalog in
+            Authentication Response" samples in the <citetitle>Cloud
+              Identity Client Developer Guide</citetitle> at <link
+              xlink:href="http://docs.openstack.com/auth/api/v2.0/auth-client-devguide/content/Sample_Request_Response-d1e64.html"
+              >http://docs.openstack.com/auth/api/v2.0/auth-client-devguide/content/Sample_Request_Response-d1e64.html</link>.</para>
+        </tip>
+
+    </section>
+    <section xml:id="Service_Access_Endpoints-d1e753">
+      <title>Service Access/Endpoints</title>
+      <para>The Block Storage Service is a regionalized service.
+        The user of the service is therefore responsible for
+        appropriate replication, caching, and overall maintenance of
+        Block Storage data across regional boundaries to other
+        Block Storage servers.</para>
+      <para>You can find the available service access/endpoints for
+        Block Storage summarized in the table below.</para>
+       <para>Replace the sample account ID number,
+          <parameter>1234</parameter>, with your actual account number
+        returned as part of the authentication service
+        response.</para>
+      <para>You will find the actual account number after the final
+        '/' in the <code>publicURL</code> field returned by the
+        authentication response.</para>
+    </section>
+    <section xml:id="DB_service_versions">
+      <title>Block Storage Service Versions</title>
+      <para>The Block Storage version defines the contract and
+        build information for the API. </para>
+      <section xml:id="Contract_Version-d1e825">
+        <title>Contract Version</title>
+        <para> The contract version denotes the data model and
+          behavior that the API supports. The requested contract
+          version is included in all request URLs. Different contract
+          versions of the API may be available at any given time and
+          are not guaranteed to be compatible with one another. </para>
+        <example>
+          <title>Example Request URL (contract version in <emphasis
+              role="strong">bold</emphasis>)</title>
+          <programlisting>https://dfw.blockstorage.api.openstackcloud.com/v1/1234/</programlisting>
+        </example>
+        <note>
+          <para>This document pertains to contract version 1.0.</para>
+        </note>
+      </section>
+    </section>
+    <section xml:id="Request_Response_Types-d1e903">
+      <title>Request/Response Types</title>
+      <para>The Block Storage API supports both the JSON and
+        XML data serialization formats. The request format is
+        specified using the <code>Content-Type</code> header and is
+          required for calls that have a request
+        body. The response format can be specified in requests either
+        by using the <code>Accept</code> header or by adding an
+          <code>.xml</code> or <code>.json</code> extension to the
+        request URI. Note that it is possible for a response to be
+        serialized using a format different from the request. If no
+        response format is specified, JSON is the default. If
+        conflicting formats are specified using both an
+          <code>Accept</code> header and a query extension, the query
+        extension takes precedence.</para>
+      <para security="writeronly">Some operations support an Atom
+        representation that can be used to efficiently determine when
+        the state of services has changed. </para>
+      
+      <table rules="all">
+        <caption>Response Formats</caption>
+        <?dbfo keep-together="always"?>
+        <thead>
+          <tr align="center">
+            <td>Format</td>
+            <td>Accept Header</td>
+            <td>Query Extension</td>
+            <td>Default</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>JSON</td>
+            <td>application/json</td>
+            <td>.json</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>XML</td>
+            <td>application/xml</td>
+            <td>.xml</td>
+            <td>No</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <para>In the request example below, notice that
+          <parameter>Content-Type</parameter> is set to
+          <parameter>application/json</parameter>, but
+          <parameter>application/xml</parameter> is requested via the
+          <parameter>Accept</parameter> header:</para>
+
+      <example>
+        <title>Request with Headers (Getting Volume Types)</title>
+        <literallayout class="monospaced">
+  GET /v1/441446/types HTTP/1.1
+  Host: dfw.blockstorage.api.openstackcloud.com
+  X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
+  Accept: application/xml
+                    </literallayout>
+      </example>
+
+      <para><?rax-fo keep-with-next?>Therefore an XML response format
+        is returned:</para>
+
+      <example>
+        <title>Response with Headers</title>
+        <literallayout class="monospaced">
+  HTTP/1.1 200 OK
+  Date: Fri, 20 Jul 2012 20:32:13 GMT
+  Content-Length: 187
+  Content-Type: application/xml
+  X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
+  
+  &lt;?xml version='1.0' encoding='UTF-8'?&gt;
+  &lt;volume_types&gt;
+      &lt;volume_type id="1" name="SATA"&gt;
+          &lt;extra_specs/&gt;
+      &lt;/volume_type&gt;
+      &lt;volume_type id="2" name="SSD"&gt;
+          &lt;extra_specs/&gt;
+      &lt;/volume_type&gt;
+  &lt;/volume_types&gt;
+     </literallayout>
+      </example>
+
+    </section>
+    
+    <!-- 
+    <section xml:id="sync_asynch_responses" security="writeronly">
+      <title>Synchronous and Asynchronous Responses</title>
+      <remark security="reviewer">Reviewer: please give me the updated info for this
+        section. Need to replace info about callback URL,
+        etc.</remark>
+      <para> All successful &GET; requests are
+          synchronous calls, since they are
+        always retrieving (reading) existing information. With these
+        requests, the caller waits until the call returns with the
+        specified code and response body. For an example, see
+        XXXX.</para>
+      <para>&PUT;, &POST;, and &DELETE; calls are
+          asynchronous, however, since they may
+        take some time to process. Therefore they return 202 ACCEPTED
+        responses containing information with a callback URL, which
+        allows the progress, status, and/or response information of
+        the call to be retrieved at a later point in time. The
+        asynchronous response body will look similar to the following
+        examples, depending on the format requested:</para>
+      <example>
+        <title>202 ACCEPTED Response: XML</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="xml">Reviewer: need code example</programlisting>
+      </example>
+      <example>
+        <title>202 ACCEPTED Response: JSON</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="json">Reviewer: need code example</programlisting>
+      </example>
+      <para>The following table shows the attributes for asynchronous
+        responses:</para>
+      <table rules="all">
+        <caption>Attributes for Asynchronous Responses</caption>
+        <?dbfo keep-together="always"?>
+        <thead>
+          <tr align="center">
+            <td colspan="1">Attribute</td>
+            <td colspan="4">Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="1">jobId</td>
+            <td colspan="4">An identifier for the specific
+              request.</td>
+          </tr>
+          <tr>
+            <td colspan="1">callbackUrl</td>
+            <td colspan="4">Resource locator for querying the status
+              of the request.</td>
+          </tr>
+        </tbody>
+      </table>
+      <note>
+        <para>The status for asynchronous calls is retained for up to
+          24 hours.</para>
+      </note>
+      <note>
+        <para>If a request body does not pass initial validation or an
+          error condition arises, you may receive an immediate error
+          response from the request.</para>
+      </note>
+      <para>When a request is made to the callback URL provided and
+        the job is still running, another
+          <returnvalue>202</returnvalue> ACCEPTED response is returned
+        with the same information as the previous one. If the request
+        is complete, the response will be as if the original call
+        returned as normal, without waiting. For example, if a Create
+        Database request was issued and a 202 asynchronous response
+        was returned, the response from querying the callback URL for
+        a completed successful database creation would be a
+          <returnvalue>200</returnvalue> OK and contain the
+        information for the created database. See XXXX for a specific
+        example.</para>
+      <para>If an error occurs during the processing of the create
+        request, querying the callback URL will return the details of
+        the error, as if the original call returned the error
+        response. For example, if a validation error occurs during the
+        Create Database request above, the response from querying the
+        callback URL would be a <returnvalue>400</returnvalue> BAD
+        REQUEST and contain details regarding the specific validation
+        error.</para>
+      <note>
+        <para>If the response from querying a callback URL is a
+            <returnvalue>404</returnvalue> NOT FOUND, the details of
+          the error in the response body will contain information the
+          caller may use to determine whether the specified job itself
+          was not found, or if the response from the original request
+          was a <returnvalue>404</returnvalue> NOT FOUND. </para>
+      </note>
+      <para>The description of each &PUT;, &POST;, and &DELETE;
+        request identifies the response codes that can indicate
+        success or error for that request. For example, see XXXX
+        immediately below the table for a list of the successful and
+        error response codes for the POST /xxxx call.</para>
+    </section>
+    <section xml:id="Content_Compression-d1e1120"
+      security="writeronly">
+      <title>Content Compression</title>
+      <remark security="reviewer">Reviewer: I am hiding this entire section for the
+        Private Beta, since I'm not sure that it applies. Is that
+        correct?</remark>
+      <para> Request and response body data may be encoded with gzip
+        compression to accelerate interactive performance of API calls
+        and responses. This is controlled using the
+          <code>Accept-Encoding</code> header on the request from the
+        client and indicated by the <code>Content-Encoding</code>
+        header in the server response. Unless the header is explicitly
+        set, encoding defaults to disabled. </para>
+      <table rules="all">
+        <caption>Encoding Headers</caption>
+        <?dbfo keep-together="always"?>
+        <thead>
+          <tr align="center">
+            <td>Header Type</td>
+            <td>Name</td>
+            <td>Value</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HTTP/1.1 Request</td>
+            <td><code>Accept-Encoding</code></td>
+            <td>gzip</td>
+          </tr>
+          <tr>
+            <td>HTTP/1.1 Response</td>
+            <td><code>Content-Encoding</code></td>
+            <td>gzip</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section xml:id="Persistent_Connections-d1e1187"
+      security="writeronly">
+      <title>Persistent Connections</title>
+      <remark security="reviewer">Reviewer: I am hiding this entire section for the
+        Private Beta, since I'm not sure that it applies. Is that
+        correct?</remark>
+      <para> By default, the API supports persistent connections via
+        HTTP/1.1 keepalives. All connections will be kept alive unless
+        the connection header is set to close. </para>
+      <para> To prevent abuse, HTTP sessions have a timeout of 20
+        seconds before being closed. </para>
+      <note>
+        <para> The server may close the connection at any time and
+          clients should not rely on this behavior. </para>
+      </note>
+    </section>
+    -->
+    <?hard-pagebreak?>
+    <section xml:id="Limits-d1e1208">
+      <title>Limits</title>
+      <para> All accounts, by default, have a preconfigured set of
+        thresholds (or limits) to manage capacity and prevent abuse of
+        the system. The system recognizes two kinds of limits:
+          <firstterm>rate limits</firstterm> and <firstterm>absolute
+          limits</firstterm>. Rate limits are thresholds that are
+        reset after a certain amount of time passes. Absolute limits
+        are fixed. </para>
+      <section xml:id="Rate_Limits-d1e1222" security="writeronly">
+        <title>Rate Limits</title>
+        <para> Rate limits are specified in terms of both a
+          human-readable wild-card URI and a machine-processable
+          regular expression. The regular expression boundary matcher
+          '^' takes effect after the root URI path. For example, the
+          regular expression ^/v1.0/instances would match the bolded
+          portion of the following URI:
+          https://dfw.blockstorage.api.openstackcloud.com<emphasis
+            role="bold">/v1.0/instances</emphasis>. </para>
+        <para>The following table specifies the default rate limits
+          for all API operations for all &GET;, &POST;, &PUT;, and
+          &DELETE; calls for volumes: </para>
+        <table rules="all">
+          <caption>Default Rate Limits</caption>
+          <thead>
+            <tr align="center">
+              <td colspan="1">Verb</td>
+              <td colspan="2">URI</td>
+              <td colspan="2">RegEx</td>
+              <td colspan="1">Default</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="1">&GET; changes-since</td>
+              <td colspan="2">*/instances/*</td>
+              <td colspan="2">^/v\d+\.\d+/\d+/instances.*</td>
+              <td colspan="1">3/minute</td>
+            </tr>
+            <tr>
+              <td colspan="1">&POST;</td>
+              <td colspan="2">*/instances/*</td>
+              <td colspan="2">^/v\d+\.\d+/\d+/instances.*</td>
+              <td colspan="1">10/minute</td>
+            </tr>
+            <tr>
+              <td colspan="1">&POST; instances</td>
+              <td colspan="2">*/instances/*</td>
+              <td colspan="2">^/v\d+\.\d+/\d+/instances.*</td>
+              <td colspan="1">50/day</td>
+            </tr>
+            <tr>
+              <td colspan="1">&PUT;</td>
+              <td colspan="2">*/instances/*</td>
+              <td colspan="2">^/v\d+\.\d+/\d+/instances.*</td>
+              <td colspan="1">10/minute</td>
+            </tr>
+            <tr>
+              <td colspan="1">&DELETE;</td>
+              <td colspan="2">*/instances/*</td>
+              <td colspan="2">^/v\d+\.\d+/\d+/instances.*</td>
+              <td colspan="1">100/minute</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <para> Rate limits are applied in order relative to the verb,
+          going from least to most specific. For example, although the
+          threshold for &POST; to /v1.0/* is 10 per minute, one cannot
+          &POST; to /v1.0/* more than 50 times within a single day. </para>
+        <para> If you exceed the thresholds established for your
+          account, a <errorcode>413 (Rate Control)</errorcode> HTTP
+          response will be returned with a <code>Retry-After</code>
+          header to notify the client when it can attempt to try
+          again. </para>
+      </section>
+      <section xml:id="Absolute_Limits-d1e1397">
+        <title>Absolute Limits</title>
+
+        <para>Refer to the following table for the absolute limits
+          that are set.</para>
+        <table rules="all">
+          <caption>Absolute Limits</caption>
+          <col width="120pt"/>
+          <col width="201pt"/>
+          <col width="50pt"/>
+          <thead>
+            <tr>
+              <td colspan="1">Name</td>
+              <td colspan="1">Description</td>
+              <td colspan="1">Limit</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="1">Block Storage</td>
+              <td colspan="1">Maximum amount of block storage (in gigabytes) 
+               </td>
+              <td colspan="1">1 TB</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+    <section xml:id="datetimeformat">
+      <title>Date/Time Format</title>
+      <para> The Block Storage Service uses an ISO-8601
+        compliant date format for the display and consumption of
+        date/time values. </para>
+      <example>
+        <title>DB Service Date/Time Format</title>
+        <programlisting>yyyy-MM-dd'T'HH:mm:ss.SSSZ</programlisting>
+        <para>See the table below for a description of the date/time
+          format codes.</para>
+        <para>May 19th, 2011 at 8:07:08 AM, GMT-5 would have the
+          following format:</para>
+        <programlisting>2011-05-19T08:07:08-05:00</programlisting>
+      </example>
+      <table rules="all">
+        <caption>Explanation of Date/Time Format Codes</caption>
+        <thead>
+          <tr>
+            <td>Code</td>
+            <td>Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>yyyy</td>
+            <td>Four digit year</td>
+          </tr>
+          <tr>
+            <td>MM</td>
+            <td>Two digit month</td>
+          </tr>
+          <tr>
+            <td>dd</td>
+            <td>Two digit day of month</td>
+          </tr>
+          <tr>
+            <td>T</td>
+            <td>Separator for date/time</td>
+          </tr>
+          <tr>
+            <td>HH</td>
+            <td>Two digit hour of day (00-23)</td>
+          </tr>
+          <tr>
+            <td>mm</td>
+            <td>Two digit minutes of hour</td>
+          </tr>
+          <tr>
+            <td>ss</td>
+            <td>Two digit seconds of the minute</td>
+          </tr>
+          <tr>
+            <td>SSS</td>
+            <td>Three digit milliseconds of the second</td>
+          </tr>
+          <tr>
+            <td>Z</td>
+            <td>RFC-822 timezone</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section xml:id="pagination" security="writeronly">
+      <title>Pagination</title>
+      <remark security="reviewer">Reviewer: please review and give me your updates for
+        this section. Dev needs to determine which API calls support
+        pagination and then supply examples. I have hidden this entire
+        section for now, since we do not believe that it will be
+        supported for Private Beta. Correct?</remark>
+      <para>To reduce load on the service, list operations will return
+        a maximum of 100 items at a time. This is referred to as
+          pagination.</para>
+      <para> Pagination is the ability to limit the size of the
+        returned data as well as retrieve a specified subset of a
+        large data set. Pagination has two key concepts: limit and
+        offset. Limit is the restriction on the
+        maximum number of items for that type that can be returned.
+          Offset is the starting point for the
+        return data. For example, an offset of 50 specifies that the
+        items that are returned should start with item number 51
+        (since the numbering is one-based) in the collection. </para>
+      <para>It is important to note that offset
+          must be a multiple of the limit (or
+        zero), otherwise a Bad Request Exception will be thrown. Both
+        limit and offset are specified via request parameters on the
+        URI. The parameters are named <code>limit</code> and
+          <code>offset</code> respectively, and both apply only to
+        &GET; calls. If unspecified, they default to
+          <code>limit=100</code> and <code>offset=0</code>. See the
+        examples that follow.</para>
+      <example>
+        <title>Examples of Limits and Offsets for Paging Calls</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="xml">Reviewer: Need code example.</programlisting>
+      </example>
+      <para>Pagination applies only to the calls listed in the
+        following table: </para>
+      <remark security="reviewer">Reviewer: need to update the table of paginated API
+        calls below:</remark>
+      <informaltable rules="all">
+        <thead>
+          <tr align="center">
+            <td colspan="1">Verb</td>
+            <td colspan="2">URI</td>
+            <td colspan="3">Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="1">&GET;</td>
+            <td colspan="2">/URI/</td>
+            <td colspan="3">List all databases manageable by the
+              account specified. </td>
+          </tr>
+          <tr>
+            <td colspan="1">&GET;</td>
+            <td colspan="2"
+              >/URI/?name=<replaceable>Name</replaceable></td>
+            <td colspan="3">Filter databases.</td>
+          </tr>
+          <tr>
+            <td colspan="1">&GET;</td>
+            <td colspan="2">/URI/<replaceable>ID</replaceable></td>
+            <td colspan="3">List details of the specified
+              database.</td>
+          </tr>
+          <tr>
+            <td colspan="1">&GET;</td>
+            <td colspan="2"
+              >/URI/<replaceable>ID</replaceable>/xxx</td>
+            <td colspan="3">List details xxx.</td>
+          </tr>
+          <tr>
+            <td colspan="1">&GET;</td>
+            <td colspan="2"
+              >/URI/<replaceable>ID</replaceable>/yyy</td>
+            <td colspan="3">List details yyy.</td>
+          </tr>
+        </tbody>
+      </informaltable>
+      <para>See the following section for examples of paged List
+        Databases calls.</para>
+      <section xml:id="Pagination_Elements_and_Attributes-d1e1754">
+        <title>Pagination Elements and Attributes</title>
+        <remark security="reviewer">Reviewer: please review and give me your updates for
+          this section.</remark>
+        <para>For any collection in a result, there is a
+            <code>totalEntries</code> attribute representing the total
+          number of entries there are for this item type. If the
+          number of items requested in the &GET; call is less then the
+          total number of items for this type, then there will be
+          pagination links <code>previous</code> and/or
+            <code>next</code>, specifying how to get to the previous
+          and/or next set of records. </para>
+        <note>
+          <para>The <code>previous</code> and/or <code>next</code>
+            link elements are displayed only if there are items
+            available in the corresponding link. See the following
+            examples for details.</para>
+        </note>
+        <example>
+          <title>List Databases Request with limit: XML</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <example>
+          <title>List Databases Request with limit: JSON</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <example>
+          <title>List Databases Response with totalEntries:
+            XML</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <example>
+          <title>List Databases Response with totalEntries:
+            JSON</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <para> In the previous two response examples, note that
+            <code>totalEntries=112</code> and that a link has been
+          provided to retrieve the next 3 results
+            (<code>limit=3</code>) in the link element identified by
+          the attribute <code>rel="next"</code> (XML) or
+            <code>"rel":"next"</code> (JSON). </para>
+        <para>The following example shows links to both previous and
+          next results in the responses, since the request specified
+          to start with the fourth item in the collection
+            (<code>offset=3</code>):</para>
+        <example>
+          <title>List Databases Request with limit and offset:
+            XML</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <example>
+          <title>List Databases Request with limit and offset:
+            JSON</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <example>
+          <title>List Databases Response with Links to previous and
+            next Results: XML</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <example>
+          <title>List Databases Response with Links to previous and
+            next Results: JSON</title>
+          <?dbfo keep-together="always"?>
+          <programlisting language="xml">Reviewer: Need code example.</programlisting>
+        </example>
+        <para>
+          <?rax-fo keep-with-next?> In the previous two response
+          examples, note that <code>totalEntries=112</code> and two
+          links have been provided to:<itemizedlist>
+            <listitem>
+              <para>Retrieve the next 3 results (<code>limit=3</code>)
+                via the link element identified by the attribute
+                  <code>rel="next"</code> (XML) or
+                  <code>"rel":"next"</code> (JSON)</para>
+            </listitem>
+            <listitem>
+              <para>Retrieve the previous 3 results via the link
+                element identified by the attribute
+                  <code>rel="previous"</code> (XML) or
+                  <code>"rel":"previous"</code> (JSON) </para>
+            </listitem>
+          </itemizedlist></para>
+      </section>
+    </section>
+    <section xml:id="efficient_polling_changes_since_parm"
+      security="writeronly">
+      <title>Efficient Polling with the
+          <parameter>Changes-Since</parameter> Parameter</title>
+      <remark security="reviewer">Reviewer: I have hidden this section, since it does not
+        appear that it will be supported for Private Beta.
+        Correct?</remark>
+      <para> The ReST API allows you to poll for the status of certain
+        operations by performing a &GET; on various URIs. Rather than
+        re-downloading and re-parsing the full status at each polling
+        interval, your ReST client may use the
+          <parameter>changes-since</parameter> parameter to check for
+        changes since a previous request. The
+          <parameter>changes-since</parameter> time is specified as
+          <link xlink:href="http://en.wikipedia.org/wiki/Unix_time"
+          >Unix time</link> (the number of seconds since January 1,
+        1970, 00:00:00 UTC, not counting leap seconds). If nothing has
+        changed since the <parameter>changes-since</parameter> time, a
+          <returnvalue>304 (Not Modified)</returnvalue> response will
+        be returned. If data has changed, only the items changed since
+        the specified time will be returned in the response. </para>
+      <remark security="reviewer">Reviewer: does the following sentence apply, and should
+        it be included?</remark>
+      <para>For example, performing a &GET; against
+          https://api.servers.openstackcloud.com/v1.0/224532/servers?<parameter>changes-since</parameter>=1244012982
+        would list all servers that have changed since Wed, 03 Jun
+        2009 07:09:42 UTC. </para>
+    </section>
+    <section xml:id="DB_faults" >
+      <title>Faults</title>
+      <para> When an error occurs, the Block Storage Service
+        returns a fault object containing an HTTP error response code
+        that denotes the type of error. In the body of the response,
+        the system will return additional information about the fault. </para>
+      <para>The following table lists possible fault types with their
+        associated error codes and descriptions.</para>
+      <informaltable rules="all">
+        <thead>
+          <tr align="center">
+            <td colspan="2">Fault Type</td>
+            <td colspan="1">Associated Error Code</td>
+            <td colspan="3">Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2"><code>badRequest</code></td>
+            <td colspan="1">400</td>
+            <td colspan="3">There was one or more errors in the user
+              request.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>unauthorized</code></td>
+            <td colspan="1">401</td>
+            <td colspan="3">The supplied token is not authorized to
+              access the resources, either it's expired or
+              invalid.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>forbidden</code></td>
+            <td colspan="1">403</td>
+            <td colspan="3">Access to the requested resource was
+              denied.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>itemNotFound</code></td>
+            <td colspan="1">404</td>
+            <td colspan="3">The back-end services did not find
+              anything matching the Request-URI.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>badMethod</code></td>
+            <td colspan="1">405</td>
+            <td colspan="3">The request method is not allowed for this
+              resource.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>overLimit</code></td>
+            <td colspan="1">413</td>
+            <td colspan="3">Either the number of entities in the
+              request is larger than allowed limits, or the user has
+              exceeded allowable request rate limits. See the
+                <code>details</code> element for more specifics.
+              Contact support if you think you need higher request
+              rate limits.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>badMediaType</code></td>
+            <td colspan="1">415</td>
+            <td colspan="3">The requested content type is not
+              supported by this service.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>unprocessableEntity</code></td>
+            <td colspan="1">422</td>
+            <td colspan="3">The requested resource could not be
+              processed on at the moment.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>instanceFault</code></td>
+            <td colspan="1">500</td>
+            <td colspan="3">This is a generic server error and the
+              message contains the reason for the error. This error
+              could wrap several error messages and is a catch
+              all.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>notImplemented</code></td>
+            <td colspan="1">501</td>
+            <td colspan="3">The requested method or resource is not
+              implemented.</td>
+          </tr>
+          <tr>
+            <td colspan="2"><code>serviceUnavailable</code></td>
+            <td colspan="1">503</td>
+            <td colspan="3">The Block Storage Service is not
+              available.</td>
+          </tr>
+        </tbody>
+      </informaltable>
+      <para>
+        The following two <code>instanceFault</code> examples show
+        errors when the server has erred or cannot perform the
+        requested operation:</para>
+      <example>
+        <title>Example instanceFault Response: XML</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="xml">
+<xi:include href="../wadls/volume-api/src/samples/db-faults-instanceFault.xml" parse="text"/>
+                    </programlisting>
+      </example>
+      <example>
+        <title>Example Fault Response: JSON</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="json">
+<xi:include href="../wadls/volume-api/src/samples/db-faults-instanceFault.json" parse="text"/>
+                    </programlisting>
+      </example>
+      <para> The error code (<code>code</code>) is returned in the
+        body of the response for convenience. The <code>message</code>
+        element returns a human-readable message that is appropriate
+        for display to the end user. The <code>details</code> element
+        is optional and may contain information that is useful for
+        tracking down an error, such as a stack trace. The
+          <code>details</code> element may or may not be appropriate
+        for display to an end user, depending on the role and
+        experience of the end user.</para>
+      <para>The fault's root element (for example,
+          <code>instanceFault</code>) may change depending on the type
+        of error. </para>
+      <para><?rax-fo keep-with-next?>The following two
+          <code>badRequest</code> examples show errors when the volume
+        size is invalid:</para>
+      <example>
+        <title>Example badRequest Fault on Volume Size Errors:
+          XML</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="xml">
+<xi:include href="../wadls/volume-api/src/samples/db-faults-badRequest.xml" parse="text"/>
+                    </programlisting>
+      </example>
+      <example>
+        <title>Example badRequest Fault on Volume Size Errors:
+          JSON</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="json">
+<xi:include href="../wadls/volume-api/src/samples/db-faults-badRequest.json" parse="text"/>
+                    </programlisting>
+      </example>
+      <para> The next two examples show <code>itemNotFound</code>
+        errors:</para>
+      <example>
+        <title>Example itemNotFound Fault: XML</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="xml">
+<xi:include href="../wadls/volume-api/src/samples/db-faults-itemNotFound.xml" parse="text"/>
+                    </programlisting>
+      </example>
+      <example>
+        <title>Example itemNotFound Fault: JSON</title>
+        <?dbfo keep-together="always"?>
+        <programlisting language="json">
+<xi:include href="../wadls/volume-api/src/samples/db-faults-itemNotFound.json" parse="text"/>
+                    </programlisting>
+      </example>
+    </section>
+    <section xml:id="volume_status">
+      <title>Volume Status</title>
+      <para><?rax-fo keep-with-next?>When making an API call to
+        create, list, or delete volume(s), the following volume status
+        values are possible:</para>
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para>CREATING &ndash; The volume is being created.</para>
+        </listitem>
+        <listitem>
+          <para>AVAILABLE &ndash; The volume is read to be attached to an instance.</para>
+        </listitem>
+        <listitem>
+          <para>ATTACHING &ndash; The volume is attaching to an instance.</para>
+        </listitem>
+        <listitem>
+          <para>IN-USE &ndash; The volume is attached to an instance.</para>
+        </listitem>
+        <listitem>
+          <para>DELETING &ndash; The volume is being deleted.</para>
+        </listitem>
+        <listitem>
+          <para>ERROR &ndash; There has been some error with the volume.</para>
+        </listitem>
+        <listitem>
+          <para>ERROR_DELETING &ndash; There was an error deleting the volume.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </chapter>
+
+  <chapter xml:id="volume">
+    <title>API Operations</title>
+    <para>The Volume API allows you to manage volumes and snapshots
+      that can be used with the Compute API.</para>
+    <wadl:resources 
+        href="../wadls/volume-api/src/os-volume-1.wadl" 
+        xmlns:wadl="http://wadl.dev.java.net/2009/02"/>
+  </chapter>
+
+</book>

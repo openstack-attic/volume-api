@@ -1,0 +1,302 @@
+<glossary xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="rs_glossary" version="5.0" role="auto">
+    <title>Glossary</title>
+    <info>
+      <legalnotice>
+          <para>
+              Licensed under the Apache License, Version 2.0 (the "License");
+              you may not use this file except in compliance with the License.
+              You may obtain a copy of the License at
+	  </para>
+	  <para>
+	    <link xlink:href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</link>
+	  </para>
+	  <para>
+              Unless required by applicable law or agreed to in writing, software
+              distributed under the License is distributed on an "AS IS" BASIS,
+              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+              See the License for the specific language governing permissions and
+              limitations under the License.
+	  </para>
+      </legalnotice>
+    </info>
+    <glossdiv>
+        <title>A</title>
+        <glossentry xml:id="alarm.glossary">
+            <glossterm>Alarm</glossterm>
+            <glossdef>
+                <para>An alarm contains a set of rules that determine when a notification is
+                    triggered.
+                </para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>B</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>C</title>
+        <glossentry xml:id="check.glossary">
+            <glossterm>Check</glossterm>
+            <glossdef>
+                <para>Checks explicitly specify how you want to monitor an entity.  </para>
+            </glossdef>
+        </glossentry>
+        <glossentry>
+            <glossterm xml:id="collector.glossary">Collector</glossterm>
+            <glossdef>
+                <para>A collector collects data from the monitoring zone. The collector is mapped
+                    directly to an individual machine or a virtual machine. </para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>D</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>E</title>
+        <glossentry xml:id="entity.glossary">
+            <glossterm>Entity</glossterm>
+            <glossdef>
+                <para>An entity is a resource that you want to monitor. Some examples are
+                    a server, a website, or a service. </para>
+            </glossdef>
+        </glossentry>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>F</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>G</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>H</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>I</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>J</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>K</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>L</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>M</title>
+        <glossentry xml:id="monitoring-zone.glossary">
+            <glossterm>Monitoring Zone</glossterm>
+            <glossdef>
+                <para>A monitoring zone is the "launch point" of a check. You can launch checks from multiple monitoring zones. </para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>N</title>
+        <glossentry xml:id="notification.glossary">
+            <glossterm>Notification</glossterm>
+            <glossdef>
+                <para>A notification is an informational message sent to one or more
+                    addresses when an alarm is triggered. </para>
+            </glossdef>
+        </glossentry>
+        <glossentry xml:id="notification-plan.glossary">
+            <glossterm>Notification Plan</glossterm>
+            <glossdef>
+                <para xmlns:xi="http://www.w3.org/2001/XInclude"
+                    xmlns:svg="http://www.w3.org/2000/svg">A notification plan is a set of
+                    notification rules to execute when an alarm is triggered. 
+                    </para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>P</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>Q</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>R</title>
+        
+            <glossentry xml:id="RESTful.glossary">
+                <glossterm>RESTful</glossterm>
+                <glossdef>
+                    <para>A type of web service API that uses Representational State
+                        Transfer. REST is the architectural style for hypermedia systems
+                        used for the World Wide Web.</para>
+                </glossdef>
+            </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>S</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>   
+        
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>T</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>U</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>V</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>W</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>X</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>Y</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+    <glossdiv>
+        <title>Z</title>
+        <glossentry>
+            <glossterm/>
+            <glossdef>
+                <para/>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <!-- ... -->
+</glossary>
