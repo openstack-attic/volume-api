@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE article [
+        <!-- Some useful entities borrowed from HTML -->
+        <!ENTITY ndash  "&#x2013;">
+        <!ENTITY mdash  "&#x2014;">
+        <!ENTITY hellip "&#x2026;">
+
+        <!-- Useful for describing APIs -->
+        <!ENTITY GET    '<command xmlns="http://docbook.org/ns/docbook">GET</command>'>
+        <!ENTITY PUT    '<command xmlns="http://docbook.org/ns/docbook">PUT</command>'>
+        <!ENTITY POST   '<command xmlns="http://docbook.org/ns/docbook">POST</command>'>
+        <!ENTITY DELETE '<command xmlns="http://docbook.org/ns/docbook">DELETE</command>'>
+        
+        <!-- changing authentication endpoints; define entities for US & UK rather than maintaining in text -->
+        <!ENTITY ENDPOINT-US "https://identity.api.rackspacecloud.com/v1.1/">
+        <!ENTITY ENDPOINT-UK "https://lon.identity.api.rackspacecloud.com/v1.1/">
+
+        <!-- Useful for specs -->
+        <!ENTITY MAY    '<emphasis xmlns="http://docbook.org/ns/docbook" role="strong">MAY</emphasis>'>
+        <!ENTITY SHOULD '<emphasis xmlns="http://docbook.org/ns/docbook" role="strong">SHOULD</emphasis>'>
+        <!ENTITY MUST   '<emphasis xmlns="http://docbook.org/ns/docbook" role="strong">MUST</emphasis>'>
+        <!ENTITY MUST_NOT   '<emphasis xmlns="http://docbook.org/ns/docbook" role="strong">MUST NOT</emphasis>'>
+]>
+
+<article version="5.0"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xml:id="cbs-getting-started"
+         class="specification">
+    <?rax status.bar.text="Preview"?>
+    <info>
+        <title>Getting Started with Rackspace Cloud Block Storage and
+            Servers</title>
+        <copyright>
+            <year>2011</year>
+            <year>2012</year>
+            <holder>Rackspace US, Inc.</holder>
+        </copyright>
+        <releaseinfo>API v1.0 EAP</releaseinfo>
+        <pubdate>2012-05-02</pubdate>
+        <revhistory>
+            <revision>
+                <date>2012-05-14</date>
+                <revdescription>
+                    <itemizedlist spacing="compact">
+                        <listitem>
+                            <para>Initial Preview Program
+                                release.</para>
+                        </listitem>
+                    </itemizedlist>
+                </revdescription>
+            </revision>           
+        </revhistory>
+    </info>
+    <section xml:id="DB_Doc_Change_History">
+        <title>Document Change History</title>
+        <para>This version of the Getting Started replaces and
+            obsoletes all previous versions. The most recent changes
+            are described in the table below:</para>
+        <?rax revhistory?>
+    </section>
+    <section xml:id="DB_Overview">
+        <title>Overview</title>
+        <para>Follow the steps described in this guide to use the
+            Rackspace Cloud Block Storage API and the Cloud
+            Servers<trademark/> section of the Control Panel to create
+            and access your database instances via Rackspace Cloud
+            Servers.</para>
+        <para>For details about using the Cloud Block Storage API,
+            refer to the <citetitle>Cloud Block Storage Developer
+                Guide</citetitle>.</para>
+        <para security="internal">Request access to the Cloud Block
+            Storage Forum during the Preview by sending an email to:
+                <email>cloudbs_beta@rackspace.com</email>. Once
+            received, we will send you an invitation to join our forum
+            group and you may set up your account if you don’t already
+            have one.</para>
+        <para xmlns:wadl="http://wadl.dev.java.net/2009/02">Email all
+            support questions to:
+                <email>CBSPrivateBeta@rackspace.com</email>. </para>
+        <para security="internal">Please visit our <link
+                xlink:href="http://feedback.rackspacecloud.com/forums/71021-product-feedback/category/42449-cloud-databases"
+                >Product Feedback Forum</link> and let us know what
+            you think about Cloud Block Storage!</para>
+        <para xmlns:wadl="http://wadl.dev.java.net/2009/02">The
+            Preview program enables customers by invitation to test an
+            early version of the product and provide feedback of the
+            product and capabilities. The CBS Preview Program is a
+            pre-production service offering covered by the Beta
+            Services terms (<link
+                xlink:href="http://www.rackspace.com/cloud/legal/#BetaServices"
+                >http://www.rackspace.com/cloud/legal/#BetaServices</link>)
+            in our Rackspace Cloud Terms of Service.</para>
+        <remark xmlns:wadl="http://wadl.dev.java.net/2009/02">Writer:
+            need to get updated wording for previous paragraphs and
+            next paragraph (for items that are marked "internal" in
+            blue font) from Jerry Schwartz in Marketing.</remark>
+        <para security="internal">The Preview Program has some
+            limitations. By using the Rackspace Cloud Block Storage
+            API, you agree and understand that:<itemizedlist
+                spacing="compact">
+                <listitem>
+                    <para>Rackspace Cloud Block Storage is
+                        API-only.</para>
+                </listitem>
+                <listitem>
+                    <para>There is no charge for this service during
+                        the EAP period.</para>
+                </listitem>
+                <listitem>
+                    <para>We will charge for Rackspace Cloud Block
+                        Storage when this service becomes generally
+                        available.</para>
+                </listitem>
+                <listitem>
+                    <para>If you participate in this Preview Program,
+                        you will receive a notification prior to
+                        general availability.</para>
+                </listitem>
+                <listitem>
+                    <para>There is no Service Level Agreement. </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <section xml:id="Prerequisites_Examples">
+            <title>Prerequisites for Running Examples</title>
+            <para>In order to run the examples in this guide, you must
+                have the following prerequisites: <itemizedlist
+                    spacing="compact">
+                    <listitem>
+                        <para>Rackspace Next Generation Cloud
+                                account<remark>Reviewer: how do we
+                                handle the issue for currrent 1st
+                                Generation Cloud Servers customers who
+                                want to try out the
+                            API.</remark></para>
+                    </listitem>
+                    <listitem>
+                        <para>Rackspace Cloud username and password,
+                            as specified during registration</para>
+                    </listitem>
+                </itemizedlist></para>
+        </section>
+    </section>
+    <section xml:id="DB_Sending_API_Requests">
+        <title>Send Requests to the API</title>
+        <para>You have several options for sending requests through an
+            API: </para>
+        <itemizedlist spacing="compact">
+            <listitem>
+                <para>Developers and testers may prefer to use cURL,
+                    the command-line tool from <link
+                        xlink:href="http://curl.haxx.se/"
+                        >http://curl.haxx.se/</link>. </para>
+                <para>With cURL you can send HTTP requests and receive
+                    responses back from the command line. </para>
+            </listitem>
+            <listitem>
+                <para>If you like to use a more graphical interface,
+                    the ReST client for Firefox also works well for
+                    testing and trying out commands, see <link
+                        xlink:href="https://addons.mozilla.org/en-US/firefox/addon/restclient/"
+                        >https://addons.mozilla.org/en-US/firefox/addon/restclient/</link>. </para>
+            </listitem>
+            <listitem>
+                <para>You can also download and install rest-client, a
+                    Java application to test ReSTful web services,
+                    from <link
+                        xlink:href="http://code.google.com/p/rest-client/"
+                        >http://code.google.com/p/rest-client/</link>. </para>
+            </listitem>
+        </itemizedlist>
+        <section xml:id="DB_using-curl-cli">
+            <title>Send API Requests Using cURL</title>
+            <para>cURL is a command-line tool that is available on
+                most UNIX®-like environments and Mac OS X® and can be
+                downloaded for Windows® in order to interact with the
+                ReST interfaces. For more information on cURL, visit
+                    <link xlink:href="http://curl.haxx.se/"
+                    >http://curl.haxx.se/</link>. </para>
+            <para>cURL allows you to transmit and receive HTTP requests and responses from the
+                command-line or from within a shell script. This makes it possible to work with the ReST API
+                directly without using one of the client APIs. </para>
+            <para>The following cURL command-line options will be used
+                in this guide to run the examples:</para>
+            <variablelist>
+                <title>cURL Command-Line Options</title>
+                <varlistentry>
+                    <term><option>-d</option></term>
+                    <listitem>
+                        <para>Sends the specified data in a post
+                            request to the HTTP server.</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><option>-i</option></term>
+                    <listitem>
+                        <para>Includes the HTTP header in the
+                            output.</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><option>-H HEADER</option></term>
+                    <listitem>
+                        <para>Specify an HTTP header in the request.</para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <note>
+                <para>If you have the tools, you can run the cURL JSON
+                    request examples with the following options to
+                    format the output from cURL: <command>&lt;curl
+                        JSON request example> | python
+                        -mjson.tool</command>.</para>
+            </note>
+        </section>
+        <section xml:id="DB_copy_paste_examples">
+            <title>Copying and Pasting cURL Request Examples into a
+                Terminal Window</title>
+            <para>To run the cURL request examples shown in this guide
+                on Linux or Mac systems, copy and paste each example
+                from the HTML version of this guide into an ASCII
+                editor (for example <emphasis role="bold"
+                    >vi</emphasis> or <emphasis role="bold"
+                    >TextEdit</emphasis>). Then modify each example
+                with your required account information and so forth,
+                as detailed in this guide.</para>
+            <note>
+                <para>The carriage returns in the cURL request
+                    examples that are part of the cURL syntax are
+                    escaped with a backslash ('\') in order to avoid
+                    prematurely terminating the command. However you
+                    should not escape carriage returns inside the xml
+                    or json message within the command.</para>
+            </note>
+            <para>Consider the following cURL Authenticate Request:
+                XML example that is described in detail in <xref
+                    linkend="Generating_Auth_Token"/>:</para>
+            <example>
+                <title>cURL Authenticate Request: XML</title>
+                <?dbfo keep-together="always"?>
+                <screen><command>curl</command> <option>-i</option> <option>-d</option> \
+'&lt;?xml version="1.0" encoding="UTF-8"?>  
+&lt;credentials xmlns="http://docs.rackspacecloud.com/auth/api/v1.1" 
+             username="<emphasis role="bold">your_username</emphasis>" 
+             key="<emphasis role="bold">your_api_key</emphasis>"/>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://identity.api.rackspacecloud.com/v1.1/auth'</uri></screen>
+            </example>
+            <para>You can see that the lines that are part of the cURL
+                command syntax have all been escaped with a backslash
+                ('\') to indicate that the command continues on the
+                next line:</para>
+            <screen><command>curl</command> <option>-i</option> <option>-d</option> \
+ 
+             key="<emphasis role="bold">your_api_key</emphasis>"/>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://identity.api.rackspacecloud.com/v1.1/auth'</uri></screen>
+            <para>However the lines <emphasis>within</emphasis> the
+                xml portion of the message are
+                    <emphasis>not</emphasis> escaped with a backslash
+                ('\') in order to avoid issues with the xml
+                processing:</para>
+            <screen>'&lt;?xml version="1.0" encoding="UTF-8"?>  
+&lt;credentials xmlns="http://docs.rackspacecloud.com/auth/api/v1.1" 
+             username="<emphasis role="bold">your_username</emphasis>" 
+             key="<emphasis role="bold">your_api_key</emphasis>"/>' \
+</screen>
+            <note>
+                <para>The final line of the xml message is escaped
+                    since the backslash lies
+                        <emphasis>outside</emphasis> the xml message
+                    and continues the cURL command to the next
+                    line.</para>
+            </note>
+            <para>After you are finished modifying the text for the
+                cURL request example with your information (for
+                example <emphasis role="bold"
+                        ><code>your_username</code></emphasis> and
+                    <emphasis role="bold"
+                    ><code>your_api_key</code></emphasis>), paste it
+                into your terminal window. Then execute the cURL
+                command by pressing <guilabel>Enter</guilabel>.</para>
+            <para>If you have trouble copying and pasting the examples
+                as described, try typing the entire example on one
+                long line, removing all the backslash line
+                continuation characters.</para>
+        </section>
+    </section>
+    <section xml:id="Generating_Auth_Token">
+        <title>Generate an Authentication Token</title>
+        <para>You need to generate a token whether you use cURL or a
+            ReST client.</para>
+        
+        <para>In order to use the ReST API, you will first need to
+            obtain an authentication token, which will need to be
+            passed in for each request using the
+                <code>X-Auth-Token</code> header. </para>
+        <para>The following example demonstrates how to use cURL to
+            obtain the authentication token and the account number.
+            You will need to supply the authentication token and
+            account number when making subsequent Cloud Databases API
+            calls.</para>
+        <para>Remember to replace the names in the Authenticate
+            Request examples below with their respective values:<itemizedlist spacing="compact">
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_username</emphasis> &mdash; The
+                        username is your common Rackspace Cloud
+                        username, as supplied during
+                        registration.</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_api_key</emphasis> &mdash; The key
+                        is your API access key. The key can be
+                        obtained from the Rackspace Cloud Control
+                        Panel in the <guimenu>Your Account</guimenu> /
+                            <guimenuitem>API Access</guimenuitem>
+                        section.</para>
+                </listitem>
+            </itemizedlist></para>
+        <para> To access the Authentication Service, you must know
+            whether your account is US-based or UK-based: </para>
+        <itemizedlist spacing="compact">
+            <listitem>
+                <para> US-based accounts authenticate through <link
+                        xlink:href="&ENDPOINT-US;"
+                        >&ENDPOINT-US;</link>. </para>
+            </listitem>
+            <listitem>
+                <para> UK-based accounts authenticate through <link
+                        xlink:href="&ENDPOINT-UK;"
+                        >&ENDPOINT-UK;</link>. </para>
+            </listitem>
+        </itemizedlist>
+        <para> Your account may be based in either the US or the UK;
+            this is not determined by your physical location but by
+            the location of the Rackspace retail site which was used
+            to create your account: </para>
+        <itemizedlist spacing="compact">
+            <listitem>
+                <para> If your account was created via <link
+                        xlink:href="http://www.rackspacecloud.com"
+                        >http://www.rackspacecloud.com</link>, it is a
+                    US-based account. </para>
+            </listitem>
+            <listitem>
+                <para> If your account was created via <link
+                        xlink:href="http:/www.rackspace.co.uk"
+                        >http:/www.rackspace.co.uk</link>, it is a
+                    UK-based account. </para>
+            </listitem>
+        </itemizedlist>
+        <para> If you are unsure how your account was created, use the
+            Rackspace contact information at either site to ask for
+            help. </para>
+        <para>Notice that you authenticate using a special URL for
+            Cloud authentication services. For example, for US-based
+            accounts, you use
+                <code>https://identity.api.rackspacecloud.com/v1.1/auth</code>),
+            as shown in the following Authenticate Request
+            examples.</para>
+        <example>
+            <title>cURL Authenticate Request: XML</title>
+            <?dbfo keep-together="always"?>
+            <screen language="xml"><command>curl</command> <option>-i</option> <option>-d</option> \
+'&lt;?xml version="1.0" encoding="UTF-8"?>  
+&lt;credentials xmlns="http://docs.rackspacecloud.com/auth/api/v1.1" 
+             username="<emphasis role="bold">your_username</emphasis>" 
+             key="<emphasis role="bold">your_api_key</emphasis>"/>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://identity.api.rackspacecloud.com/v1.1/auth'</uri></screen>
+        </example>
+        <example>
+            <title>cURL Authenticate Request: JSON</title>
+            <?dbfo keep-together="always"?>
+            <programlisting language="json"><command>curl</command> <option>-i</option> <option>-d</option> \
+'{ 
+    "credentials": {  
+        "username": "<emphasis role="bold">your_username</emphasis>",  
+        "key": "<emphasis role="bold">your_api_key</emphasis>"}  
+    }' \
+<option>-H 'Content-Type: application/json'</option> \
+<uri>'https://identity.api.rackspacecloud.com/v1.1/auth'</uri></programlisting>
+            
+        </example>
+        <note>
+            <para>For UK-based accounts, you would need to modify the
+                URL shown in the last line of each of the Authenticate
+                Request  examples above to be
+                    <code>'https://lon.identity.api.rackspacecloud.com/v1.1/auth'</code>
+                instead.</para>
+        </note>
+        <example>
+            <title>Authenticate Response: XML</title>
+            <programlisting language="xml"><xi:include href="../wadls/volume-api/src/samples/db-auth.xml" parse="text"><xi:fallback>Missing code sample! <?rax fail?></xi:fallback></xi:include></programlisting>
+        </example>
+        <example>
+            <title>Authenticate Response: JSON</title>
+            <programlisting language="json"><xi:include href="../wadls/volume-api/src/samples/db-auth.json" parse="text"><xi:fallback>Missing code sample! <?rax fail?></xi:fallback></xi:include></programlisting>
+        </example>
+        <para>The authentication token <code>id</code> is returned
+            along with an <code>expires</code> attribute that
+            specifies when the token expires. </para>
+        <note>
+            <title>Notes</title>
+            <itemizedlist spacing="compact">
+                <listitem>
+                    <para>The information shown in the Authenticate
+                        Response examples above is for US-based
+                        accounts. If you authenticate against the
+                        UK-endpoint for auth, you will see the service
+                        catalog information for UK-based
+                        accounts.</para>
+                </listitem>
+                <listitem>
+                    <para>For all response examples in this guide, the
+                        field values you receive in your responses
+                        will vary from those shown here since they
+                        will be specific to your account.</para>
+                </listitem>
+                <listitem>
+                    <para>The <code>id</code> attribute in the
+                        Authenticate Response specifies the
+                        authentication token. Tokens are valid for a
+                        finite duration.</para>
+                    <para>Remember to supply your authentication token
+                        wherever you see the field <emphasis
+                            role="bold">your_auth_token</emphasis> in
+                        the examples in this guide.</para>
+                </listitem>
+                <listitem>
+                    <para> The <code>expires</code> attribute denotes
+                        the time after which the token will
+                        automatically become invalid. A token may be
+                        manually revoked before the time identified by
+                        the expires attribute; <code>expires</code>
+                        predicts a token's maximum possible lifespan
+                        but does not guarantee that it will reach that
+                        lifespan. Clients are encouraged to cache a
+                        token until it expires.</para>
+                </listitem>
+                <listitem>
+                    <para>Applications should be designed to
+                        re-authenticate after receiving a 401
+                        (Unauthorized) response from a service
+                        endpoint.</para>
+                </listitem>
+            </itemizedlist>
+        </note>
+        <para>As an example, you can see that the
+                <code>publicURL</code> endpoints for
+                <code>cloudDatabases</code> (for example
+                <code>https://ord.databases.api.rackspacecloud.com/v1.0/1234</code>)
+            are returned in the Authenticate Response. </para>
+        <para>You will find the actual account number after the final
+            '/' in the <code>publicURL</code> field. In this example,
+            you can see that the account number is 1234. You need to
+            specify your account number on most of the API calls,
+            wherever you see the field <emphasis role="bold"
+                >your_acct_id</emphasis> specified in the examples in
+            this guide.</para>
+        <note>
+            <para>The endpoints for Cloud Block Storage are not yet
+                included in the <code>serviceCatalog</code> displayed
+                in the Authenticate Response. You will find the
+                endpoints to use for Cloud Block Storage listed in
+                    <xref linkend="Service_Access_Endpoints-d1e753"
+                />.</para>
+        </note>
+        <para>After authentication, you can use cURL to perform &GET;,
+            &DELETE;, and &POST; requests for the Cloud Block Storage
+            API.</para>
+        
+    </section>
+    <section xml:id="Service_Access_Endpoints-d1e753">
+        <title>Service Access/Endpoints</title>
+        <para>The endpoints to use for your Cloud Block Storage API
+            calls are summarized in the table below.</para>
+        <?rax-fo keep-with-next?>
+        <para>
+            <table rules="all">
+                <caption>Regionalized Service Endpoints</caption>
+                <thead>
+                    <tr align="center">
+                        <td colspan="2">Region</td>
+                        <td colspan="5">Endpoint</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="left">
+                        <td colspan="2">Chicago (ORD)</td>
+                        <td colspan="5"
+                                ><code>https://ord.databases.api.rackspacecloud.com/v1.0/</code><parameter>1234</parameter>/
+                        </td>
+                    </tr>
+                    <tr align="left">
+                        <td colspan="2">Dallas/Ft. Worth (DFW)</td>
+                        <td colspan="5"
+                                ><code>https://dfw.databases.api.rackspacecloud.com/v1.0/</code><parameter>1234</parameter>/
+                        </td>
+                    </tr>
+                    <tr align="left">
+                        <td colspan="2">London (LON)</td>
+                        <td colspan="5">
+                            <code>https://lon.databases.api.rackspacecloud.com/v1.0/</code><parameter>1234</parameter>/
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </para>
+        <note>
+            <title>Notes:</title>
+            <itemizedlist>
+                <listitem>
+                    <para>All examples in this guide assume that you
+                        are operating against the ORD datacenter,
+                        however if you are using a different
+                        datacenter, be sure to use the associated
+                        endpoint from the table above instead.</para>
+                </listitem>
+            </itemizedlist>
+        </note>
+        <para>Replace the sample account ID number,
+                <parameter>1234</parameter>, with your actual account
+            number returned as part of the authentication response.
+            Use your actual account number wherever you see the field
+                <emphasis role="bold">your_acct_id</emphasis>
+            specified in this guide. Refer to <xref
+                linkend="Generating_Auth_Token"/>.</para>
+        <para>When making a Cloud Block Storage API call, place the
+            endpoint at the beginning of the request URL, for example:
+                (<code>https://ord.databases.api.rackspacecloud.com/v1.0/your_acct_id/</code>),
+            as you can see in the example cURL request in the next
+            section.</para>
+    </section>
+    <section xml:id="Deploy_NG_CloudServer">
+        <title>Deploy a Next Generation Cloud Server</title>
+        <para>You will use the following URL to deploy CBS-compliant
+            Cloud Servers for the Preview:<remark>Reviewer: Here is
+                the note I received from Megan: "CBS users won't be
+                able to use the normal Next Gen Servers for CBS
+                Preview. We'll be creating them access to a private
+                huddle where they can deploy CBS-compliant servers. So
+                no Reach access at this point for either CBS or our
+                version of Next Gen Servers." Please provide me with
+                the URL and any other information required to access
+                the private huddle.</remark></para>
+        <note>
+            <para>For the CBS Preview, you cannot use Next Generation
+                Cloud Servers created using the Next Generation
+                Control Panel or the Next Generation Cloud Servers
+                API. This will be possible during the Early Access
+                Program (EAP).</para>
+        </note>
+        <remark>Reviewers: please give me the examples for deploying
+            the CBS-compliant Cloud Servers.</remark>
+        <remark>*******************************************************************************************</remark>
+        <remark>******************Writer: You need to update the
+            remainder of the manual from here
+            on.******************</remark>
+        <remark>*******************************************************************************************</remark>
+        <para>The following examples show the cURL requests for
+            deploying the CBS-compliant Cloud Servers:</para>
+        <example>
+            <title>cURL Access CBS-compliant Cloud Servers Request:
+                XML</title>
+            <programlisting language="xml"><command>curl -i</command> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/flavors/detail'</uri></programlisting>
+        </example>
+        <example>
+            <title>cURL Access CBS-compliant Cloud Servers Request:
+                JSON</title>
+            <programlisting language="json"><command>curl -i</command> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Accept: application/json'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/flavors/detail'</uri></programlisting>
+        </example>
+        <para>Remember to replace the names in the examples above with
+            their actual respective values for all the cURL examples
+            that follow:<itemizedlist spacing="compact">
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_auth_token</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the response examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_acct_id</emphasis> &mdash; as
+                        returned in your authentication response (must
+                        be replaced in the request URL)</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>The following examples show the responses for List
+            Flavors Details:</para>
+        <example>
+            <title>List Flavors Details Response: XML</title>
+            <programlisting language="xml"/>
+        </example>
+        <example>
+            <title>List Flavors Details Response: JSON</title>
+            <programlisting language="json"/>
+        </example>
+        <para>In the previous examples, you can see from the flavor
+                <code>name</code> that there are multiple flavors
+            available, including <code>medium</code> (with 1 virtual
+            CPU and 2 gigabytes of memory) and <code>tiny</code> (with
+            1 virtual CPU and 0.5 gigabytes of memory). </para>
+        <para>In this example, assume that you decide to use the tiny
+            flavor (id 1) to provide the needed capacity for your
+            database instance.</para>
+    </section>
+    
+    <section xml:id="List_Volume_Types">
+            <title>List Volume Types</title>
+            <para>In this section you list the volume types available
+            to determine the correct storage type to choose for your application:<itemizedlist>
+                <listitem>
+                    <para>Standard performance storage &mdash; SATA
+                        storage</para>
+                </listitem>
+                <listitem>
+                    <para>Hight performance storage &mdash; SSD
+                        storage</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>The following examples show the cURL requests for List
+            Volume Types:</para>
+        <example>
+            <title>cURL List Volume Types Request: XML</title>
+            <programlisting language="xml"><command>curl</command> <option>-i</option> <option>-d</option> \
+'&lt;?xml version="1.0" ?> 
+&lt;instance xmlns="http://docs.openstack.org/database/api/v1.0" 
+    name="myrackinstance" 
+    flavorRef= 
+      "https://ord.databases.api.rackspacecloud.com/v1.0/<emphasis role="bold">your_acct_id</emphasis>/flavors/1"> 
+    &lt;databases> 
+        &lt;database name="sampledb" character_set="utf8" 
+         collate="utf8_general_ci" /> 
+    &lt;/databases>
+    &lt;users>
+        &lt;user name="simplestUser" password="password">
+            &lt;databases>
+                &lt;database name="sampledb"/>
+            &lt;/databases>
+        &lt;/user>
+    &lt;/users> 
+    &lt;volume size="2" /> 
+&lt;/instance>' \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances'</uri></programlisting>
+        </example>
+        <example>
+            <title>cURL List Volume Types Request: JSON</title>
+            <programlisting language="json"><command>curl</command> <option>-i</option> <option>-d</option> \
+'{
+    "instance": {
+        "databases": [
+            {
+                "character_set": "utf8",
+                "collate": "utf8_general_ci",
+                "name": "sampledb"
+            }
+        ],
+        "flavorRef": "https://ord.databases.api.rackspacecloud.com/v1.0/<emphasis role="bold">your_acct_id</emphasis>/flavors/1",
+        "name": "myrackinstance",
+        "users": [
+            {
+                "databases": [
+                    {
+                        "name": "sampledb"
+                    }
+                ],
+            "name": "simplestUser",
+            "password": "password"
+            }
+        ],
+        "volume": 
+            {
+                "size": "2"
+            }
+    }
+}' \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/json'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances'</uri></programlisting>
+        </example>
+        <para>Remember to replace the names in the examples above with
+            their actual respective values for all the cURL examples
+            that follow:<itemizedlist spacing="compact">
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_auth_token</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the response examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_acct_id</emphasis> &mdash; as
+                        returned in your authentication response (must
+                        be replaced in the request URL)</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>Remember to replace the account id shown in the
+                <code>flavorRef</code> property for the examples with
+            your actual account id:
+                <code>"https://ord.databases.api.rackspacecloud.com/v1.0/</code><emphasis
+                role="bold"
+                >your_acct_id</emphasis><code>/flavors/1"</code>.</para>
+        <para>The following examples show the List Volume Types
+            responses:</para>
+            
+            <example>
+                <title>List Volume Types Response: XML</title>
+                <programlisting language="xml"/>
+            </example>
+            
+            <example>
+                <title>List Volume Types Response: JSON</title>
+                <programlisting language="json"/>
+            </example>
+        <para>You will need to note the volume types returned (in the
+            response examples above:
+                <code>id="d379ba5c-9a1f-4aa9-9a17-afe237d04c65"</code>)
+            on subsequent API calls that require it, and then
+            determine the correct volume type to use for the storage
+            for your application.</para>
+        </section>
+    <section xml:id="Create_Volume">
+        <title>Create Volume</title>
+        <para>In this section you will create the volume to use for
+            your application with the appropriate type, name, and
+            size.</para>
+        <para xmlns="http://docbook.org/ns/docbook">The following
+            examples show the cURL requests for Create Volume:</para>
+        <example>
+            <title>cURL Create Volume Request: XML</title>
+            <programlisting language="xml"><command>curl</command> <option>-i</option> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances/</uri><emphasis role="bold">instance_id</emphasis><uri>/databases'</uri></programlisting>
+        </example>
+        <example>
+            <?dbfo keep-together="always"?>
+            <title>cURL Create Volume Request: JSON</title>
+            <programlisting language="xml"><command>curl</command> <option>-i</option> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/json'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances/</uri><emphasis role="bold">instance_id</emphasis><uri>/databases'</uri></programlisting>
+        </example>
+        <para>Remember to replace the names in the examples above with
+            their actual respective values:<itemizedlist spacing="compact">
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_auth_token</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_acct_id</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>The following examples show the responses for Create
+            Volume:</para>
+        <example>
+            <title>Create Volume Response: XML</title>
+            <programlisting language="xml">HTTP/1.1 200 OK
+Content-Type: application/xml
+Content-Length: 109
+Date: Thu, 05 Apr 2012 18:20:18 GMT
+
+&lt;databases xmlns="http://docs.openstack.org/database/api/v1.0">
+    &lt;database name="sampledb"/>
+&lt;/databases>
+</programlisting>
+        </example>
+        <example>
+            <title>Create Volume Response: JSON</title>
+            <programlisting language="json">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 37
+Date: Thu, 05 Apr 2012 18:13:53 GMT
+
+{
+    "databases": [
+        {
+            "name": "sampledb"
+        }
+    ]
+}</programlisting>
+        </example>
+        <para>You can see that the volume <code>xxxx</code> was
+            successfully created. Next you will attach the new volume
+            to your Cloud Server for use.</para>
+    </section>
+    <section xml:id="List_Volumes">
+        <title>List Volumes</title>
+        <para>In this section you will list the available volumes to
+            confirm that your new volume was successfully
+            created.</para>
+        <para>The following examples show the cURL requests for List
+            Volumes:</para>
+        <example>
+            <title>cURL List Volumes Request: XML</title>
+            <programlisting language="xml"><command>curl</command> <option>-i</option> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances/</uri><emphasis role="bold">instance_id</emphasis><uri>/databases'</uri></programlisting>
+        </example>
+        <example>
+            <?dbfo keep-together="always"?>
+            <title>cURL List Volumes Request: JSON</title>
+            <programlisting language="xml"><command>curl</command> <option>-i</option> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/json'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances/</uri><emphasis role="bold">instance_id</emphasis><uri>/databases'</uri></programlisting>
+        </example>
+        <para>Remember to replace the names in the examples above with
+            their actual respective values:<itemizedlist
+                spacing="compact">
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_auth_token</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_acct_id</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>The following examples show the responses for Create
+            Volume:</para>
+        <example>
+            <title>List Volumes Response: XML</title>
+            <programlisting language="xml">HTTP/1.1 200 OK
+Content-Type: application/xml
+Content-Length: 109
+Date: Thu, 05 Apr 2012 18:20:18 GMT
+
+&lt;databases xmlns="http://docs.openstack.org/database/api/v1.0">
+    &lt;database name="sampledb"/>
+&lt;/databases>
+</programlisting>
+        </example>
+        <example>
+            <title>List Volumes Response: JSON</title>
+            <programlisting language="json">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 37
+Date: Thu, 05 Apr 2012 18:13:53 GMT
+
+{
+    "databases": [
+        {
+            "name": "sampledb"
+        }
+    ]
+}</programlisting>
+        </example>
+        <para>You can see that the volume <code>xxxx</code> was
+            successfully created. Next you will attach the new volume
+            to your Cloud Server for use.</para>
+    </section>
+    <section xml:id="Attach_Volume">
+        <title>Attach the Volume to the Cloud Server</title>
+        <para>In this section you will attach the new volume you
+            created to your Cloud Server so you can use it for
+            additional storage.</para>
+        <para>The following examples show the cURL requests for Volume
+            Attachments:</para>
+        <example>
+            <title>cURL Volume Attachments Request: XML</title>
+            <programlisting language="xml"><command>curl</command> <option>-i</option> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/xml'</option> \
+<option>-H 'Accept: application/xml'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances/</uri><emphasis role="bold">instance_id</emphasis><uri>/users'</uri></programlisting>
+        </example>
+        <example>
+            <?dbfo keep-together="always"?>
+            <title>cURL Volume Attachments Request: JSON</title>
+            <programlisting language="json"><command>curl</command> <option>-i</option> \
+-H 'X-Auth-Token: <emphasis role="bold">your_auth_token</emphasis>' \
+<option>-H 'Content-Type: application/json'</option> \
+<uri>'https://ord.databases.api.rackspacecloud.com/v1.0/</uri><emphasis role="bold">your_acct_id</emphasis><uri>/instances/</uri><emphasis role="bold">instance_id</emphasis><uri>/users'</uri></programlisting>
+        </example>
+        <para>Remember to replace the names in the examples above with
+            their actual respective values:<itemizedlist
+                spacing="compact">
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_auth_token</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold"
+                            >your_acct_id</emphasis> &mdash; as
+                        returned in your authentication response (see
+                        the examples in <xref
+                            linkend="Generating_Auth_Token"/>)</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>The following examples show the responses for List
+            Users in Database Instance:</para>
+        <example>
+            <title>Volume Attachments Response: XML</title>
+            <programlisting language="xml">HTTP/1.1 200 OK
+Content-Type: application/xml
+Content-Length: 109
+Date: Thu, 05 Apr 2012 18:20:18 GMT
+
+&lt;?xml version="1.0" ?>
+&lt;users xmlns="http://docs.openstack.org/database/api/v1.0">
+    &lt;user name="simplestUser">
+        &lt;databases>
+            &lt;database>
+                &lt;name>
+                    sampledb
+                &lt;/name>
+            &lt;/database>
+        &lt;/databases>
+    &lt;/user>
+&lt;/users>
+</programlisting>
+        </example>
+        <example>
+            <title>Volume Attachments Response: JSON</title>
+            <programlisting language="json">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 113
+Date: Thu, 05 Apr 2012 18:13:53 GMT
+
+{
+    "users": [
+        {
+            "databases": [
+                {
+                    "name": "sampledb"
+                }
+            ],
+            "name": "simplestUser"  
+        }
+    ]
+}</programlisting>
+        </example>
+        <para>You can see that the volume <code>xxxxx</code> was
+            successfully attached.</para>
+    </section>
+    <section xml:id="Prepare_Volume">
+        <title>Prepare the Volume for Use on the Cloud Server</title>
+        <para>The new volume will show up as another device on your
+            Cloud Server. You need to prepare it for use by
+            partitioning, formatting, and mounting it:<itemizedlist>
+                <listitem>
+                    <para>Partition</para>
+                </listitem>
+                <listitem>
+                    <para>Format</para>
+                </listitem>
+                <listitem>
+                    <para>Mount</para>
+                </listitem>
+                <listitem>
+                    <para>Access - copy a file to the new storage and
+                        confirm that you can access it.</para>
+                </listitem>
+            </itemizedlist></para>
+        <remark>Writer: if time permits you could next have users
+            create a snapshot of the volume (after unmounting
+            it).</remark>
+    </section>
+</article>
