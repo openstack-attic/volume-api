@@ -159,12 +159,12 @@
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
                     Note that you use the <code>os-volume_attachments</code> API call 
                     (/servers/{server_id}/os-volume_attachments) to attach 
-                    the new volume to your Next Generation Cloud Server (with 
+                    the new volume to your Next Generation Compute Server (with 
                     the specified {server_id}). 
-                    Refer to the <i>Next Generation Cloud Servers Developer Guide</i> 
+                    Refer to the <i>Next Generation Compute Servers Developer Guide</i> 
                     at <a href="docs.rackspace.com">docs.rackspace.com</a> for details 
                     of the call. Once the volume is attached, the new volume will appear 
-                    as another device on the Next Generation Cloud Server. It can 
+                    as another device on the Next Generation Compute Server. It can 
                     then be partitioned, formatted, and mounted for use on the system.    
                 </p></doc>
                 
