@@ -1,0 +1,11 @@
+{
+    "snapshot": {
+        "created_at": "2013-02-19T00:24:54.179025",
+        "display_description": "Daily backup",
+        "display_name": "snap-001",
+        "id": "2d843196-eff1-4a0c-980e-10fee5df2bea",
+        "size": 10,
+        "status": "creating",
+        "volume_id": "da450d0c-0920-4785-80dd-b024515200ce"
+    }
+}
