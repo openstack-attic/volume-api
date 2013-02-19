@@ -116,7 +116,7 @@
         <configuration>
           <!-- These parameters apply to pdf and webhelp -->
           <xincludeSupported>true</xincludeSupported>
-          <sourceDirectory>src/docbkx</sourceDirectory>
+          <sourceDirectory>src</sourceDirectory>
           <includes>
             openstack-blockstorage-devguide.xml
           </includes>

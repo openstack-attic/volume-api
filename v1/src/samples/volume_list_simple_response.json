@@ -1,0 +1,38 @@
+{
+    "volumes": [
+        {
+            "attachments": [],
+            "availability_zone": "us-east1",
+            "bootable": "false",
+            "created_at": "2013-02-18T23:47:37.000000",
+            "display_description": "yet another volume",
+            "display_name": "vol-002",
+            "id": "dfd9dd41-1353-450a-b5ac-a6037ee43cd8",
+            "metadata": {
+                "contents": "some more junk"
+            },
+            "size": 30,
+            "snapshot_id": null,
+            "source_volid": null,
+            "status": "available",
+            "volume_type": "SATA"
+        },
+        {
+            "attachments": [],
+            "availability_zone": "us-east1",
+            "bootable": "false",
+            "created_at": "2013-02-18T23:44:47.000000",
+            "display_description": "another volume",
+            "display_name": "vol-001",
+            "id": "da450d0c-0920-4785-80dd-b024515200ce",
+            "metadata": {
+                "contents": "junk"
+            },
+            "size": 10,
+            "snapshot_id": null,
+            "source_volid": null,
+            "status": "available",
+            "volume_type": "SATA"
+        }
+    ]
+}
