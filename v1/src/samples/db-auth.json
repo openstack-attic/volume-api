@@ -12,7 +12,7 @@ Date: Thu, 12 Apr 2012 18:45:13 GMT
                 }
             ],
             "cloudDatabases": [
-                {           
+                { 
                     "publicURL": "https://dfw.databases.api.rackspacecloud.com/v1.0/1234",
                     "region": "DFW"
                 },
