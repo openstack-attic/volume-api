@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snapshot xmlns="http://docs.openstack.org/volume/api/v2"
+    name="vol-003"
+    description="This is yet, another volume."/>
