@@ -138,6 +138,12 @@ format="SVG" scale="60"/>
           <para>Block Storage allows you to create snapshots that you can save, list, and
             restore.</para>
         </listitem>
+        <listitem>
+            <para>Block Storage allows you to create backups of your volumes
+                to Object Storage for archival and disaster recovery purposes.
+                These backups can be subsequently restored to the same volume
+                or new volumes.</para>
+        </listitem>
       </itemizedlist>
     </note>
     <?hard-pagebreak?>
@@ -166,6 +172,13 @@ format="SVG" scale="60"/>
       <section xml:id="Instance">
         <title>Instance</title>
         <para>An instance is a virtual machine that runs inside the cloud.</para>
+      </section>
+      <section xml:id="Backup">
+        <title>Backup</title>
+        <para>A backup is a full copy of a volume stored in an external service. The service can
+            be configured. The only supported service for now is Object Storage. A backup can
+            subsequently be restored from the external service to either the same volume that the
+        backup was originally taken from, or to a new volume.</para>
       </section>
     </section>
 
@@ -635,6 +648,15 @@ format="SVG" scale="60"/>
         </listitem>
         <listitem>
           <para>ERROR_DELETING &ndash; There was an error deleting the volume.</para>
+        </listitem>
+        <listitem>
+          <para>BACKING-UP &ndash; The volume is being backed up.</para>
+        </listitem>
+        <listitem>
+          <para>RESTORING-BACKUP &ndash; A backup is being restored to the volume.</para>
+        </listitem>
+        <listitem>
+          <para>ERROR_RESTORING &ndash; There was an error restoring a backup to the volume.</para>
         </listitem>
       </itemizedlist>
       <informaltable rules="all" width="100%">
@@ -1224,6 +1246,312 @@ Accept: application/json
         </programlisting>
         </example>
         <para>Returns status code 200 on success</para>
+      </section>
+    </section>
+    <section xml:id="Extensions">
+      <title>Extensions</title>
+      <section xml:id="Backups">
+        <title>Backups</title>
+        <para>A backup is a full copy of a volume stored in an external service. The service can
+            be configured. The only supported service for now is Object Storage. A backup can
+            subsequently be restored from the external service to either the same volume that the
+            backup was originally taken from, or to a new volume. Backup and restore operations
+            can only be carried out on volumes which are in an unattached and available state.
+        </para>
+        <para><?rax-fo keep-with-next?>When making an API call to create, list, or delete backup(s),
+          the following status values are possible:</para>
+        <itemizedlist spacing="compact">
+          <listitem>
+            <para>CREATING &ndash; The backup is being created.</para>
+          </listitem>
+          <listitem>
+            <para>AVAILABLE &ndash; The backup is ready to be restored to a volume.</para>
+          </listitem>
+          <listitem>
+            <para>DELETING &ndash; The backup is being deleted.</para>
+          </listitem>
+          <listitem>
+            <para>ERROR &ndash; An error has occurred with the backup.</para>
+          </listitem>
+          <listitem>
+            <para>RESTORING &ndash; The backup is being restored to a volume.</para>
+          </listitem>
+          <listitem>
+            <para>ERROR_RESTORING &ndash; There was an error restoring a backup to the volume.</para>
+        </listitem>
+        </itemizedlist>
+        <para>In the event of an error, more information about the error can be found in the
+            FAIL_REASON field for the backup.</para>
+        <informaltable rules="all" width="100%">
+          <col width="20%"/>
+          <col width="20%"/>
+          <col width="60%"/>
+          <thead>
+            <tr align="center">
+              <td>Verb</td>
+              <td>URI</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>&GET;</td>
+              <td>/backups</td>
+              <td>Lists a summary of all backups defined in Cinder that are accessible to the tenant
+                who submits the request.</td>
+            </tr>
+            <tr>
+              <td>&GET;</td>
+              <td>/backups/detail</td>
+              <td>Lists detailed information for all backups defined in Cinder
+                  that are accessible to the tenant who submits the request.</td>
+            </tr>
+            <tr>
+              <td>&GET;</td>
+              <td>/backups/<parameter>backup_id</parameter></td>
+              <td>Lists detailed information for the specified backup.</td>
+            </tr>
+            <tr>
+              <td>&POST;</td>
+              <td>/backups</td>
+              <td>Creates a new Cinder backup from a Cinder Volume.</td>
+            </tr>
+            <tr>
+              <td>&DELETE;</td>
+              <td>/backups/<parameter>backup_id</parameter></td>
+              <td>Destroys the specified backup.</td>
+            </tr>
+            <tr>
+              <td>&POST;</td>
+              <td>/backups/<parameter>backup_id</parameter>/restore</td>
+              <td>Restores a Cinder backup to an existing or new Cinder volume.</td>
+            </tr>
+          </tbody>
+        </informaltable>
+        <section xml:id="Create_Backup">
+          <title>Create Backup</title>
+          <informaltable rules="all" width="100%">
+            <col width="20%"/>
+            <col width="20%"/>
+            <col width="60%"/>
+            <thead>
+              <tr>
+                <td>Verb</td>
+                <td>URI</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&POST;</td>
+                <td>/backups</td>
+                <td>Create a new Cinder backup from a Cinder Volume.</td>
+              </tr>
+            </tbody>
+          </informaltable>
+          <example>
+            <title>Create Backup: JSON Request</title>
+            <literallayout class="monospaced">
+  POST /&VERSION;/backups
+  Content-Type: application/json
+  Accept: application/json
+            </literallayout>
+            <programlisting language="json">
+            <xi:include href="samples/backup_create_request.json" parse="text"/>
+          </programlisting>
+          </example>
+          <example>
+            <title>Create Backup: JSON Response</title>
+            <programlisting language="json">
+            <xi:include href="samples/backup_create_response.json" parse="text"/>
+          </programlisting>
+          </example>
+          <para>Returns status code 202 on success</para>
+        </section>
+        <section xml:id="List_Backup_Summaries">
+          <title>List Backup Summaries</title>
+          <informaltable rules="all" width="100%">
+            <col width="20%"/>
+            <col width="20%"/>
+            <col width="60%"/>
+            <thead>
+              <tr>
+                <td>Verb</td>
+                <td>URI</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&GET;</td>
+                <td>/backups</td>
+                <td>Lists a summary of all backups defined in Cinder that are accessible to the tenant
+                  who submits the request. </td>
+              </tr>
+            </tbody>
+          </informaltable>
+          <example>
+            <title>List Backups: Request</title>
+            <literallayout class="monospaced">
+  GET /&VERSION;/backups
+  Accept: application/json
+                      </literallayout>
+          </example>
+          <example>
+            <title>List Backups: JSON Response</title>
+            <programlisting language="json">
+            <xi:include href="samples/backup_list_simple_response.json" parse="text"/>
+          </programlisting>
+          </example>
+          <para>Returns status code 200 on success</para>
+        </section>
+        <section xml:id="List_Backup_Details">
+          <title>List Backup Details</title>
+          <informaltable rules="all" width="100%">
+            <col width="20%"/>
+            <col width="20%"/>
+            <col width="60%"/>
+            <thead>
+              <tr>
+                <td>Verb</td>
+                <td>URI</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&GET;</td>
+                <td>/backups/details</td>
+                <td>List detailed information for all backups defined in Cinder that are accessible to
+                  the tenant who submits the request. </td>
+              </tr>
+            </tbody>
+          </informaltable>
+          <example>
+            <title>List Backups: Request</title>
+            <literallayout class="monospaced">
+  GET /&VERSION;/backups/details
+  Accept: application/json
+          </literallayout>
+          </example>
+          <example>
+            <title>List Backups: JSON Response</title>
+            <programlisting language="json">
+            <xi:include href="samples/backup_list_detail_response.json" parse="text"/>
+          </programlisting>
+          </example>
+          <para>Returns status code 200 on success</para>
+        </section>
+        <section xml:id="Show_Backup">
+          <title>Show Backup</title>
+          <informaltable rules="all" width="100%">
+            <col width="20%"/>
+            <col width="20%"/>
+            <col width="60%"/>
+            <thead>
+              <tr>
+                <td>Verb</td>
+                <td>URI</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&GET;</td>
+                <td>/backups/<parameter>backup-id</parameter></td>
+                <td>Lists detailed information for the specified backup ID. </td>
+              </tr>
+            </tbody>
+          </informaltable>
+          <example>
+            <title>Show Backup: Request</title>
+            <literallayout class="monospaced">
+  GET /&VERSION;/backups/<parameter>fa4351c8-d881-4e31-904f-c28a8a2e80cc</parameter>
+  Accept: application/json
+  </literallayout>
+          </example>
+          <example>
+            <title>Show Backup: JSON Response</title>
+            <programlisting language="json">
+            <xi:include href="samples/backup_show_response.json" parse="text"/>
+          </programlisting>
+          </example>
+          <para>Returns status code 200 on success</para>
+        </section>
+        <section xml:id="Delete_Backup">
+          <title>Delete Backup</title>
+          <informaltable rules="all" width="100%">
+            <col width="20%"/>
+            <col width="20%"/>
+            <col width="60%"/>
+            <thead>
+              <tr>
+                <td>Verb</td>
+                <td>URI</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&DELETE;</td>
+                <td>/backups/<parameter>backups-id</parameter></td>
+                <td>Destroys the specified backup.</td>
+              </tr>
+            </tbody>
+          </informaltable>
+          <example>
+            <title>Delete Backup: Request</title>
+            <literallayout class="monospaced">
+  DELETE /&VERSION;/backups/<parameter>fa4351c8-d881-4e31-904f-c28a8a2e80cc</parameter>
+           </literallayout>
+          </example>
+          <example>
+            <title>Delete Backup: Response</title>
+            <literallayout class="monospaced">
+  The response body will be empty with status code 202.
+           </literallayout>
+          </example>
+        </section>
+        <section xml:id="Restore_Backup">
+          <title>Restore Backup</title>
+          <informaltable rules="all" width="100%">
+            <col width="20%"/>
+            <col width="20%"/>
+            <col width="60%"/>
+            <thead>
+              <tr>
+                <td>Verb</td>
+                <td>URI</td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&POST;</td>
+                <td>/backups/<parameter>backup_id</parameter>/restore</td>
+                <td>Restores a Cinder backup to an existing or new Cinder volume..</td>
+              </tr>
+            </tbody>
+          </informaltable>
+          <example>
+            <title>Restore Backup: JSON Request</title>
+            <literallayout class="monospaced">
+  POST /&VERSION;/backups/fa4351c8-d881-4e31-904f-c28a8a2e80cc/restore
+  Content-Type: application/json
+  Accept: application/json
+            </literallayout>
+            <programlisting language="json">
+            <xi:include href="samples/backup_restore_request.json" parse="text"/>
+          </programlisting>
+          </example>
+          <example>
+            <title>Restore Backup: JSON Response</title>
+            <programlisting language="json">
+            <xi:include href="samples/backup_restore_response.json" parse="text"/>
+          </programlisting>
+          </example>
+          <para>Returns status code 202 on success</para>
+        </section>
       </section>
     </section>
   </chapter>
