@@ -39,6 +39,7 @@
                 article   toc,title
                 book      title,figure,table,example,equation
                 chapter   toc,title
+                section   toc,title
                 part      toc,title
                 preface   toc,title
                 qandadiv  toc
@@ -46,6 +47,9 @@
                 reference toc,title
                 set       toc,title
               </generateToc>
+              <chapterAutolabel>0</chapterAutolabel>
+              <sectionAutolabel>0</sectionAutolabel>
+              <tocSectionDepth>1</tocSectionDepth>
               <!-- The following elements sets the autonumbering of sections in output for chapter numbers but no numbered sections-->
               <!--<sectionAutolabel>0</sectionAutolabel>
               <sectionLabelIncludesComponentLabel>0</sectionLabelIncludesComponentLabel>-->
