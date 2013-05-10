@@ -34,39 +34,65 @@ format="SVG" scale="60"/>
 </imageobject>
 </inlinemediaobject>'>
 ]>
-<book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
-  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg"
-  xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:html="http://www.w3.org/1999/xhtml"
-  xmlns:db="http://docbook.org/ns/docbook" version="5.0" xml:id="openstack-blockstorage-devguide">
-  <?rax title.font.size="35px" subtitle.font.size="20px"?>
+<book xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:m="http://www.w3.org/1998/Math/MathML"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0"
+  xml:id="openstack-blockstorage-devguide">
+  <title>OpenStack Block Storage Service API Specification</title>
+  <?rax title.font.size="28px" subtitle.font.size="28px"?>
+  <titleabbrev>OpenStack Block Storage Service API Specification</titleabbrev>
   <info>
-    <title>&PRODNAME; Developer Guide</title>
-    <titleabbrev>&PRODNAME; Developer Guide</titleabbrev>
+    <author>
+      <personname>
+        <firstname/>
+        <surname/>
+      </personname>
+      <affiliation>
+        <orgname>OpenStack Foundation</orgname>
+      </affiliation>
+    </author>
     <copyright>
       <year>2013</year>
+      <holder>OpenStack Foundation</holder>
     </copyright>
-    <releaseinfo>API v2.0</releaseinfo>
-    <productname>&PRODNAME;</productname>
-    <pubdate></pubdate>
+    <releaseinfo>API v2</releaseinfo>
+    <productname>OpenStack Block Storage Service API</productname>
+    <pubdate/>
     <legalnotice role="apache2">
-      <annotation xmlns:svg="http://www.w3.org/2000/svg"
-        xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:html="http://www.w3.org/1999/xhtml">
-        <remark>Copyright details are filled in by the template.</remark>
+      <annotation>
+        <remark>Copyright details are filled in by the
+          template.</remark>
       </annotation>
     </legalnotice>
     <abstract>
       <para>This document is for software developers who develop
-        applications by using the &PRODNAME; Application Programming
+        applications by using the OpenStack Block Storage Service Application Programming
         Interface (<abbrev>API</abbrev>). </para>
     </abstract>
     <revhistory>
+      <revision>
+        <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
+        <date>2013-05-09</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Updated the book title for consistency.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
       <revision>
         <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
         <date>2013-04-21</date>
         <revdescription>
           <itemizedlist spacing="compact">
             <listitem>
-              <para>Corrected request and response examples in the API operations chapter.</para>
+              <para>Corrected request and response examples in the API
+                operations chapter.</para>
             </listitem>
           </itemizedlist>
         </revdescription>
@@ -96,11 +122,13 @@ format="SVG" scale="60"/>
   </info>
   <preface xml:id="Preface">
     <title>Preface</title>
-    <para>The OpenStack Block Storage (Cinder) project provides volume management with the
-      OpenStack Compute service.</para>
-    <para>This document describes the features available with the &API;.</para>
+    <para>The OpenStack Block Storage (Cinder) project provides volume
+      management with the OpenStack Compute service.</para>
+    <para>This document describes the features available with the
+      &API;.</para>
     <para>We welcome feedback, comments and bug reports at <link
-        xlink:href="http://bugs.launchpad.net/cinder">bugs.launchpad.net/Cinder</link>.</para>
+        xlink:href="http://bugs.launchpad.net/cinder"
+        >bugs.launchpad.net/Cinder</link>.</para>
     <section xml:id="Intended_Audience-d1e122">
       <title>Intended Audience</title>
       <para>This guide assists software developers who develop
@@ -126,17 +154,19 @@ format="SVG" scale="60"/>
       <para>You can download the latest API-related documents from
           <link xlink:href="http://docs.openstack.org/api/"
           >docs.openstack.org/api/</link>. </para>
-      <para>This API uses standard HTTP 1.1 response codes as documented at: <link
+      <para>This API uses standard HTTP 1.1 response codes as
+        documented at: <link
           xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
-          >www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</link>. </para>
+          >www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</link>.
+      </para>
     </section>
   </preface>
-  <preface xml:id="Overview" xmlns:svg="http://www.w3.org/2000/svg"
-    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:html="http://www.w3.org/1999/xhtml">
+  <chapter xml:id="Overview" xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:html="http://www.w3.org/1999/xhtml">
     <title>Overview</title>
-    <para>&PRODNAME; is a block-level storage solution that enables
-      you to: 
-      <itemizedlist>
+    <para>OpenStack Block Storage Service is a block-level storage solution that enables
+      you to: <itemizedlist>
         <listitem>
           <para>Mount drives to OpenStack Cloud Servers<trademark/> to
             scale storage without paying for more compute
@@ -151,52 +181,71 @@ format="SVG" scale="60"/>
       Block Storage API as described in this guide. </para>
     <note>
       <para><itemizedlist>
-        <listitem>
-          <para>&PRODNAME; is an add-on feature to OpenStack Nova Compute in Folsom versions and
-            earlier.</para>
-        </listitem>
-        <listitem>
-          <para>Block Storage is multi-tenant rather than dedicated.</para>
-        </listitem>
-        <listitem>
-          <para>Block Storage allows you to create snapshots that you can save, list, and
-            restore.</para>
-        </listitem>
-        <listitem>
-            <para>Block Storage allows you to create backups of your volumes
-                to Object Storage for archival and disaster recovery purposes.
-                These backups can be subsequently restored to the same volume
-                or new volumes.</para>
-        </listitem>
-      </itemizedlist></para>
+          <listitem>
+            <para>&PRODNAME; is an add-on feature to OpenStack Nova
+              Compute in Folsom versions and earlier.</para>
+          </listitem>
+          <listitem>
+            <para>Block Storage is multi-tenant rather than
+              dedicated.</para>
+          </listitem>
+          <listitem>
+            <para>Block Storage allows you to create snapshots that
+              you can save, list, and restore.</para>
+          </listitem>
+          <listitem>
+            <para>Block Storage allows you to create backups of your
+              volumes to Object Storage for archival and disaster
+              recovery purposes. These backups can be subsequently
+              restored to the same volume or new volumes.</para>
+          </listitem>
+        </itemizedlist></para>
     </note>
     <?hard-pagebreak?>
     <section xml:id="Concepts">
       <title>Glossary</title>
       <?dbhtml stop-chunking?>
-      <para> To use the Block Storage API effectively, you should understand several key concepts: </para>
-      <itemizedlist><listitem><para><emphasis role="bold">Volume</emphasis></para>
-        <para>A detachable block storage device. You can think of it as a USB hard
-          drive. It can only be attached to one instance at a time.</para>
-      </listitem><listitem><para><emphasis role="bold">Volume type</emphasis></para>
-        <para>A type of a block storage volume. You can define
+      <para> To use the Block Storage API effectively, you should
+        understand several key concepts: </para>
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Volume</emphasis></para>
+          <para>A detachable block storage device. You can think of it
+            as a USB hard drive. It can only be attached to one
+            instance at a time.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">Volume type</emphasis></para>
+          <para>A type of a block storage volume. You can define
             whatever types work best for you, such as SATA, SCSCI,
             SSD, etc. These can be customized or defined by the
             OpenStack admin. </para>
-        
-        <para>You can also define extra_specs associated with your
+
+          <para>You can also define extra_specs associated with your
             volume types. For instance, you could have a
             VolumeType=SATA, with extra_specs (RPM=10000,
             RAID-Level=5) . Extra_specs are defined and customized by
-            the admin. </para></listitem><listitem><para><emphasis role="bold">Snapshot</emphasis></para>
-        <para>A point in time copy of the data contained in a volume.</para>
-          </listitem><listitem><para><emphasis role="bold">Instance</emphasis></para><para>A virtual machine (VM) that runs inside the cloud.</para></listitem>
-        <listitem><para><emphasis role="bold">Backup</emphasis></para>  <para>A full copy of a volume stored in an external service. The
-            service can be configured. The only supported service for
-            now is Object Storage. A backup can subsequently be
+            the admin. </para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">Snapshot</emphasis></para>
+          <para>A point in time copy of the data contained in a
+            volume.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">Instance</emphasis></para>
+          <para>A virtual machine (VM) that runs inside the
+            cloud.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">Backup</emphasis></para>
+          <para>A full copy of a volume stored in an external service.
+            The service can be configured. The only supported service
+            for now is Object Storage. A backup can subsequently be
             restored from the external service to either the same
             volume that the backup was originally taken from, or to a
-            new volume.</para></listitem>
+            new volume.</para>
+        </listitem>
       </itemizedlist>
     </section>
 
@@ -204,16 +253,19 @@ format="SVG" scale="60"/>
 
     <section xml:id="High_Level_Task_Flow">
       <title>High-Level Task Flow</title>
-      <para>The high-level task flow for Block Storage (Cinder) is as follows:</para>
+      <para>The high-level task flow for Block Storage (Cinder) is as
+        follows:</para>
       <para>
         <orderedlist>
           <listitem>
             <para>The tenant creates a volume.</para>
-            <para>For example, the tenant creates a 30G volume called vol1.</para>
+            <para>For example, the tenant creates a 30G volume called
+              vol1.</para>
             <programlisting language="bash" role="gutter: false"><prompt>$</prompt> cinder create --display-name vol1 30</programlisting>
           </listitem>
           <listitem>
-            <para>This gives the tenant a volume id 521752a6-acf6-4b2d-bc7a-119f9148cd8c. The tenant
+            <para>This gives the tenant a volume id
+              521752a6-acf6-4b2d-bc7a-119f9148cd8c. The tenant
               attaches that volume to a virtual machine (VM)
               616fb98f-46ca-475e-917e-2563e5a8cd19:</para>
             <para>For example
@@ -222,20 +274,22 @@ format="SVG" scale="60"/>
         </orderedlist>
       </para>
     </section>
-  </preface>
-  <chapter xml:id="General_API_Information" xmlns:svg="http://www.w3.org/2000/svg"
-    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:html="http://www.w3.org/1999/xhtml">
+  </chapter>
+  <chapter xml:id="General_API_Information"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:html="http://www.w3.org/1999/xhtml">
     <title>General API Information</title>
-       <para>The Block Storage API is implemented using a ReSTful
-      web service interface. Like other OpenStack projects, Block Storage shares a common token-based
-      authentication system that allows access between
-      products and services. </para>
+    <para>The Block Storage API is implemented using a ReSTful web
+      service interface. Like other OpenStack projects, Block Storage
+      shares a common token-based authentication system that allows
+      access between products and services. </para>
     <note>
       <para>All requests to authenticate against and operate the
         service are performed using SSL over HTTP (HTTPS) on TCP port
         443. </para>
     </note>
-    
+
     <section xml:id="Authentication-d1e647">
       <title>Authentication</title>
       <para>You can use <link xlink:href="http://curl.haxx.se/"
@@ -255,7 +309,8 @@ format="SVG" scale="60"/>
               authenticated. To use the token, pass it to other
               services as an <code>X-Auth-Token</code> header. </para>
             <para>Authentication also returns a service catalog,
-              listing the endpoints you can use for Cloud services. </para>
+              listing the endpoints you can use for Cloud services.
+            </para>
           </listitem>
           <listitem>
             <para>Use the authentication token to send a GET to a
@@ -263,8 +318,10 @@ format="SVG" scale="60"/>
           </listitem>
         </orderedlist>
       </para>
-      <para>Authentication tokens are typically valid for 24 hours. Applications should be designed
-        to re-authenticate after receiving a 401 (Unauthorized) response from a service endpoint. </para>
+      <para>Authentication tokens are typically valid for 24 hours.
+        Applications should be designed to re-authenticate after
+        receiving a 401 (Unauthorized) response from a service
+        endpoint. </para>
       <important>
         <para>If you programmatically parse an authentication
           response, be aware that service names are stable for the
@@ -276,16 +333,21 @@ format="SVG" scale="60"/>
     </section>
     <section xml:id="Request_Response_Types-d1e903">
       <title>Request/Response Types</title>
-      <para>The Block Storage API supports both the JSON and XML data serialization formats. The
-        request format is specified using the <code>Content-Type</code> header and is required for
-        calls that have a request body. The response format can be specified in requests either by
-        using the <code>Accept</code> header or by adding an <code>.xml</code> or <code>.json</code>
-        extension to the request URI. Note that it is possible for a response to be serialized using
-        a format different from the request. If no response format is specified, JSON is the
-        default. If conflicting formats are specified using both an <code>Accept</code> header and a
-        query extension, the query extension takes precedence.</para>
-      <para security="writeronly">Some operations support an Atom representation that can be used to
-        efficiently determine when the state of services has changed. </para>
+      <para>The Block Storage API supports both the JSON and XML data
+        serialization formats. The request format is specified using
+        the <code>Content-Type</code> header and is required for calls
+        that have a request body. The response format can be specified
+        in requests either by using the <code>Accept</code> header or
+        by adding an <code>.xml</code> or <code>.json</code> extension
+        to the request URI. Note that it is possible for a response to
+        be serialized using a format different from the request. If no
+        response format is specified, JSON is the default. If
+        conflicting formats are specified using both an
+          <code>Accept</code> header and a query extension, the query
+        extension takes precedence.</para>
+      <para security="writeronly">Some operations support an Atom
+        representation that can be used to efficiently determine when
+        the state of services has changed. </para>
       <table rules="all">
         <caption>Response Formats</caption>
         <?dbfo keep-together="always"?>
@@ -312,9 +374,11 @@ format="SVG" scale="60"/>
           </tr>
         </tbody>
       </table>
-      <para>In the request example below, notice that <parameter>Content-Type</parameter> is set to
-          <parameter>application/json</parameter>, but <parameter>application/xml</parameter> is
-        requested via the <parameter>Accept</parameter> header:</para>
+      <para>In the request example below, notice that
+          <parameter>Content-Type</parameter> is set to
+          <parameter>application/json</parameter>, but
+          <parameter>application/xml</parameter> is requested via the
+          <parameter>Accept</parameter> header:</para>
       <example>
         <title>Request with Headers (Getting Volume Types)</title>
         <literallayout class="monospaced">GET /&VERSION;/441446/types HTTP/1.1
@@ -322,7 +386,8 @@ Host: dfw.blockstorage.api.openstackcloud.com
 X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
 Accept: application/xml                  </literallayout>
       </example>
-      <para><?rax-fo keep-with-next?>Therefore an XML response format is returned:</para>
+      <para><?rax-fo keep-with-next?>Therefore an XML response format
+        is returned:</para>
       <example>
         <title>Response with Headers</title>
         <literallayout class="monospaced">HTTP/1.1 200 OK
@@ -353,14 +418,17 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         are fixed. </para>
       <section xml:id="Rate_Limits-d1e1222" security="writeronly">
         <title>Rate Limits</title>
-        <para> Rate limits are specified in terms of both a human-readable wild-card URI and a
-          machine-processable regular expression. The regular expression boundary matcher '^' takes
-          effect after the root URI path. For example, the regular expression ^/v1.0/instances would
-          match the bolded portion of the following URI:
-            https://dfw.blockstorage.api.openstackcloud.com<emphasis role="bold"
-            >/v1.0/instances</emphasis>. </para>
-        <para>The following table specifies the default rate limits for all API operations for all
-          &GET;, &POST;, &PUT;, and &DELETE; calls for volumes: </para>
+        <para> Rate limits are specified in terms of both a
+          human-readable wild-card URI and a machine-processable
+          regular expression. The regular expression boundary matcher
+          '^' takes effect after the root URI path. For example, the
+          regular expression ^/v1.0/instances would match the bolded
+          portion of the following URI:
+            https://dfw.blockstorage.api.openstackcloud.com<emphasis
+            role="bold">/v1.0/instances</emphasis>. </para>
+        <para>The following table specifies the default rate limits
+          for all API operations for all &GET;, &POST;, &PUT;, and
+          &DELETE; calls for volumes: </para>
         <table rules="all">
           <caption>Default Rate Limits</caption>
           <thead>
@@ -404,12 +472,15 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
             </tr>
           </tbody>
         </table>
-        <para> Rate limits are applied in order relative to the verb, going from least to most
-          specific. For example, although the threshold for &POST; to /v1.0/* is 10 per minute, one
-          cannot &POST; to /v1.0/* more than 50 times within a single day. </para>
-        <para> If you exceed the thresholds established for your account, a <errorcode>413 (Rate
-            Control)</errorcode> HTTP response will be returned with a <code>Retry-After</code>
-          header to notify the client when it can attempt to try again. </para>
+        <para> Rate limits are applied in order relative to the verb,
+          going from least to most specific. For example, although the
+          threshold for &POST; to /v1.0/* is 10 per minute, one cannot
+          &POST; to /v1.0/* more than 50 times within a single day. </para>
+        <para> If you exceed the thresholds established for your
+          account, a <errorcode>413 (Rate Control)</errorcode> HTTP
+          response will be returned with a <code>Retry-After</code>
+          header to notify the client when it can attempt to try
+          again. </para>
       </section>
       <section xml:id="Absolute_Limits-d1e1397">
         <title>Absolute Limits</title>
@@ -499,11 +570,12 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     </section>
     <section xml:id="DB_faults">
       <title>Faults</title>
-      <para> When an error occurs, the Block Storage Service returns a fault object containing an
-        HTTP error response code that denotes the type of error. In the body of the response, the
+      <para> When an error occurs, the Block Storage Service returns a
+        fault object containing an HTTP error response code that
+        denotes the type of error. In the body of the response, the
         system will return additional information about the fault. </para>
-      <para>The following table lists possible fault types with their associated error codes and
-        descriptions.</para>
+      <para>The following table lists possible fault types with their
+        associated error codes and descriptions.</para>
       <informaltable rules="all" width="100%">
         <col width="20%"/>
         <col width="15%"/>
@@ -524,8 +596,8 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tr>
             <td><code>unauthorized</code></td>
             <td>401</td>
-            <td>The supplied token is not authorized to access the resources, either
-              it's expired or invalid.</td>
+            <td>The supplied token is not authorized to access the
+              resources, either it's expired or invalid.</td>
           </tr>
           <tr>
             <td><code>forbidden</code></td>
@@ -535,42 +607,48 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tr>
             <td><code>itemNotFound</code></td>
             <td>404</td>
-            <td>The back-end services did not find anything matching the
-              Request-URI.</td>
+            <td>The back-end services did not find anything matching
+              the Request-URI.</td>
           </tr>
           <tr>
             <td><code>badMethod</code></td>
             <td>405</td>
-            <td>The request method is not allowed for this resource.</td>
+            <td>The request method is not allowed for this
+              resource.</td>
           </tr>
           <tr>
             <td><code>overLimit</code></td>
             <td>413</td>
-            <td>Either the number of entities in the request is larger than allowed
-              limits, or the user has exceeded allowable request rate limits. See the
-                <code>details</code> element for more specifics. Contact support if you think you
-              need higher request rate limits.</td>
+            <td>Either the number of entities in the request is larger
+              than allowed limits, or the user has exceeded allowable
+              request rate limits. See the <code>details</code>
+              element for more specifics. Contact support if you think
+              you need higher request rate limits.</td>
           </tr>
           <tr>
             <td><code>badMediaType</code></td>
             <td>415</td>
-            <td>The requested content type is not supported by this service.</td>
+            <td>The requested content type is not supported by this
+              service.</td>
           </tr>
           <tr>
             <td><code>unprocessableEntity</code></td>
             <td>422</td>
-            <td>The requested resource could not be processed on at the moment.</td>
+            <td>The requested resource could not be processed on at
+              the moment.</td>
           </tr>
           <tr>
             <td><code>instanceFault</code></td>
             <td>500</td>
-            <td>This is a generic server error and the message contains the reason for
-              the error. This error could wrap several error messages and is a catch all.</td>
+            <td>This is a generic server error and the message
+              contains the reason for the error. This error could wrap
+              several error messages and is a catch all.</td>
           </tr>
           <tr>
             <td><code>notImplemented</code></td>
             <td>501</td>
-            <td>The requested method or resource is not implemented.</td>
+            <td>The requested method or resource is not
+              implemented.</td>
           </tr>
           <tr>
             <td><code>serviceUnavailable</code></td>
@@ -601,21 +679,26 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <code>details</code> element may or may not be appropriate
         for display to an end user, depending on the role and
         experience of the end user.</para>
-      <para>The fault's root element (for example, <code>instanceFault</code>) may change depending
-        on the type of error. </para>
-      <para><?rax-fo keep-with-next?>The following two <code>badRequest</code> examples show errors
-        when the volume size is invalid:</para>
+      <para>The fault's root element (for example,
+          <code>instanceFault</code>) may change depending on the type
+        of error. </para>
+      <para><?rax-fo keep-with-next?>The following two
+          <code>badRequest</code> examples show errors when the volume
+        size is invalid:</para>
       <example>
-        <title>Example badRequest Fault on Volume Size Errors: XML</title>
+        <title>Example badRequest Fault on Volume Size Errors:
+          XML</title>
         <?dbfo keep-together="always"?>
         <programlisting language="xml"><xi:include href="samples/db-faults-badRequest.xml" parse="text"/></programlisting>
       </example>
       <example>
-        <title>Example badRequest Fault on Volume Size Errors: JSON</title>
+        <title>Example badRequest Fault on Volume Size Errors:
+          JSON</title>
         <?dbfo keep-together="always"?>
         <programlisting language="json"><xi:include href="samples/db-faults-badRequest.json" parse="text"/></programlisting>
       </example>
-      <para> The next two examples show <code>itemNotFound</code> errors:</para>
+      <para> The next two examples show <code>itemNotFound</code>
+        errors:</para>
       <example>
         <title>Example itemNotFound Fault: XML</title>
         <?dbfo keep-together="always"?>
@@ -628,45 +711,57 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
       </example>
     </section>
   </chapter>
-  <chapter xml:id="API_Operations" xmlns:svg="http://www.w3.org/2000/svg"
-    xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:html="http://www.w3.org/1999/xhtml">
+  <chapter xml:id="API_Operations"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:html="http://www.w3.org/1999/xhtml">
     <title>API Operations</title>
     <section xml:id="Volumes">
       <title>Volumes</title>
-      <para>A volume is a detachable block storage device. You can think of it as a USB hard drive.
-        It can only be attached to one instance at a time.</para>
-      <para><?rax-fo keep-with-next?>When making an API call to create, list, or delete volume(s),
-        the following status values are possible:</para>
+      <para>A volume is a detachable block storage device. You can
+        think of it as a USB hard drive. It can only be attached to
+        one instance at a time.</para>
+      <para><?rax-fo keep-with-next?>When making an API call to
+        create, list, or delete volume(s), the following status values
+        are possible:</para>
       <itemizedlist spacing="compact">
         <listitem>
           <para>CREATING &ndash; The volume is being created.</para>
         </listitem>
         <listitem>
-          <para>AVAILABLE &ndash; The volume is read to be attached to an instance.</para>
+          <para>AVAILABLE &ndash; The volume is read to be attached to
+            an instance.</para>
         </listitem>
         <listitem>
-          <para>ATTACHING &ndash; The volume is attaching to an instance.</para>
+          <para>ATTACHING &ndash; The volume is attaching to an
+            instance.</para>
         </listitem>
         <listitem>
-          <para>IN-USE &ndash; The volume is attached to an instance.</para>
+          <para>IN-USE &ndash; The volume is attached to an
+            instance.</para>
         </listitem>
         <listitem>
           <para>DELETING &ndash; The volume is being deleted.</para>
         </listitem>
         <listitem>
-          <para>ERROR &ndash; An error has occurred with the volume.</para>
+          <para>ERROR &ndash; An error has occurred with the
+            volume.</para>
         </listitem>
         <listitem>
-          <para>ERROR_DELETING &ndash; There was an error deleting the volume.</para>
+          <para>ERROR_DELETING &ndash; There was an error deleting the
+            volume.</para>
         </listitem>
         <listitem>
-          <para>BACKING-UP &ndash; The volume is being backed up.</para>
+          <para>BACKING-UP &ndash; The volume is being backed
+            up.</para>
         </listitem>
         <listitem>
-          <para>RESTORING-BACKUP &ndash; A backup is being restored to the volume.</para>
+          <para>RESTORING-BACKUP &ndash; A backup is being restored to
+            the volume.</para>
         </listitem>
         <listitem>
-          <para>ERROR_RESTORING &ndash; There was an error restoring a backup to the volume.</para>
+          <para>ERROR_RESTORING &ndash; There was an error restoring a
+            backup to the volume.</para>
         </listitem>
       </itemizedlist>
       <informaltable rules="all" width="100%">
@@ -684,13 +779,15 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tr>
             <td>&GET;</td>
             <td>/volumes</td>
-            <td>Lists a summary of all volumes defined in Block Storage that are accessible to the tenant
-              who submits the request.</td>
+            <td>Lists a summary of all volumes defined in Block
+              Storage that are accessible to the tenant who submits
+              the request.</td>
           </tr>
           <tr>
             <td>&GET;</td>
             <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Lists detailed information for the specified volume.</td>
+            <td>Lists detailed information for the specified
+              volume.</td>
           </tr>
           <tr>
             <td>&POST;</td>
@@ -741,7 +838,8 @@ Accept: application/json</literallayout>
           <title>Create Volumes: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_create_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="List_Summary_Volumes">
         <title>List Volume Summaries</title>
@@ -760,8 +858,9 @@ Accept: application/json</literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes</td>
-              <td>Lists a summary of all volumes defined in Block Storage (Cinder) that are accessible to the tenant
-                who submits the request. </td>
+              <td>Lists a summary of all volumes defined in Block
+                Storage (Cinder) that are accessible to the tenant who
+                submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -774,7 +873,8 @@ Accept: application/json	                </literallayout>
           <title>List Volumes: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_list_simple_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="List_Volumes_Details">
         <title>List Volume Details</title>
@@ -793,8 +893,9 @@ Accept: application/json	                </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes/details</td>
-              <td>List detailed information of all volumes defined in Block Storage (Cinder) that are accessible to
-                the tenant who submits the request. </td>
+              <td>List detailed information of all volumes defined in
+                Block Storage (Cinder) that are accessible to the
+                tenant who submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -807,7 +908,8 @@ Accept: application/json        </literallayout>
           <title>List Volumes: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_list_detail_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Show_Volume">
         <title>Show Volume</title>
@@ -826,7 +928,8 @@ Accept: application/json        </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes/<parameter>volume-id</parameter></td>
-              <td>Lists detailed information for the specified volume ID. </td>
+              <td>Lists detailed information for the specified volume
+                ID. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -839,7 +942,8 @@ Accept: application/json</literallayout>
           <title>Show Volume: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_show_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Update_Volume">
         <title>Update Volume</title>
@@ -873,7 +977,8 @@ Accept: application/json</literallayout>
           <title>Update Volume: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_update_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Delete_Volume">
         <title>Delete Volume</title>
@@ -904,30 +1009,36 @@ Accept: application/json</literallayout>
           <title>Delete Volume: Response</title>
           <literallayout class="monospaced">The response body is empty with status code 202.	     </literallayout>
         </example>
-        <caution><para>You cannot delete a volume if it has snapshots associated with it.</para></caution>
+        <caution>
+          <para>You cannot delete a volume if it has snapshots
+            associated with it.</para>
+        </caution>
       </section>
     </section>
     <section xml:id="Snapshots">
       <title>Snapshots</title>
-      <para><?rax-fo keep-with-next?>A snapshot is a point in time copy of the data contained in a
-        volume.</para>
-        <para>When making an API call to create, list, or delete snapshot(s), the following status
-        values are possible:</para>
+      <para><?rax-fo keep-with-next?>A snapshot is a point in time
+        copy of the data contained in a volume.</para>
+      <para>When making an API call to create, list, or delete
+        snapshot(s), the following status values are possible:</para>
       <itemizedlist spacing="compact">
         <listitem>
           <para>CREATING &ndash; The snapshot is being created.</para>
         </listitem>
         <listitem>
-          <para>AVAILABLE &ndash; The snapshot is ready to be used.</para>
+          <para>AVAILABLE &ndash; The snapshot is ready to be
+            used.</para>
         </listitem>
         <listitem>
           <para>DELETING &ndash; The snapshot is being deleted.</para>
         </listitem>
         <listitem>
-          <para>ERROR &ndash; An error occurred with the snapshot.</para>
+          <para>ERROR &ndash; An error occurred with the
+            snapshot.</para>
         </listitem>
         <listitem>
-          <para>ERROR_DELETING &ndash; There was an error deleting the snapshot.</para>
+          <para>ERROR_DELETING &ndash; There was an error deleting the
+            snapshot.</para>
         </listitem>
       </itemizedlist>
       <section xml:id="Create_Snapshot">
@@ -981,8 +1092,9 @@ Accept: application/json</literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots</td>
-              <td>Lists a summary of all snapshots defined in Block Storage (Cinder) that are accessible to the
-                tenant who submits the request. </td>
+              <td>Lists a summary of all snapshots defined in Block
+                Storage (Cinder) that are accessible to the tenant who
+                submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -995,7 +1107,8 @@ Accept: application/json	                </literallayout>
           <title>List Snapshots: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/snapshot_list_simple_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="List_Snapshot_Details">
         <title>List Snapshot Details</title>
@@ -1014,8 +1127,9 @@ Accept: application/json	                </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots/details</td>
-              <td>List detailed information of all snapshots defined in Block Storage (Cinder) that are accessible
-                to the tenant who submits the request. </td>
+              <td>List detailed information of all snapshots defined
+                in Block Storage (Cinder) that are accessible to the
+                tenant who submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1028,7 +1142,8 @@ Accept: application/json     </literallayout>
           <title>List Snapshots Details: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/snapshot_list_detail_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Show_Snapshot">
         <title>Show Snapshot</title>
@@ -1047,7 +1162,8 @@ Accept: application/json     </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Lists detailed information for the specified snapshot ID. </td>
+              <td>Lists detailed information for the specified
+                snapshot ID. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1060,7 +1176,8 @@ Accept: application/json</literallayout>
           <title>Show Snapshot: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/snapshot_show_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Update_Snapshot">
         <title>Update Snapshot</title>
@@ -1094,7 +1211,8 @@ Accept: application/json	      </literallayout>
           <title>Update Snapshot: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/snapshot_update_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Delete_Snapshot">
         <title>Delete Snapshot</title>
@@ -1159,7 +1277,8 @@ Accept: application/json	     </literallayout>
           <title>List Volume Types: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_type_list_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
       <section xml:id="Volume_Show_Type">
         <title>Show Volume Type</title>
@@ -1191,44 +1310,54 @@ Accept: application/json	     </literallayout>
           <title>Show Volume Type: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_type_show_response.json" parse="text"/></programlisting>
         </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+        <para>Returns status code <returnvalue>200</returnvalue> on
+          success.</para>
       </section>
     </section>
     <section xml:id="Extensions">
       <title>Extensions</title>
-      <para>The Block Storage API is extensible. Extensions are add-ons to the API that enable new features. </para>
+      <para>The Block Storage API is extensible. Extensions are
+        add-ons to the API that enable new features. </para>
       <section xml:id="Backups">
         <title>Backups</title>
-        <para>A backup is a full copy of a volume stored in an external service. The service can
-            be configured. The only supported service for now is Object Storage. A backup can
-            subsequently be restored from the external service to either the same volume that the
-            backup was originally taken from, or to a new volume. Backup and restore operations
-            can only be carried out on volumes which are in an unattached and available state.
-        </para>
-        <para><?rax-fo keep-with-next?>When making an API call to create, list, or delete backup(s),
-          the following status values are possible:</para>
+        <para>A backup is a full copy of a volume stored in an
+          external service. The service can be configured. The only
+          supported service for now is Object Storage. A backup can
+          subsequently be restored from the external service to either
+          the same volume that the backup was originally taken from,
+          or to a new volume. Backup and restore operations can only
+          be carried out on volumes which are in an unattached and
+          available state. </para>
+        <para><?rax-fo keep-with-next?>When making an API call to
+          create, list, or delete backup(s), the following status
+          values are possible:</para>
         <itemizedlist spacing="compact">
           <listitem>
             <para>CREATING &ndash; The backup is being created.</para>
           </listitem>
           <listitem>
-            <para>AVAILABLE &ndash; The backup is ready to be restored to a volume.</para>
+            <para>AVAILABLE &ndash; The backup is ready to be restored
+              to a volume.</para>
           </listitem>
           <listitem>
             <para>DELETING &ndash; The backup is being deleted.</para>
           </listitem>
           <listitem>
-            <para>ERROR &ndash; An error has occurred with the backup.</para>
+            <para>ERROR &ndash; An error has occurred with the
+              backup.</para>
           </listitem>
           <listitem>
-            <para>RESTORING &ndash; The backup is being restored to a volume.</para>
+            <para>RESTORING &ndash; The backup is being restored to a
+              volume.</para>
           </listitem>
           <listitem>
-            <para>ERROR_RESTORING &ndash; There was an error restoring a backup to the volume.</para>
-        </listitem>
+            <para>ERROR_RESTORING &ndash; There was an error restoring
+              a backup to the volume.</para>
+          </listitem>
         </itemizedlist>
-        <para>In the event of an error, more information about the error can be found in the
-            FAIL_REASON field for the backup.</para>
+        <para>In the event of an error, more information about the
+          error can be found in the FAIL_REASON field for the
+          backup.</para>
         <informaltable rules="all" width="100%">
           <col width="20%"/>
           <col width="20%"/>
@@ -1244,24 +1373,28 @@ Accept: application/json	     </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/backups</td>
-              <td>Lists a summary of all backups defined in Block Storage (Cinder) that are accessible to the tenant
-                who submits the request.</td>
+              <td>Lists a summary of all backups defined in Block
+                Storage (Cinder) that are accessible to the tenant who
+                submits the request.</td>
             </tr>
             <tr>
               <td>&GET;</td>
               <td>/backups/detail</td>
-              <td>Lists detailed information for all backups defined in Block Storage (Cinder)
-                  that are accessible to the tenant who submits the request.</td>
+              <td>Lists detailed information for all backups defined
+                in Block Storage (Cinder) that are accessible to the
+                tenant who submits the request.</td>
             </tr>
             <tr>
               <td>&GET;</td>
               <td>/backups/<parameter>backup_id</parameter></td>
-              <td>Lists detailed information for the specified backup.</td>
+              <td>Lists detailed information for the specified
+                backup.</td>
             </tr>
             <tr>
               <td>&POST;</td>
               <td>/backups</td>
-              <td>Creates a new Block Storage (Cinder) backup from a volume.</td>
+              <td>Creates a new Block Storage (Cinder) backup from a
+                volume.</td>
             </tr>
             <tr>
               <td>&DELETE;</td>
@@ -1271,7 +1404,8 @@ Accept: application/json	     </literallayout>
             <tr>
               <td>&POST;</td>
               <td>/backups/<parameter>backup_id</parameter>/restore</td>
-              <td>Restores a Block Storage (Cinder) backup to an existing or new volume.</td>
+              <td>Restores a Block Storage (Cinder) backup to an
+                existing or new volume.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1292,7 +1426,8 @@ Accept: application/json	     </literallayout>
               <tr>
                 <td>&POST;</td>
                 <td>/backups</td>
-                <td>Create a new Block Storage (Cinder) backup from a volume.</td>
+                <td>Create a new Block Storage (Cinder) backup from a
+                  volume.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1326,7 +1461,8 @@ Accept: application/json         </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups</td>
-                <td>Lists a summary of all backups defined in Block Storage (Cinder) that are accessible to the tenant
+                <td>Lists a summary of all backups defined in Block
+                  Storage (Cinder) that are accessible to the tenant
                   who submits the request. </td>
               </tr>
             </tbody>
@@ -1340,7 +1476,8 @@ Accept: application/json                   </literallayout>
             <title>List Backups: JSON Response</title>
             <programlisting language="json"><xi:include href="samples/backup_list_simple_response.json" parse="text"/></programlisting>
           </example>
-          <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+          <para>Returns status code <returnvalue>200</returnvalue> on
+            success.</para>
         </section>
         <section xml:id="List_Backup_Details">
           <title>List Backup Details</title>
@@ -1359,8 +1496,9 @@ Accept: application/json                   </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups/details</td>
-                <td>List detailed information for all backups defined in Block Storage (Cinder) that are accessible to
-                  the tenant who submits the request. </td>
+                <td>List detailed information for all backups defined
+                  in Block Storage (Cinder) that are accessible to the
+                  tenant who submits the request. </td>
               </tr>
             </tbody>
           </informaltable>
@@ -1373,7 +1511,8 @@ Accept: application/json    </literallayout>
             <title>List Backups: JSON Response</title>
             <programlisting language="json"><xi:include href="samples/backup_list_detail_response.json" parse="text"/></programlisting>
           </example>
-          <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+          <para>Returns status code <returnvalue>200</returnvalue> on
+            success.</para>
         </section>
         <section xml:id="Show_Backup">
           <title>Show Backup</title>
@@ -1392,7 +1531,8 @@ Accept: application/json    </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups/<parameter>backup-id</parameter></td>
-                <td>Lists detailed information for the specified backup ID. </td>
+                <td>Lists detailed information for the specified
+                  backup ID. </td>
               </tr>
             </tbody>
           </informaltable>
@@ -1405,7 +1545,8 @@ Accept: application/json</literallayout>
             <title>Show Backup: JSON Response</title>
             <programlisting language="json"><xi:include href="samples/backup_show_response.json" parse="text"/></programlisting>
           </example>
-          <para>Returns status code <returnvalue>200</returnvalue> on success.</para>
+          <para>Returns status code <returnvalue>200</returnvalue> on
+            success.</para>
         </section>
         <section xml:id="Delete_Backup">
           <title>Delete Backup</title>
@@ -1454,7 +1595,8 @@ Accept: application/json</literallayout>
               <tr>
                 <td>&POST;</td>
                 <td>/backups/<parameter>backup_id</parameter>/restore</td>
-                <td>Restores a Block Storage (Cinder) backup to an existing or new Block Storage (Cinder) volume..</td>
+                <td>Restores a Block Storage (Cinder) backup to an
+                  existing or new Block Storage (Cinder) volume..</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1469,7 +1611,8 @@ Accept: application/json         </literallayout>
             <title>Restore Backup: JSON Response</title>
             <programlisting language="json"><xi:include href="samples/backup_restore_response.json" parse="text"/></programlisting>
           </example>
-          <para>Returns status code <returnvalue>202</returnvalue> on success.</para>
+          <para>Returns status code <returnvalue>202</returnvalue> on
+            success.</para>
         </section>
       </section>
     </section>
