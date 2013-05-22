@@ -42,9 +42,9 @@ format="SVG" scale="60"/>
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:db="http://docbook.org/ns/docbook" version="5.0"
   xml:id="openstack-blockstorage-devguide">
-  <title>OpenStack Block Storage Service API Specification</title>
+  <title>OpenStack Block Storage Service API v2 Reference</title>
   <?rax title.font.size="28px" subtitle.font.size="28px"?>
-  <titleabbrev>OpenStack Block Storage Service API Specification</titleabbrev>
+  <titleabbrev>Block Storage Service API Reference</titleabbrev>
   <info>
     <author>
       <personname>
@@ -60,7 +60,7 @@ format="SVG" scale="60"/>
       <holder>OpenStack Foundation</holder>
     </copyright>
     <releaseinfo>API v2</releaseinfo>
-    <productname>OpenStack Block Storage Service API</productname>
+    <productname>OpenStack Block Storage Service API v2</productname>
     <pubdate/>
     <legalnotice role="apache2">
       <annotation>
@@ -76,7 +76,7 @@ format="SVG" scale="60"/>
     <revhistory>
       <revision>
         <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
-        <date>2013-05-09</date>
+        <date>2013-05-22</date>
         <revdescription>
           <itemizedlist spacing="compact">
             <listitem>
