@@ -829,7 +829,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         </informaltable>
         <example>
           <title>Create Volumes: JSON Request</title>
-          <literallayout class="monospaced">&GET; /&VERSION;/volumes
+          <literallayout class="monospaced">POST /&VERSION;/volumes
 Content-Type: application/json
 Accept: application/json</literallayout>
           <programlisting language="json"><xi:include href="samples/volume_create_request.json" parse="text"/></programlisting>
