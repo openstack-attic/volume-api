@@ -718,9 +718,9 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     <title>API Operations</title>
     <section xml:id="Volumes">
       <title>Volumes</title>
-      <para>A volume is a detachable block storage device. You can
-        think of it as a USB hard drive. It can only be attached to
-        one instance at a time.</para>
+      <para>A volume is a detachable block storage device. You can think of it as a USB hard drive.
+        It can only be attached to one instance at a time. For more information about different
+        types of volumes, see the Openstack Configuration Reference.</para>
       <para><?rax-fo keep-with-next?>When making an API call to
         create, list, or delete volume(s), the following status values
         are possible:</para>
