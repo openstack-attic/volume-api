@@ -122,7 +122,7 @@ format="SVG" scale="60"/>
   </info>
   <preface xml:id="Preface">
     <title>Preface</title>
-    <para>The OpenStack Block Storage (Cinder) project provides volume
+    <para>The OpenStack Block Storage project provides volume
       management with the OpenStack Compute service.</para>
     <para>This document describes the features available with the
       &API;.</para>
@@ -253,7 +253,7 @@ format="SVG" scale="60"/>
 
     <section xml:id="High_Level_Task_Flow">
       <title>High-Level Task Flow</title>
-      <para>The high-level task flow for Block Storage (Cinder) is as
+      <para>The high-level task flow for Block Storage is as
         follows:</para>
       <para>
         <orderedlist>
@@ -792,7 +792,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tr>
             <td>&POST;</td>
             <td>/volumes</td>
-            <td>Creates a new Block Storage (Cinder) volume.</td>
+            <td>Creates a new Block Storage volume.</td>
           </tr>
           <tr>
             <td>&PUT;</td>
@@ -823,7 +823,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
             <tr>
               <td>&POST;</td>
               <td>/volumes</td>
-              <td>Create a new volume.</td>
+              <td>Creates a volume.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -842,7 +842,7 @@ Accept: application/json</literallayout>
           success.</para>
       </section>
       <section xml:id="List_Summary_Volumes">
-        <title>List Volume Summaries</title>
+        <title>List Volumes</title>
         <informaltable rules="all" width="100%">
           <col width="20%"/>
           <col width="20%"/>
@@ -858,9 +858,8 @@ Accept: application/json</literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes</td>
-              <td>Lists a summary of all volumes defined in Block
-                Storage (Cinder) that are accessible to the tenant who
-                submits the request. </td>
+              <td>Lists volumes defined in Block Storage that are
+                accessible to the tenant who submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -893,9 +892,9 @@ Accept: application/json	                </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes/details</td>
-              <td>List detailed information of all volumes defined in
-                Block Storage (Cinder) that are accessible to the
-                tenant who submits the request. </td>
+              <td>Lists detailed information for volumes defined in
+                Block Storage that are accessible to the tenant who
+                submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -962,7 +961,7 @@ Accept: application/json</literallayout>
             <tr>
               <td>&PUT;</td>
               <td>/volumes/<parameter>volume-id</parameter></td>
-              <td>Update the specified volume.</td>
+              <td>Updates a specified volume.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -997,7 +996,7 @@ Accept: application/json</literallayout>
             <tr>
               <td>&DELETE;</td>
               <td>/volumes/<parameter>volume-id</parameter></td>
-              <td>Destroys the specified volume.</td>
+              <td>Deletes the specified volume.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1058,7 +1057,7 @@ Accept: application/json</literallayout>
             <tr>
               <td>&POST;</td>
               <td>/snapshots</td>
-              <td>Create a snapshot of specified volume.</td>
+              <td>Creates a snapshot from a specified volume.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1076,7 +1075,7 @@ Accept: application/json</literallayout>
         <para>Returns status code 202 on success</para>
       </section>
       <section xml:id="List_Snapshots">
-        <title>List Snapshot Summaries</title>
+        <title>List Snapshots</title>
         <informaltable rules="all" width="100%">
           <col width="20%"/>
           <col width="20%"/>
@@ -1092,9 +1091,8 @@ Accept: application/json</literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots</td>
-              <td>Lists a summary of all snapshots defined in Block
-                Storage (Cinder) that are accessible to the tenant who
-                submits the request. </td>
+              <td>Lists snapshots defined in Block Storage that are
+                accessible to the tenant who submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1127,9 +1125,9 @@ Accept: application/json	                </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots/details</td>
-              <td>List detailed information of all snapshots defined
-                in Block Storage (Cinder) that are accessible to the
-                tenant who submits the request. </td>
+              <td>Lists detailed information for snapshots defined in
+                Block Storage that are accessible to the tenant who
+                submits the request. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1162,8 +1160,8 @@ Accept: application/json     </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Lists detailed information for the specified
-                snapshot ID. </td>
+              <td>Lists detailed information for a specified snapshot
+                ID. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1196,7 +1194,7 @@ Accept: application/json</literallayout>
             <tr>
               <td>&PUT;</td>
               <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Update the specified snapshot.</td>
+              <td>Updates a specified snapshot.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1231,7 +1229,7 @@ Accept: application/json	      </literallayout>
             <tr>
               <td>&DELETE;</td>
               <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Destroys the specified snapshot.</td>
+              <td>Deletes a specified snapshot.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1264,7 +1262,7 @@ Accept: application/json	      </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/types</td>
-              <td>List all volume types and their information.</td>
+              <td>Lists volume types and their information.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1297,7 +1295,8 @@ Accept: application/json	     </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/types/<parameter>type-id</parameter></td>
-              <td>Show information on a specified volume type.</td>
+              <td>Shows information about a specified volume
+                type.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1373,39 +1372,37 @@ Accept: application/json	     </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/backups</td>
-              <td>Lists a summary of all backups defined in Block
-                Storage (Cinder) that are accessible to the tenant who
-                submits the request.</td>
+              <td>Lists backups defined in Block Storage that are
+                accessible to the tenant who submits the request.</td>
             </tr>
             <tr>
               <td>&GET;</td>
               <td>/backups/detail</td>
-              <td>Lists detailed information for all backups defined
-                in Block Storage (Cinder) that are accessible to the
-                tenant who submits the request.</td>
+              <td>Lists detailed information for backups defined in
+                Block Storage that are accessible to the tenant who
+                submits the request.</td>
             </tr>
             <tr>
               <td>&GET;</td>
               <td>/backups/<parameter>backup_id</parameter></td>
-              <td>Lists detailed information for the specified
+              <td>Lists detailed information for a specified
                 backup.</td>
             </tr>
             <tr>
               <td>&POST;</td>
               <td>/backups</td>
-              <td>Creates a new Block Storage (Cinder) backup from a
-                volume.</td>
+              <td>Creates a Block Storage backup from a volume.</td>
             </tr>
             <tr>
               <td>&DELETE;</td>
               <td>/backups/<parameter>backup_id</parameter></td>
-              <td>Destroys the specified backup.</td>
+              <td>Deletes a specified backup.</td>
             </tr>
             <tr>
               <td>&POST;</td>
               <td>/backups/<parameter>backup_id</parameter>/restore</td>
-              <td>Restores a Block Storage (Cinder) backup to an
-                existing or new volume.</td>
+              <td>Restores a Block Storage backup to an existing or
+                new volume.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1426,8 +1423,7 @@ Accept: application/json	     </literallayout>
               <tr>
                 <td>&POST;</td>
                 <td>/backups</td>
-                <td>Create a new Block Storage (Cinder) backup from a
-                  volume.</td>
+                <td>Creates a Block Storage backup from a volume.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1445,7 +1441,7 @@ Accept: application/json         </literallayout>
           <para>Returns status code 202 on success</para>
         </section>
         <section xml:id="List_Backup_Summaries">
-          <title>List Backup Summaries</title>
+          <title>List Backups</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1461,9 +1457,8 @@ Accept: application/json         </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups</td>
-                <td>Lists a summary of all backups defined in Block
-                  Storage (Cinder) that are accessible to the tenant
-                  who submits the request. </td>
+                <td>Lists backups defined in Block Storage that are
+                  accessible to the tenant who submits the request. </td>
               </tr>
             </tbody>
           </informaltable>
@@ -1496,9 +1491,9 @@ Accept: application/json                   </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups/details</td>
-                <td>List detailed information for all backups defined
-                  in Block Storage (Cinder) that are accessible to the
-                  tenant who submits the request. </td>
+                <td>Lists detailed information for backups defined in
+                  Block Storage that are accessible to the tenant who
+                  submits the request. </td>
               </tr>
             </tbody>
           </informaltable>
@@ -1531,8 +1526,8 @@ Accept: application/json    </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups/<parameter>backup-id</parameter></td>
-                <td>Lists detailed information for the specified
-                  backup ID. </td>
+                <td>Lists detailed information for a specified backup
+                  ID. </td>
               </tr>
             </tbody>
           </informaltable>
@@ -1565,7 +1560,7 @@ Accept: application/json</literallayout>
               <tr>
                 <td>&DELETE;</td>
                 <td>/backups/<parameter>backups-id</parameter></td>
-                <td>Destroys the specified backup.</td>
+                <td>Deletes a specified backup.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1595,8 +1590,8 @@ Accept: application/json</literallayout>
               <tr>
                 <td>&POST;</td>
                 <td>/backups/<parameter>backup_id</parameter>/restore</td>
-                <td>Restores a Block Storage (Cinder) backup to an
-                  existing or new Block Storage (Cinder) volume..</td>
+                <td>Restores a Block Storage backup to an existing or
+                  new Block Storage volume..</td>
               </tr>
             </tbody>
           </informaltable>
