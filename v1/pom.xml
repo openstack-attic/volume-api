@@ -8,7 +8,7 @@
   <artifactId>openstack-block-storage-api-guide</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>OpenStack Guides</name>
+  <name>OpenStack Block Storage Service Developer Guide v1.0</name>
   <!-- ################################################ -->
   <!-- USE "mvn clean generate-sources" to run this POM -->
   <!-- ################################################ -->
