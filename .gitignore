@@ -3,3 +3,6 @@ target/
 *.xpr
 .bak
 *.swp
+
+# NetBeans user-specific build actions
+nbactions.xml
