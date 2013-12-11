@@ -70,12 +70,24 @@ format="SVG" scale="60"/>
     </legalnotice>
     <abstract>
       <para>This document is for software developers who develop
-        applications by using the OpenStack Block Storage Service Application Programming
-        Interface (<abbrev>API</abbrev>). </para>
+        applications by using the OpenStack Block Storage Service
+        Application Programming Interface (<abbrev>API</abbrev>).
+      </para>
     </abstract>
     <revhistory>
       <revision>
         <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
+        <date>2013-12-14</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Corrected code example for list volume details
+                request.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
         <date>2013-05-22</date>
         <revdescription>
           <itemizedlist spacing="compact">
@@ -165,8 +177,8 @@ format="SVG" scale="60"/>
     xmlns:m="http://www.w3.org/1998/Math/MathML"
     xmlns:html="http://www.w3.org/1999/xhtml">
     <title>Overview</title>
-    <para>OpenStack Block Storage Service is a block-level storage solution that enables
-      you to: <itemizedlist>
+    <para>OpenStack Block Storage Service is a block-level storage
+      solution that enables you to: <itemizedlist>
         <listitem>
           <para>Mount drives to OpenStack Cloud Servers<trademark/> to
             scale storage without paying for more compute
@@ -780,29 +792,29 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
             <td>&GET;</td>
             <td>/volumes</td>
             <td>Lists a summary of all volumes defined in Block
-              Storage that are accessible to the tenant who submits
-              the request.</td>
+              Storage that the tenant who submits the request can
+              access.</td>
           </tr>
           <tr>
             <td>&GET;</td>
             <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Lists detailed information for the specified
+            <td>Lists detailed information for a specified
               volume.</td>
           </tr>
           <tr>
             <td>&POST;</td>
             <td>/volumes</td>
-            <td>Creates a new Block Storage volume.</td>
+            <td>Creates a Block Storage volume.</td>
           </tr>
           <tr>
             <td>&PUT;</td>
             <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Updates the specified volume.</td>
+            <td>Updates a specified volume.</td>
           </tr>
           <tr>
             <td>&DELETE;</td>
             <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Destroys the specified volume.</td>
+            <td>Deletes a specified volume.</td>
           </tr>
         </tbody>
       </informaltable>
@@ -858,8 +870,8 @@ Accept: application/json</literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes</td>
-              <td>Lists volumes defined in Block Storage that are
-                accessible to the tenant who submits the request. </td>
+              <td>Lists volumes defined in Block Storage that the
+                tenant who submits the request can access. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -892,19 +904,19 @@ Accept: application/json	                </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/volumes/details</td>
-              <td>Lists detailed information for volumes defined in
-                Block Storage that are accessible to the tenant who
-                submits the request. </td>
+              <td>Lists detailed information for Block Storage volumes
+                that the tenant who submits the request can access.
+              </td>
             </tr>
           </tbody>
         </informaltable>
         <example>
-          <title>List Volumes: JSON Request</title>
+          <title>List Volume Details: JSON Request</title>
           <literallayout class="monospaced">GET /&VERSION;/volumes/details
 Accept: application/json        </literallayout>
         </example>
         <example>
-          <title>List Volumes: JSON Response</title>
+          <title>List Volume Details: JSON Response</title>
           <programlisting language="json"><xi:include href="samples/volume_list_detail_response.json" parse="text"/></programlisting>
         </example>
         <para>Returns status code <returnvalue>200</returnvalue> on
@@ -1091,8 +1103,8 @@ Accept: application/json</literallayout>
             <tr>
               <td>&GET;</td>
               <td>/snapshots</td>
-              <td>Lists snapshots defined in Block Storage that are
-                accessible to the tenant who submits the request. </td>
+              <td>Lists snapshots defined in Block Storage that the
+                tenant who submits the request can access. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1126,8 +1138,8 @@ Accept: application/json	                </literallayout>
               <td>&GET;</td>
               <td>/snapshots/details</td>
               <td>Lists detailed information for snapshots defined in
-                Block Storage that are accessible to the tenant who
-                submits the request. </td>
+                Block Storage that the tenant who submits the request
+                can access. </td>
             </tr>
           </tbody>
         </informaltable>
@@ -1372,15 +1384,15 @@ Accept: application/json	     </literallayout>
             <tr>
               <td>&GET;</td>
               <td>/backups</td>
-              <td>Lists backups defined in Block Storage that are
-                accessible to the tenant who submits the request.</td>
+              <td>Lists backups defined in Block Storage that the
+                tenant who submits the request can access.</td>
             </tr>
             <tr>
               <td>&GET;</td>
               <td>/backups/detail</td>
               <td>Lists detailed information for backups defined in
-                Block Storage that are accessible to the tenant who
-                submits the request.</td>
+                Block Storage that the tenant who submits the request
+                can access.</td>
             </tr>
             <tr>
               <td>&GET;</td>
@@ -1457,8 +1469,8 @@ Accept: application/json         </literallayout>
               <tr>
                 <td>&GET;</td>
                 <td>/backups</td>
-                <td>Lists backups defined in Block Storage that are
-                  accessible to the tenant who submits the request. </td>
+                <td>Lists backups defined in Block Storage that the
+                  tenant who submits the request can access. </td>
               </tr>
             </tbody>
           </informaltable>
@@ -1492,8 +1504,8 @@ Accept: application/json                   </literallayout>
                 <td>&GET;</td>
                 <td>/backups/details</td>
                 <td>Lists detailed information for backups defined in
-                  Block Storage that are accessible to the tenant who
-                  submits the request. </td>
+                  Block Storage that the tenant who submits the
+                  request can access. </td>
               </tr>
             </tbody>
           </informaltable>
