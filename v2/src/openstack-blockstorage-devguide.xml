@@ -741,7 +741,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <para>CREATING &ndash; The volume is being created.</para>
         </listitem>
         <listitem>
-          <para>AVAILABLE &ndash; The volume is read to be attached to
+          <para>AVAILABLE &ndash; The volume is ready to be attached to
             an instance.</para>
         </listitem>
         <listitem>
