@@ -60,7 +60,7 @@ format="SVG" scale="60"/>
       <holder>OpenStack Foundation</holder>
     </copyright>
     <releaseinfo>API v2</releaseinfo>
-    <productname>OpenStack Block Storage Service API v2</productname>
+    <productname>OpenStack Block Storage Service</productname>
     <pubdate/>
     <legalnotice role="apache2">
       <annotation>
@@ -71,12 +71,23 @@ format="SVG" scale="60"/>
     <abstract>
       <para>This document is for software developers who develop
         applications by using the OpenStack Block Storage Service
-        Application Programming Interface (<abbrev>API</abbrev>).
-      </para>
+        Application Programming Interface
+        (<abbrev>API</abbrev>).</para>
     </abstract>
     <revhistory>
       <revision>
         <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
+        <date>2013-12-23</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Updated API call descriptions to point to WADL
+                files.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
         <date>2013-12-14</date>
         <revdescription>
           <itemizedlist spacing="compact">
@@ -98,7 +109,6 @@ format="SVG" scale="60"/>
         </revdescription>
       </revision>
       <revision>
-        <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
         <date>2013-04-21</date>
         <revdescription>
           <itemizedlist spacing="compact">
@@ -110,7 +120,6 @@ format="SVG" scale="60"/>
         </revdescription>
       </revision>
       <revision>
-        <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
         <date>2013-04-10</date>
         <revdescription>
           <itemizedlist spacing="compact">
@@ -134,15 +143,15 @@ format="SVG" scale="60"/>
   </info>
   <preface xml:id="Preface">
     <title>Preface</title>
-    <para>The OpenStack Block Storage project provides volume
-      management with the OpenStack Compute service.</para>
+    <para>OpenStack Block Storage provides volume management with the
+      OpenStack Compute service.</para>
     <para>This document describes the features available with the
       &API;.</para>
     <para>We welcome feedback, comments and bug reports at <link
         xlink:href="http://bugs.launchpad.net/cinder"
         >bugs.launchpad.net/Cinder</link>.</para>
     <section xml:id="Intended_Audience-d1e122">
-      <title>Intended Audience</title>
+      <title>Intended audience</title>
       <para>This guide assists software developers who develop
         applications by using the &API;. It assumes the reader has a
         general understanding of storage and is familiar with:</para>
@@ -158,19 +167,15 @@ format="SVG" scale="60"/>
         </listitem>
       </itemizedlist>
     </section>
-
-    <?hard-pagebreak?>
-
     <section xml:id="Additional_Resources-d1e532">
-      <title>Additional Resources</title>
+      <title>Additional resources</title>
       <para>You can download the latest API-related documents from
           <link xlink:href="http://docs.openstack.org/api/"
           >docs.openstack.org/api/</link>.</para>
       <para>This API uses standard HTTP 1.1 response codes as
         documented at: <link
           xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
-          >www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</link>.
-      </para>
+          >www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</link>.</para>
     </section>
   </preface>
   <chapter xml:id="Overview" xmlns:svg="http://www.w3.org/2000/svg"
@@ -217,7 +222,7 @@ format="SVG" scale="60"/>
     <section xml:id="Concepts">
       <title>Glossary</title>
       <?dbhtml stop-chunking?>
-      <para>To use the Block Storage API effectively, you should
+      <para>To use the Block Storage API effectively, you must
         understand several key concepts:</para>
       <itemizedlist>
         <listitem>
@@ -232,7 +237,6 @@ format="SVG" scale="60"/>
             whatever types work best for you, such as SATA, SCSCI,
             SSD, etc. These can be customized or defined by the
             OpenStack admin.</para>
-
           <para>You can also define extra_specs associated with your
             volume types. For instance, you could have a
             VolumeType=SATA, with extra_specs (RPM=10000,
@@ -260,38 +264,33 @@ format="SVG" scale="60"/>
         </listitem>
       </itemizedlist>
     </section>
-
     <?hard-pagebreak?>
-
     <section xml:id="High_Level_Task_Flow">
-      <title>High-Level Task Flow</title>
-      <para>The high-level task flow for Block Storage is as
-        follows:</para>
-      <para>
-        <orderedlist>
-          <listitem>
-            <para>The tenant creates a volume.</para>
-            <para>For example, the tenant creates a 30G volume called
-              vol1.</para>
-            <programlisting language="bash" role="gutter: false"><prompt>$</prompt> cinder create --display-name vol1 30</programlisting>
-          </listitem>
-          <listitem>
-            <para>This gives the tenant a volume id
-              521752a6-acf6-4b2d-bc7a-119f9148cd8c. The tenant
-              attaches that volume to a virtual machine (VM)
-              616fb98f-46ca-475e-917e-2563e5a8cd19:</para>
-            <para>For example
-              A:<programlisting language="bash" role="gutter: false"><prompt>$</prompt> nova volume-attach 616fb98f-46ca-475e-917e-2563e5a8cd19 521752a6-acf6-4b2d-bc7a-119f9148cd8c /dev/vdb</programlisting></para>
-          </listitem>
-        </orderedlist>
-      </para>
+      <title>High-level task flow</title>
+      <procedure>
+        <title>To create and attach a volume</title>
+        <step>
+          <para>You create a volume.</para>
+          <para>For example, you might create a 30 GB volume called
+              <literal>vol1</literal>, as follows:</para>
+          <screen><prompt>$</prompt> <userinput>cinder create --display-name vol1 30</userinput></screen>
+          <para>The command returns the
+              <literal>521752a6-acf6-4b2d-bc7a-119f9148cd8c</literal>
+            volume ID.</para>
+        </step>
+        <step>
+          <para>You attach that volume to a virtual machine (VM) with
+            the
+              <literal>616fb98f-46ca-475e-917e-2563e5a8cd19</literal>
+            ID, as follows:</para>
+          <para>For example:</para>
+          <screen><prompt>$</prompt> <userinput>nova volume-attach 616fb98f-46ca-475e-917e-2563e5a8cd19 521752a6-acf6-4b2d-bc7a-119f9148cd8c /dev/vdb</userinput></screen>
+        </step>
+      </procedure>
     </section>
   </chapter>
-  <chapter xml:id="General_API_Information"
-    xmlns:svg="http://www.w3.org/2000/svg"
-    xmlns:m="http://www.w3.org/1998/Math/MathML"
-    xmlns:html="http://www.w3.org/1999/xhtml">
-    <title>General API Information</title>
+  <chapter xml:id="General_API_Information">
+    <title>General API information</title>
     <para>The Block Storage API is implemented using a ReSTful web
       service interface. Like other OpenStack projects, Block Storage
       shares a common token-based authentication system that allows
@@ -301,35 +300,31 @@ format="SVG" scale="60"/>
         service are performed using SSL over HTTP (HTTPS) on TCP port
         443.</para>
     </note>
-
     <section xml:id="Authentication-d1e647">
       <title>Authentication</title>
       <para>You can use <link xlink:href="http://curl.haxx.se/"
           >cURL</link> to try the authentication process in two steps:
-        get a token; send the token to a service. <orderedlist>
-          <listitem>
-            <para>Get an authentication token by providing your user
-              name and either your API key or your password. Here are
-              examples of both approaches:</para>
-            <para><emphasis>You can request a token by providing your
-                user name and your password.</emphasis></para>
-            <para>
-              <literallayout class="monospaced"><prompt>$</prompt> curl -X POST https://localhost:5000/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "joecool", "password":"coolword"}, "tenantId":"5"}}' -H 'Content-type: application/json'</literallayout>
-            </para>
-            <para>Successful authentication returns a token which you
-              can use as evidence that your identity has already been
-              authenticated. To use the token, pass it to other
-              services as an <code>X-Auth-Token</code> header.</para>
-            <para>Authentication also returns a service catalog,
-              listing the endpoints you can use for Cloud services.
-            </para>
-          </listitem>
-          <listitem>
-            <para>Use the authentication token to send a GET to a
-              service you would like to use.</para>
-          </listitem>
-        </orderedlist>
-      </para>
+        get a token, and send the token to a service.</para>
+      <orderedlist>
+        <listitem>
+          <para>Get an authentication token by providing your user
+            name and either your API key or your password. Here are
+            examples of both approaches:</para>
+          <para><emphasis>You can request a token by providing your
+              user name and your password.</emphasis></para>
+          <screen><prompt>$</prompt> <userinput>curl -X POST https://localhost:5000/v2.0/tokens -d '{"auth":{"passwordCredentials":{"username": "joecool", "password":"coolword"}, "tenantId":"5"}}' -H 'Content-type: application/json'</userinput></screen>
+          <para>Successful authentication returns a token which you
+            can use as evidence that your identity has already been
+            authenticated. To use the token, pass it to other services
+            as an <code>X-Auth-Token</code> header.</para>
+          <para>Authentication also returns a service catalog, listing
+            the endpoints you can use for Cloud services.</para>
+        </listitem>
+        <listitem>
+          <para>Use the authentication token to send a GET to a
+            service you would like to use.</para>
+        </listitem>
+      </orderedlist>
       <para>Authentication tokens are typically valid for 24 hours.
         Applications should be designed to re-authenticate after
         receiving a 401 (Unauthorized) response from a service
@@ -344,7 +339,7 @@ format="SVG" scale="60"/>
       </important>
     </section>
     <section xml:id="Request_Response_Types-d1e903">
-      <title>Request/Response Types</title>
+      <title>Request and response types</title>
       <para>The Block Storage API supports both the JSON and XML data
         serialization formats. The request format is specified using
         the <code>Content-Type</code> header and is required for calls
@@ -361,8 +356,7 @@ format="SVG" scale="60"/>
         representation that can be used to efficiently determine when
         the state of services has changed.</para>
       <table rules="all">
-        <caption>Response Formats</caption>
-        <?dbfo keep-together="always"?>
+        <caption>Response formats</caption>
         <thead>
           <tr align="center">
             <td>Format</td>
@@ -392,16 +386,15 @@ format="SVG" scale="60"/>
           <parameter>application/xml</parameter> is requested via the
           <parameter>Accept</parameter> header:</para>
       <example>
-        <title>Request with Headers (Getting Volume Types)</title>
+        <title>Request with headers: Get volume types</title>
         <literallayout class="monospaced">GET /&VERSION;/441446/types HTTP/1.1
 Host: dfw.blockstorage.api.openstackcloud.com
 X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
-Accept: application/xml                  </literallayout>
+Accept: application/xml</literallayout>
       </example>
-      <para><?rax-fo keep-with-next?>Therefore an XML response format
-        is returned:</para>
+      <para>Therefore an XML response format is returned:</para>
       <example>
-        <title>Response with Headers</title>
+        <title>Response with headers</title>
         <literallayout class="monospaced">HTTP/1.1 200 OK
 Date: Fri, 20 Jul 2012 20:32:13 GMT
 Content-Length: 187
@@ -429,7 +422,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         reset after a certain amount of time passes. Absolute limits
         are fixed.</para>
       <section xml:id="Rate_Limits-d1e1222" security="writeronly">
-        <title>Rate Limits</title>
+        <title>Rate limits</title>
         <para>Rate limits are specified in terms of both a
           human-readable wild-card URI and a machine-processable
           regular expression. The regular expression boundary matcher
@@ -442,7 +435,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           for all API operations for all &GET;, &POST;, &PUT;, and
           &DELETE; calls for volumes:</para>
         <table rules="all">
-          <caption>Default Rate Limits</caption>
+          <caption>Default rate limits</caption>
           <thead>
             <tr align="center">
               <td colspan="1">Verb</td>
@@ -487,7 +480,8 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         <para>Rate limits are applied in order relative to the verb,
           going from least to most specific. For example, although the
           threshold for &POST; to /v1.0/* is 10 per minute, one cannot
-          &POST; to /v1.0/* more than 50 times within a single day.</para>
+          &POST; to /v1.0/* more than 50 times within a single
+          day.</para>
         <para>If you exceed the thresholds established for your
           account, a <errorcode>413 (Rate Control)</errorcode> HTTP
           response will be returned with a <code>Retry-After</code>
@@ -495,10 +489,10 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           again.</para>
       </section>
       <section xml:id="Absolute_Limits-d1e1397">
-        <title>Absolute Limits</title>
+        <title>Absolute limits</title>
         <para>The following table shows the absolute limits:</para>
         <table rules="all">
-          <caption>Absolute Limits</caption>
+          <caption>Absolute limits</caption>
           <col width="120pt"/>
           <col width="201pt"/>
           <col width="50pt"/>
@@ -512,7 +506,8 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tbody>
             <tr>
               <td colspan="1">Block Storage</td>
-              <td colspan="1">Maximum amount of block storage (in GBs)</td>
+              <td colspan="1">Maximum amount of block storage (in
+                GBs)</td>
               <td colspan="1">1 TB</td>
             </tr>
           </tbody>
@@ -520,20 +515,21 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
       </section>
     </section>
     <section xml:id="datetimeformat">
-      <title>Date/Time Format</title>
+      <title>Date and time format</title>
       <para>The Block Storage Service uses an ISO-8601 compliant date
-        format for the display and consumption of date/time values.</para>
+        format for the display and consumption of date time
+        values.</para>
       <example>
-        <title>DB Service Date/Time Format</title>
+        <title>DB service date and time format</title>
         <programlisting>yyyy-MM-dd'T'HH:mm:ss.SSSZ</programlisting>
         <para>May 19th, 2011 at 8:07:08 AM, GMT-5 has the following
           format:</para>
         <programlisting>2011-05-19T08:07:08-05:00</programlisting>
       </example>
-      <para>The following table describes the date/time format
+      <para>The following table describes the date time format
         codes:</para>
       <table rules="all">
-        <caption>Date/Time Format Codes</caption>
+        <caption>Date time format codes</caption>
         <thead>
           <tr>
             <td>Code</td>
@@ -555,7 +551,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           </tr>
           <tr>
             <td>T</td>
-            <td>Separator for date/time</td>
+            <td>Separator for date time</td>
           </tr>
           <tr>
             <td>HH</td>
@@ -584,8 +580,8 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
       <title>Faults</title>
       <para>When an error occurs, the Block Storage Service returns a
         fault object containing an HTTP error response code that
-        denotes the type of error. In the body of the response, the
-        system will return additional information about the fault.</para>
+        denotes the type of error. The response body returns
+        additional information about the fault.</para>
       <para>The following table lists possible fault types with their
         associated error codes and descriptions.</para>
       <informaltable rules="all" width="100%">
@@ -673,13 +669,13 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         errors when the server has erred or cannot perform the
         requested operation:</para>
       <example>
-        <title>Example instanceFault Response: XML</title>
-        <?dbfo keep-together="always"?>
+        <title>Example instanceFault response: XML</title>
+
         <programlisting language="xml"><xi:include href="samples/db-faults-instanceFault.xml" parse="text"/></programlisting>
       </example>
       <example>
-        <title>Example Fault Response: JSON</title>
-        <?dbfo keep-together="always"?>
+        <title>Example fault response: JSON</title>
+
         <programlisting language="json"><xi:include href="samples/db-faults-instanceFault.json" parse="text"/></programlisting>
       </example>
       <para>The error code (<code>code</code>) is returned in the body
@@ -694,31 +690,30 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
       <para>The fault's root element (for example,
           <code>instanceFault</code>) may change depending on the type
         of error.</para>
-      <para><?rax-fo keep-with-next?>The following two
-          <code>badRequest</code> examples show errors when the volume
-        size is invalid:</para>
+      <para>The following two <code>badRequest</code> examples show
+        errors when the volume size is invalid:</para>
       <example>
-        <title>Example badRequest Fault on Volume Size Errors:
+        <title>Example badRequest fault on volume size errors:
           XML</title>
-        <?dbfo keep-together="always"?>
+
         <programlisting language="xml"><xi:include href="samples/db-faults-badRequest.xml" parse="text"/></programlisting>
       </example>
       <example>
-        <title>Example badRequest Fault on Volume Size Errors:
+        <title>Example badRequest fault on volume size errors:
           JSON</title>
-        <?dbfo keep-together="always"?>
+
         <programlisting language="json"><xi:include href="samples/db-faults-badRequest.json" parse="text"/></programlisting>
       </example>
       <para>The next two examples show <code>itemNotFound</code>
         errors:</para>
       <example>
-        <title>Example itemNotFound Fault: XML</title>
-        <?dbfo keep-together="always"?>
+        <title>Example itemNotFound fault: XML</title>
+
         <programlisting language="xml"><xi:include href="samples/db-faults-itemNotFound.xml" parse="text"/></programlisting>
       </example>
       <example>
-        <title>Example itemNotFound Fault: JSON</title>
-        <?dbfo keep-together="always"?>
+        <title>Example itemNotFound fault: JSON</title>
+
         <programlisting language="json"><xi:include href="samples/db-faults-itemNotFound.json" parse="text"/></programlisting>
       </example>
     </section>
@@ -727,607 +722,166 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     xmlns:svg="http://www.w3.org/2000/svg"
     xmlns:m="http://www.w3.org/1998/Math/MathML"
     xmlns:html="http://www.w3.org/1999/xhtml">
-    <title>API Operations</title>
+    <title>API operations</title>
     <section xml:id="Volumes">
       <title>Volumes</title>
       <para>A volume is a detachable block storage device. You can
         think of it as a USB hard drive. It can only be attached to
         one instance at a time.</para>
-      <para><?rax-fo keep-with-next?>When making an API call to
-        create, list, or delete volume(s), the following status values
-        are possible:</para>
-      <itemizedlist spacing="compact">
-        <listitem>
-          <para>CREATING &ndash; The volume is being created.</para>
-        </listitem>
-        <listitem>
-          <para>AVAILABLE &ndash; The volume is ready to be attached to
-            an instance.</para>
-        </listitem>
-        <listitem>
-          <para>ATTACHING &ndash; The volume is attaching to an
-            instance.</para>
-        </listitem>
-        <listitem>
-          <para>IN-USE &ndash; The volume is attached to an
-            instance.</para>
-        </listitem>
-        <listitem>
-          <para>DELETING &ndash; The volume is being deleted.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR &ndash; An error has occurred with the
-            volume.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR_DELETING &ndash; There was an error deleting the
-            volume.</para>
-        </listitem>
-        <listitem>
-          <para>BACKING-UP &ndash; The volume is being backed
-            up.</para>
-        </listitem>
-        <listitem>
-          <para>RESTORING-BACKUP &ndash; A backup is being restored to
-            the volume.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR_RESTORING &ndash; There was an error restoring a
-            backup to the volume.</para>
-        </listitem>
-      </itemizedlist>
-      <informaltable rules="all" width="100%">
-        <col width="20%"/>
-        <col width="20%"/>
-        <col width="60%"/>
+      <para>When you create, list, or delete volumes, these status
+        values are possible:</para>
+      <informaltable rules="all">
         <thead>
-          <tr align="center">
-            <td>Verb</td>
-            <td>URI</td>
-            <td>Description</td>
+          <tr>
+            <th>Status</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>&GET;</td>
-            <td>/volumes</td>
-            <td>Lists a summary of all volumes defined in Block
-              Storage that the tenant who submits the request can
-              access.</td>
+            <td><para>CREATING</para></td>
+            <td><para>The volume is being created.</para>
+            </td>
           </tr>
           <tr>
-            <td>&GET;</td>
-            <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Lists detailed information for a specified
-              volume.</td>
+            <td><para>AVAILABLE</para></td>
+            <td><para>The volume is ready to be attached to an
+                instance.</para>
+            </td>
           </tr>
           <tr>
-            <td>&POST;</td>
-            <td>/volumes</td>
-            <td>Creates a Block Storage volume.</td>
+            <td><para>ATTACHING</para></td>
+            <td><para>The volume is attaching to an instance.</para>
+            </td>
           </tr>
           <tr>
-            <td>&PUT;</td>
-            <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Updates a specified volume.</td>
+            <td><para>IN-USE</para></td>
+            <td><para>The volume is attached to an instance.</para>
+            </td>
           </tr>
           <tr>
-            <td>&DELETE;</td>
-            <td>/volumes/<parameter>volume_id</parameter></td>
-            <td>Deletes a specified volume.</td>
+            <td><para>DELETING</para></td>
+            <td><para>The volume is being deleted.</para>
+            </td>
+          </tr>
+          <tr>
+            <td><para>ERROR</para></td>
+            <td><para>An error has occurred with the volume.</para>
+            </td>
+          </tr>
+          <tr>
+            <td><para>ERROR_DELETING</para></td>
+            <td><para>There was an error deleting the volume.</para>
+            </td>
+          </tr>
+          <tr>
+            <td><para>BACKING-UP</para></td>
+            <td><para>The volume is being backed up.</para>
+            </td>
+          </tr>
+          <tr>
+            <td><para>RESTORING-BACKUP</para></td>
+            <td><para>A backup is being restored to the volume.</para>
+            </td>
+          </tr>
+          <tr>
+            <td><para>ERROR_RESTORING</para></td>
+            <td><para>There was an error restoring a backup to the
+                volume.</para>
+            </td>
           </tr>
         </tbody>
       </informaltable>
-      <section xml:id="Create_Volume">
-        <title>Create Volume</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&POST;</td>
-              <td>/volumes</td>
-              <td>Creates a volume.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Create Volumes: JSON Request</title>
-          <literallayout class="monospaced">POST /&VERSION;/volumes
-Content-Type: application/json
-Accept: application/json</literallayout>
-          <programlisting language="json"><xi:include href="samples/volume_create_request.json" parse="text"/></programlisting>
-        </example>
-        <example>
-          <title>Create Volumes: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_create_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="List_Summary_Volumes">
-        <title>List Volumes</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/volumes</td>
-              <td>Lists volumes defined in Block Storage that the
-                tenant who submits the request can access.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>List Volumes: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/volumes
-Accept: application/json	                </literallayout>
-        </example>
-        <example>
-          <title>List Volumes: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_list_simple_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="List_Volumes_Details">
-        <title>List Volume Details</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/volumes/details</td>
-              <td>Lists detailed information for Block Storage volumes
-                that the tenant who submits the request can access.
-              </td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>List Volume Details: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/volumes/details
-Accept: application/json        </literallayout>
-        </example>
-        <example>
-          <title>List Volume Details: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_list_detail_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Show_Volume">
-        <title>Show Volume</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/volumes/<parameter>volume-id</parameter></td>
-              <td>Lists detailed information for the specified volume
-                ID.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Show Volume: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/volumes/<parameter>5aa119a8-d25b-45a7-8d1b-88e127885635</parameter>
-Accept: application/json</literallayout>
-        </example>
-        <example>
-          <title>Show Volume: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_show_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Update_Volume">
-        <title>Update Volume</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&PUT;</td>
-              <td>/volumes/<parameter>volume-id</parameter></td>
-              <td>Updates a specified volume.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Update Volume: JSON Request</title>
-          <literallayout class="monospaced">PUT /&VERSION;/volumes<parameter>5aa119a8-d25b-45a7-8d1b-88e127885635</parameter>
-Content-Type: application/json
-Accept: application/json</literallayout>
-          <programlisting language="json"><xi:include href="samples/volume_update_request.json" parse="text"/></programlisting>
-        </example>
-        <example>
-          <title>Update Volume: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_update_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Delete_Volume">
-        <title>Delete Volume</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&DELETE;</td>
-              <td>/volumes/<parameter>volume-id</parameter></td>
-              <td>Deletes the specified volume.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Delete Volume: Request</title>
-          <literallayout class="monospaced">DELETE /&VERSION;/volumes/<parameter>521752a6-acf6-4b2d-bc7a-119f9148cd8c</parameter>	     </literallayout>
-        </example>
-        <example>
-          <title>Delete Volume: Response</title>
-          <literallayout class="monospaced">The response body is empty with status code 202.	     </literallayout>
-        </example>
-        <caution>
-          <para>You cannot delete a volume if it has snapshots
-            associated with it.</para>
-        </caution>
-      </section>
+      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#volumes">
+          <wadl:method href="createVolume"/>
+          <wadl:method href="getVolumesSimple"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#detail">
+          <wadl:method href="getVolumesDetail"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#volume_id">
+          <wadl:method href="getVolume"/>
+          <wadl:method href="updateVolume"/>
+          <wadl:method href="deleteVolume"/>
+        </wadl:resource>
+      </wadl:resources>
     </section>
     <section xml:id="Snapshots">
       <title>Snapshots</title>
-      <para><?rax-fo keep-with-next?>A snapshot is a point in time
-        copy of the data contained in a volume.</para>
-      <para>When making an API call to create, list, or delete
-        snapshot(s), the following status values are possible:</para>
-      <itemizedlist spacing="compact">
-        <listitem>
-          <para>CREATING &ndash; The snapshot is being created.</para>
-        </listitem>
-        <listitem>
-          <para>AVAILABLE &ndash; The snapshot is ready to be
-            used.</para>
-        </listitem>
-        <listitem>
-          <para>DELETING &ndash; The snapshot is being deleted.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR &ndash; An error occurred with the
-            snapshot.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR_DELETING &ndash; There was an error deleting the
-            snapshot.</para>
-        </listitem>
-      </itemizedlist>
-      <section xml:id="Create_Snapshot">
-        <title>Create Snapshot</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&POST;</td>
-              <td>/snapshots</td>
-              <td>Creates a snapshot from a specified volume.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Create Snapshot: JSON Request</title>
-          <literallayout class="monospaced">POST /&VERSION;/snapshots
-Content-Type: application/json
-Accept: application/json</literallayout>
-          <programlisting language="json"><xi:include href="samples/snapshot_create_request.json" parse="text"/></programlisting>
-        </example>
-        <example>
-          <title>Create Snapshot: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/snapshot_create_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code 202 on success</para>
-      </section>
-      <section xml:id="List_Snapshots">
-        <title>List Snapshots</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/snapshots</td>
-              <td>Lists snapshots defined in Block Storage that the
-                tenant who submits the request can access.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>List Snapshots: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/snapshots
-Accept: application/json	                </literallayout>
-        </example>
-        <example>
-          <title>List Snapshots: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/snapshot_list_simple_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="List_Snapshot_Details">
-        <title>List Snapshot Details</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/snapshots/details</td>
-              <td>Lists detailed information for snapshots defined in
-                Block Storage that the tenant who submits the request
-                can access.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>List Snapshots Details: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/snapshots/details
-Accept: application/json     </literallayout>
-        </example>
-        <example>
-          <title>List Snapshots Details: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/snapshot_list_detail_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Show_Snapshot">
-        <title>Show Snapshot</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Lists detailed information for a specified snapshot
-                ID.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Show Snapshot: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/snapshots/<parameter>/2bb856e1-b3d8-4432-a858-09e4ce939389</parameter>
-Accept: application/json</literallayout>
-        </example>
-        <example>
-          <title>Show Snapshot: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/snapshot_show_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Update_Snapshot">
-        <title>Update Snapshot</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&PUT;</td>
-              <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Updates a specified snapshot.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Update Snapshot: JSON Request</title>
-          <literallayout class="monospaced">PUT /&VERSION;/snapshots/<parameter>2402b902-0b7a-458c-9c07-7435a826f794</parameter>
-Content-Type: application/json
-Accept: application/json	      </literallayout>
-          <programlisting language="json"><xi:include href="samples/snapshot_update_request.json" parse="text"/></programlisting>
-        </example>
-        <example>
-          <title>Update Snapshot: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/snapshot_update_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Delete_Snapshot">
-        <title>Delete Snapshot</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&DELETE;</td>
-              <td>/snapshots/<parameter>snapshot-id</parameter></td>
-              <td>Deletes a specified snapshot.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Delete Snapshot: Request</title>
-          <literallayout class="monospaced">DELETE /&VERSION;/snapshots/<parameter>3fbbcccf-d058-4502-8844-6feeffdf4cb5</parameter>	     </literallayout>
-        </example>
-        <example>
-          <title>Delete Snapshot: Response</title>
-          <literallayout class="monospaced">The response body is empty with status code 202.	     </literallayout>
-        </example>
-      </section>
+      <para>A snapshot is a point in time copy of the data that a
+        volume contains.</para>
+      <para>When you create, list, or delete snapshots, these status
+        values are possible:</para>
+      <informaltable rules="all">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <para>CREATING</para></td>
+            <td><para>The snapshot is being created.</para>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <para>AVAILABLE</para></td>
+            <td><para>The snapshot is ready to be used.</para>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <para>DELETING</para></td>
+            <td><para>The snapshot is being deleted.</para>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <para>ERROR</para></td>
+            <td><para>An error occurred with the snapshot.</para>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <para>ERROR_DELETING</para></td>
+            <td><para>There was an error deleting the snapshot.</para>
+            </td>
+          </tr>
+        </tbody>
+      </informaltable>
+      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#snapshots"/>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#detail-snapshot"/>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#snapshot_id"
+        />
+      </wadl:resources>
     </section>
     <section xml:id="Volume_Types">
-      <title>Volume Types</title>
-      <section xml:id="Volume_List_Types">
-        <title>List Volume Types</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/types</td>
-              <td>Lists volume types and their information.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>List Volume Types: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/types
-Accept: application/json	     </literallayout>
-        </example>
-        <example>
-          <title>List Volume Types: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_type_list_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
-      <section xml:id="Volume_Show_Type">
-        <title>Show Volume Type</title>
-        <informaltable rules="all" width="100%">
-          <col width="20%"/>
-          <col width="20%"/>
-          <col width="60%"/>
-          <thead>
-            <tr>
-              <td>Verb</td>
-              <td>URI</td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&GET;</td>
-              <td>/types/<parameter>type-id</parameter></td>
-              <td>Shows information about a specified volume
-                type.</td>
-            </tr>
-          </tbody>
-        </informaltable>
-        <example>
-          <title>Show Volume Type: JSON Request</title>
-          <literallayout class="monospaced">GET /&VERSION;/types/6685584b-1eac-4da6-b5c3-555430cf68ff
-Accept: application/json	     </literallayout>
-        </example>
-        <example>
-          <title>Show Volume Type: JSON Response</title>
-          <programlisting language="json"><xi:include href="samples/volume_type_show_response.json" parse="text"/></programlisting>
-        </example>
-        <para>Returns status code <returnvalue>200</returnvalue> on
-          success.</para>
-      </section>
+      <title>Volume types</title>
+      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#types">
+          <wadl:method href="getVolumeTypes"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#volume_type_id">
+          <wadl:method href="getVolumeType"/>
+        </wadl:resource>
+      </wadl:resources>
     </section>
     <section xml:id="Extensions">
       <title>Extensions</title>
-      <para>The Block Storage API is extensible. Extensions are
+      <para>You can extend the Block Storage API. Extensions are
         add-ons to the API that enable new features.</para>
       <section xml:id="Backups">
         <title>Backups</title>
@@ -1336,36 +890,60 @@ Accept: application/json	     </literallayout>
           supported service for now is Object Storage. A backup can
           subsequently be restored from the external service to either
           the same volume that the backup was originally taken from,
-          or to a new volume. Backup and restore operations can only
+          or to a new volume. backup and restore operations can only
           be carried out on volumes which are in an unattached and
           available state.</para>
-        <para><?rax-fo keep-with-next?>When making an API call to
-          create, list, or delete backup(s), the following status
+        <para>When you create, list, or delete backups, these status
           values are possible:</para>
-        <itemizedlist spacing="compact">
-          <listitem>
-            <para>CREATING &ndash; The backup is being created.</para>
-          </listitem>
-          <listitem>
-            <para>AVAILABLE &ndash; The backup is ready to be restored
-              to a volume.</para>
-          </listitem>
-          <listitem>
-            <para>DELETING &ndash; The backup is being deleted.</para>
-          </listitem>
-          <listitem>
-            <para>ERROR &ndash; An error has occurred with the
-              backup.</para>
-          </listitem>
-          <listitem>
-            <para>RESTORING &ndash; The backup is being restored to a
-              volume.</para>
-          </listitem>
-          <listitem>
-            <para>ERROR_RESTORING &ndash; There was an error restoring
-              a backup to the volume.</para>
-          </listitem>
-        </itemizedlist>
+        <informaltable rules="all">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <para>CREATING</para></td>
+              <td><para>The backup is being created.</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para>AVAILABLE</para></td>
+              <td><para>The backup is ready to be restored to a
+                  volume.</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para>DELETING</para></td>
+              <td><para>The backup is being deleted.</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para>ERROR</para></td>
+              <td><para>An error has occurred with the backup.</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para>RESTORING</para></td>
+              <td><para>The backup is being restored to a
+                  volume.</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para>ERROR_RESTORING</para></td>
+              <td><para>There was an error restoring a backup to the
+                  volume.</para>
+              </td>
+            </tr>
+          </tbody>
+        </informaltable>
         <para>In the event of an error, more information about the
           error can be found in the FAIL_REASON field for the
           backup.</para>
@@ -1419,7 +997,7 @@ Accept: application/json	     </literallayout>
           </tbody>
         </informaltable>
         <section xml:id="Create_Backup">
-          <title>Create Backup</title>
+          <title>Create backup</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1440,20 +1018,20 @@ Accept: application/json	     </literallayout>
             </tbody>
           </informaltable>
           <example>
-            <title>Create Backup: JSON Request</title>
+            <title>Create backup request: JSON</title>
             <literallayout class="monospaced">POST /&VERSION;/backups
 Content-Type: application/json
-Accept: application/json         </literallayout>
+Accept: application/json</literallayout>
             <programlisting language="json"><xi:include href="samples/backup_create_request.json" parse="text"/></programlisting>
           </example>
           <example>
-            <title>Create Backup: JSON Response</title>
+            <title>Create backup response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_create_response.json" parse="text"/></programlisting>
           </example>
           <para>Returns status code 202 on success</para>
         </section>
         <section xml:id="List_Backup_Summaries">
-          <title>List Backups</title>
+          <title>List backups</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1470,24 +1048,24 @@ Accept: application/json         </literallayout>
                 <td>&GET;</td>
                 <td>/backups</td>
                 <td>Lists backups defined in Block Storage that the
-                  tenant who submits the request can access.</td>
+                  tenant who submits the request can access. </td>
               </tr>
             </tbody>
           </informaltable>
           <example>
-            <title>List Backups: JSON Request</title>
+            <title>List backups request: JSON</title>
             <literallayout class="monospaced">GET /&VERSION;/backups
-Accept: application/json                   </literallayout>
+Accept: application/json</literallayout>
           </example>
           <example>
-            <title>List Backups: JSON Response</title>
+            <title>List backups response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_list_simple_response.json" parse="text"/></programlisting>
           </example>
           <para>Returns status code <returnvalue>200</returnvalue> on
             success.</para>
         </section>
         <section xml:id="List_Backup_Details">
-          <title>List Backup Details</title>
+          <title>List backup details</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1505,24 +1083,24 @@ Accept: application/json                   </literallayout>
                 <td>/backups/details</td>
                 <td>Lists detailed information for backups defined in
                   Block Storage that the tenant who submits the
-                  request can access.</td>
+                  request can access. </td>
               </tr>
             </tbody>
           </informaltable>
           <example>
-            <title>List Backups: JSON Request</title>
+            <title>List backups request: JSON</title>
             <literallayout class="monospaced">GET /&VERSION;/backups/details
-Accept: application/json    </literallayout>
+Accept: application/json</literallayout>
           </example>
           <example>
-            <title>List Backups: JSON Response</title>
+            <title>List backups response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_list_detail_response.json" parse="text"/></programlisting>
           </example>
           <para>Returns status code <returnvalue>200</returnvalue> on
             success.</para>
         </section>
         <section xml:id="Show_Backup">
-          <title>Show Backup</title>
+          <title>Show backup</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1539,24 +1117,24 @@ Accept: application/json    </literallayout>
                 <td>&GET;</td>
                 <td>/backups/<parameter>backup-id</parameter></td>
                 <td>Lists detailed information for a specified backup
-                  ID.</td>
+                  ID. </td>
               </tr>
             </tbody>
           </informaltable>
           <example>
-            <title>Show Backup: JSON Request</title>
+            <title>Show backup request: JSON</title>
             <literallayout class="monospaced">GET /&VERSION;/backups/<parameter>fa4351c8-d881-4e31-904f-c28a8a2e80cc</parameter>
 Accept: application/json</literallayout>
           </example>
           <example>
-            <title>Show Backup: JSON Response</title>
+            <title>Show backup response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_show_response.json" parse="text"/></programlisting>
           </example>
           <para>Returns status code <returnvalue>200</returnvalue> on
             success.</para>
         </section>
         <section xml:id="Delete_Backup">
-          <title>Delete Backup</title>
+          <title>Delete backup</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1577,16 +1155,16 @@ Accept: application/json</literallayout>
             </tbody>
           </informaltable>
           <example>
-            <title>Delete Backup: Request</title>
-            <literallayout class="monospaced">DELETE /&VERSION;/backups/<parameter>fa4351c8-d881-4e31-904f-c28a8a2e80cc</parameter>         </literallayout>
+            <title>Delete backup: Request</title>
+            <literallayout class="monospaced">DELETE /&VERSION;/backups/<parameter>fa4351c8-d881-4e31-904f-c28a8a2e80cc</parameter></literallayout>
           </example>
           <example>
-            <title>Delete Backup: Response</title>
-            <literallayout class="monospaced">The response body is empty with status code 202.         </literallayout>
+            <title>Delete backup: Response</title>
+            <literallayout class="monospaced">The response body is empty with status code 202.</literallayout>
           </example>
         </section>
         <section xml:id="Restore_Backup">
-          <title>Restore Backup</title>
+          <title>Restore backup</title>
           <informaltable rules="all" width="100%">
             <col width="20%"/>
             <col width="20%"/>
@@ -1603,19 +1181,19 @@ Accept: application/json</literallayout>
                 <td>&POST;</td>
                 <td>/backups/<parameter>backup_id</parameter>/restore</td>
                 <td>Restores a Block Storage backup to an existing or
-                  new Block Storage volume..</td>
+                  new Block Storage volume.</td>
               </tr>
             </tbody>
           </informaltable>
           <example>
-            <title>Restore Backup: JSON Request</title>
+            <title>Restore backup request: JSON</title>
             <literallayout class="monospaced">POST /&VERSION;/backups/fa4351c8-d881-4e31-904f-c28a8a2e80cc/restore
 Content-Type: application/json
-Accept: application/json         </literallayout>
+Accept: application/json</literallayout>
             <programlisting language="json"><xi:include href="samples/backup_restore_request.json" parse="text"/></programlisting>
           </example>
           <example>
-            <title>Restore Backup: JSON Response</title>
+            <title>Restore backup response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_restore_response.json" parse="text"/></programlisting>
           </example>
           <para>Returns status code <returnvalue>202</returnvalue> on
