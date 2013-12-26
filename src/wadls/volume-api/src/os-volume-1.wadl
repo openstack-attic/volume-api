@@ -18,12 +18,12 @@
                 </param> -->
                 <?rax start-sections?>
                 <resource id="volumes" path="volumes">
-                <doc title="Volumes"/>   
+                <doc title="Volumes"/>
                    <method href="#createVolume" />
                    <method href="#getVolumesSimple" />
 
                        <resource path="detail" id="detail">
-                           <!-- as of 7-25-12, this is same as non-detailed  
+                           <!-- as of 7-25-12, this is same as non-detailed
                                <method href="#getVolumesDetail" />  -->
                        </resource>
 
@@ -33,13 +33,13 @@
                                    The unique identifier of an existing Volume.
                                </p></doc>
                            </param>
-        
+
                           <method href="#getVolume" />
                           <method href="#deleteVolume" />
-        
+
                        </resource>
                 </resource>
-                
+
                 <resource id="volume_types" path="/types">
                     <doc title="Volume types"/>
                     <method href="#getVolumeTypes" />
@@ -56,12 +56,12 @@
                 </resource>
 
                 <resource id="snapshots" path="snapshots">
-		   <doc title="Snapshots"/>
+                  <doc title="Snapshots"/>
                     <method href="#createSnapshot" />
                     <method href="#getSnapshotsSimple" />
 
                     <resource path="detail" id="snapshot_detail">
-                        <!-- as of 7-25-12, this is same as non-detailed   
+                        <!-- as of 7-25-12, this is same as non-detailed
                            <method href="#getSnapshotsDetail" /> -->
                     </resource>
 
@@ -85,17 +85,17 @@
     <method name="POST" id="createVolume">
         <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" title="Create Volume">
            <p xmlns="http://www.w3.org/1999/xhtml" class="shortdesc">Creates the volume.</p>
-            
-            
+
+
 <!--
     The below are examples of how to insert new text into the wadl and have it display.
     Two forms of text are given, Comment to the Reviewer and Straight Text
     <p>
             <remark xmlns="http://docbook.org/ns/docbook" security="reviewer">Reviewer - Here is my question!</remark>
             </p>
-            <p xmlns="http://www.w3.org/1999/xhtml">Create a Volume - hey! this is old text. 
+            <p xmlns="http://www.w3.org/1999/xhtml">Create a Volume - hey! this is old text.
             The below example creates a volume called vol-001.</p>
--->            
+-->
             <doc><p xmlns="http://www.w3.org/1999/xhtml">
                 The below example creates a SATA volume called "vol-001" that has a size of 30 GB.
             </p></doc>
@@ -118,16 +118,16 @@
             </param>
             <param name="display_name" style="query" type="string" required="false">
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
-                    The name of the volume. 
+                    The name of the volume.
                 </p></doc>
             </param>
-            
+
             <param name="metadata" style="query" type="string" required="false">
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
-                    Key and value metadata pairs defined by the admin. 
+                    Key and value metadata pairs defined by the admin.
                 </p></doc>
             </param>
-            
+
             <param name="snapshot_id" style="query" type="string" required="false">
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
                     The optional snapshot from which to create a volume.
@@ -139,12 +139,12 @@
                     then the default, SATA, is used.
                 </p></doc>
             </param>
-            
+
             <representation mediaType="application/xml">
-                
+
                 <doc xml:lang="EN">
                     <xsdxt:code href="samples/volume_create.xml" />
-                </doc>                            
+                </doc>
             </representation>
             <representation mediaType="application/json">
                 <doc xml:lang="EN">
@@ -164,14 +164,12 @@
                     <xsdxt:code href="samples/volume_show.json" />
                 </doc>
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
-                    Note that you use the <code>os-volume_attachments</code> API call 
-                    (/servers/{server_id}/os-volume_attachments) to attach 
-                    the new volume to your Server (with 
-                    the specified {server_id}).    
+                    Note that you use the <code>os-volume_attachments</code> API call
+                    (/servers/{server_id}/os-volume_attachments) to attach
+                    the new volume to your Server (with
+                    the specified {server_id}).
                 </p></doc>
-                
 
-                
             </representation>
         </response>
     </method>
@@ -203,9 +201,9 @@
         <response status="200">
             <representation mediaType="application/xml">
                 <doc xml:lang="EN">
-                    
+
                     <xsdxt:code href="samples/volume_list_simple.xml" />
-                    
+
                 </doc>
             </representation>
             <representation mediaType="application/json">
@@ -259,9 +257,9 @@
                     <xsdxt:code href="samples/volume_type_list.json" />
                 </doc>
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
-                    Note that two storage types are currently supported: SATA 
-                    and SSD. SATA is the standard performance storage option 
-                    and SSD is the high performance option. 
+                    Note that two storage types are currently supported: SATA
+                    and SSD. SATA is the standard performance storage option
+                    and SSD is the high performance option.
                 </p></doc>
             </representation>
         </response>
@@ -272,7 +270,7 @@
             <p xmlns="http://www.w3.org/1999/xhtml">Request a single Volume Type.</p>
 
         </wadl:doc>
-  
+
         <response status="200">
             <representation mediaType="application/xml">
                 <doc xml:lang="EN">
@@ -288,11 +286,11 @@
     </method>
 
     <method name="POST" id="createSnapshot">
-        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E" 
+        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E"
             title="Create Snapshot">
             <p class="shortdesc" xmlns="http://www.w3.org/1999/xhtml">Create a Snapshot.</p>
         </wadl:doc>
-        
+
         <doc><p xmlns="http://www.w3.org/1999/xhtml">
             Creating a snapshot makes a point-in-time copy of the
             volume. All writes to the volume should be flushed <i>before</i>
@@ -301,7 +299,7 @@
             Snapshots are incremental, so each time you create a new snapshot, you are
             appending the incremental changes for the new snapshot to the previous
             one. The previous snapshot is still available. Note that you can
-            create a new volume from the snapshot if desired.       
+            create a new volume from the snapshot if desired.
         </p></doc>
         <request>
             <param name="snapshot" style="query" type="string" required="true">
@@ -318,11 +316,11 @@
             </param>
             <param name="force" style="query" type="string" required="false">
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
-                    [True/False] Indicate whether to snapshot, even if the volume is attached. 
+                    [True/False] Indicate whether to snapshot, even if the volume is attached.
                     Default==False.
                 </p>
                 </doc>
-            </param>            
+            </param>
             <param name="display_name" style="query" type="string" required="false">
                 <doc><p xmlns="http://www.w3.org/1999/xhtml">
                     Name of the snapshot. Default==None.
@@ -335,8 +333,7 @@
                 </p>
                 </doc>
             </param>
-            
-            
+
             <representation mediaType="application/xml">
                 <doc xml:lang="EN">
                     <xsdxt:code href="samples/snapshot_create.xml" />
@@ -363,7 +360,7 @@
     </method>
 
     <method name="GET" id="getSnapshotsSimple">
-        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E" 
+        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E"
             title="List Snapshots">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 View a list of simple Snapshot entities.
@@ -384,7 +381,7 @@
     </method>
 
     <method name="GET" id="getSnapshotsDetail">
-        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E" 
+        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E"
             title="List Snapshots (Detailed)">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 View a list of detailed Snapshot entities.
@@ -406,7 +403,7 @@
 
 
     <method name="GET" id="getSnapshot">
-        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E" 
+        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E"
             title="Show Snapshot">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 View all information about a single Snapshot.
@@ -427,7 +424,7 @@
     </method>
 
     <method name="DELETE" id="deleteSnapshot">
-        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E" 
+        <wadl:doc xmlns="http://www.w3.org/1999/xhtml" xml:lang="E"
             title="Delete Snapshot">
             <p xmlns="http://www.w3.org/1999/xhtml">Delete a single Snapshot.</p>
         </wadl:doc>

@@ -145,7 +145,7 @@ format="SVG" scale="60"/>
       <title>Intended Audience</title>
       <para>This guide assists software developers who develop
         applications by using the &API;. It assumes the reader has a
-        general understanding of storage and is familiar with: </para>
+        general understanding of storage and is familiar with:</para>
       <itemizedlist spacing="compact">
         <listitem>
           <para>ReSTful web services</para>
@@ -165,7 +165,7 @@ format="SVG" scale="60"/>
       <title>Additional Resources</title>
       <para>You can download the latest API-related documents from
           <link xlink:href="http://docs.openstack.org/api/"
-          >docs.openstack.org/api/</link>. </para>
+          >docs.openstack.org/api/</link>.</para>
       <para>This API uses standard HTTP 1.1 response codes as
         documented at: <link
           xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
@@ -190,7 +190,7 @@ format="SVG" scale="60"/>
         </listitem>
       </itemizedlist></para>
     <para>You interact with Block Storage programmatically through the
-      Block Storage API as described in this guide. </para>
+      Block Storage API as described in this guide.</para>
     <note>
       <para><itemizedlist>
           <listitem>
@@ -217,8 +217,8 @@ format="SVG" scale="60"/>
     <section xml:id="Concepts">
       <title>Glossary</title>
       <?dbhtml stop-chunking?>
-      <para> To use the Block Storage API effectively, you should
-        understand several key concepts: </para>
+      <para>To use the Block Storage API effectively, you should
+        understand several key concepts:</para>
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Volume</emphasis></para>
@@ -231,13 +231,13 @@ format="SVG" scale="60"/>
           <para>A type of a block storage volume. You can define
             whatever types work best for you, such as SATA, SCSCI,
             SSD, etc. These can be customized or defined by the
-            OpenStack admin. </para>
+            OpenStack admin.</para>
 
           <para>You can also define extra_specs associated with your
             volume types. For instance, you could have a
             VolumeType=SATA, with extra_specs (RPM=10000,
             RAID-Level=5) . Extra_specs are defined and customized by
-            the admin. </para>
+            the admin.</para>
         </listitem>
         <listitem>
           <para><emphasis role="bold">Snapshot</emphasis></para>
@@ -295,11 +295,11 @@ format="SVG" scale="60"/>
     <para>The Block Storage API is implemented using a ReSTful web
       service interface. Like other OpenStack projects, Block Storage
       shares a common token-based authentication system that allows
-      access between products and services. </para>
+      access between products and services.</para>
     <note>
       <para>All requests to authenticate against and operate the
         service are performed using SSL over HTTP (HTTPS) on TCP port
-        443. </para>
+        443.</para>
     </note>
 
     <section xml:id="Authentication-d1e647">
@@ -319,28 +319,28 @@ format="SVG" scale="60"/>
             <para>Successful authentication returns a token which you
               can use as evidence that your identity has already been
               authenticated. To use the token, pass it to other
-              services as an <code>X-Auth-Token</code> header. </para>
+              services as an <code>X-Auth-Token</code> header.</para>
             <para>Authentication also returns a service catalog,
               listing the endpoints you can use for Cloud services.
             </para>
           </listitem>
           <listitem>
             <para>Use the authentication token to send a GET to a
-              service you would like to use. </para>
+              service you would like to use.</para>
           </listitem>
         </orderedlist>
       </para>
       <para>Authentication tokens are typically valid for 24 hours.
         Applications should be designed to re-authenticate after
         receiving a 401 (Unauthorized) response from a service
-        endpoint. </para>
+        endpoint.</para>
       <important>
         <para>If you programmatically parse an authentication
           response, be aware that service names are stable for the
           life of the particular service and can be used as keys. You
           should also be aware that a user's service catalog can
           include multiple uniquely-named services that perform
-          similar functions. </para>
+          similar functions.</para>
       </important>
     </section>
     <section xml:id="Request_Response_Types-d1e903">
@@ -359,7 +359,7 @@ format="SVG" scale="60"/>
         extension takes precedence.</para>
       <para security="writeronly">Some operations support an Atom
         representation that can be used to efficiently determine when
-        the state of services has changed. </para>
+        the state of services has changed.</para>
       <table rules="all">
         <caption>Response Formats</caption>
         <?dbfo keep-together="always"?>
@@ -427,20 +427,20 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <firstterm>rate limits</firstterm> and <firstterm>absolute
           limits</firstterm>. Rate limits are thresholds that are
         reset after a certain amount of time passes. Absolute limits
-        are fixed. </para>
+        are fixed.</para>
       <section xml:id="Rate_Limits-d1e1222" security="writeronly">
         <title>Rate Limits</title>
-        <para> Rate limits are specified in terms of both a
+        <para>Rate limits are specified in terms of both a
           human-readable wild-card URI and a machine-processable
           regular expression. The regular expression boundary matcher
           '^' takes effect after the root URI path. For example, the
           regular expression ^/v1.0/instances would match the bolded
           portion of the following URI:
             https://dfw.blockstorage.api.openstackcloud.com<emphasis
-            role="bold">/v1.0/instances</emphasis>. </para>
+            role="bold">/v1.0/instances</emphasis>.</para>
         <para>The following table specifies the default rate limits
           for all API operations for all &GET;, &POST;, &PUT;, and
-          &DELETE; calls for volumes: </para>
+          &DELETE; calls for volumes:</para>
         <table rules="all">
           <caption>Default Rate Limits</caption>
           <thead>
@@ -484,15 +484,15 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
             </tr>
           </tbody>
         </table>
-        <para> Rate limits are applied in order relative to the verb,
+        <para>Rate limits are applied in order relative to the verb,
           going from least to most specific. For example, although the
           threshold for &POST; to /v1.0/* is 10 per minute, one cannot
-          &POST; to /v1.0/* more than 50 times within a single day. </para>
-        <para> If you exceed the thresholds established for your
+          &POST; to /v1.0/* more than 50 times within a single day.</para>
+        <para>If you exceed the thresholds established for your
           account, a <errorcode>413 (Rate Control)</errorcode> HTTP
           response will be returned with a <code>Retry-After</code>
           header to notify the client when it can attempt to try
-          again. </para>
+          again.</para>
       </section>
       <section xml:id="Absolute_Limits-d1e1397">
         <title>Absolute Limits</title>
@@ -512,7 +512,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tbody>
             <tr>
               <td colspan="1">Block Storage</td>
-              <td colspan="1">Maximum amount of block storage (in GBs) </td>
+              <td colspan="1">Maximum amount of block storage (in GBs)</td>
               <td colspan="1">1 TB</td>
             </tr>
           </tbody>
@@ -522,7 +522,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     <section xml:id="datetimeformat">
       <title>Date/Time Format</title>
       <para>The Block Storage Service uses an ISO-8601 compliant date
-        format for the display and consumption of date/time values. </para>
+        format for the display and consumption of date/time values.</para>
       <example>
         <title>DB Service Date/Time Format</title>
         <programlisting>yyyy-MM-dd'T'HH:mm:ss.SSSZ</programlisting>
@@ -582,10 +582,10 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     </section>
     <section xml:id="DB_faults">
       <title>Faults</title>
-      <para> When an error occurs, the Block Storage Service returns a
+      <para>When an error occurs, the Block Storage Service returns a
         fault object containing an HTTP error response code that
         denotes the type of error. In the body of the response, the
-        system will return additional information about the fault. </para>
+        system will return additional information about the fault.</para>
       <para>The following table lists possible fault types with their
         associated error codes and descriptions.</para>
       <informaltable rules="all" width="100%">
@@ -693,7 +693,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         experience of the end user.</para>
       <para>The fault's root element (for example,
           <code>instanceFault</code>) may change depending on the type
-        of error. </para>
+        of error.</para>
       <para><?rax-fo keep-with-next?>The following two
           <code>badRequest</code> examples show errors when the volume
         size is invalid:</para>
@@ -709,7 +709,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         <?dbfo keep-together="always"?>
         <programlisting language="json"><xi:include href="samples/db-faults-badRequest.json" parse="text"/></programlisting>
       </example>
-      <para> The next two examples show <code>itemNotFound</code>
+      <para>The next two examples show <code>itemNotFound</code>
         errors:</para>
       <example>
         <title>Example itemNotFound Fault: XML</title>
@@ -871,7 +871,7 @@ Accept: application/json</literallayout>
               <td>&GET;</td>
               <td>/volumes</td>
               <td>Lists volumes defined in Block Storage that the
-                tenant who submits the request can access. </td>
+                tenant who submits the request can access.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -940,7 +940,7 @@ Accept: application/json        </literallayout>
               <td>&GET;</td>
               <td>/volumes/<parameter>volume-id</parameter></td>
               <td>Lists detailed information for the specified volume
-                ID. </td>
+                ID.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1104,7 +1104,7 @@ Accept: application/json</literallayout>
               <td>&GET;</td>
               <td>/snapshots</td>
               <td>Lists snapshots defined in Block Storage that the
-                tenant who submits the request can access. </td>
+                tenant who submits the request can access.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1139,7 +1139,7 @@ Accept: application/json	                </literallayout>
               <td>/snapshots/details</td>
               <td>Lists detailed information for snapshots defined in
                 Block Storage that the tenant who submits the request
-                can access. </td>
+                can access.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1173,7 +1173,7 @@ Accept: application/json     </literallayout>
               <td>&GET;</td>
               <td>/snapshots/<parameter>snapshot-id</parameter></td>
               <td>Lists detailed information for a specified snapshot
-                ID. </td>
+                ID.</td>
             </tr>
           </tbody>
         </informaltable>
@@ -1328,7 +1328,7 @@ Accept: application/json	     </literallayout>
     <section xml:id="Extensions">
       <title>Extensions</title>
       <para>The Block Storage API is extensible. Extensions are
-        add-ons to the API that enable new features. </para>
+        add-ons to the API that enable new features.</para>
       <section xml:id="Backups">
         <title>Backups</title>
         <para>A backup is a full copy of a volume stored in an
@@ -1338,7 +1338,7 @@ Accept: application/json	     </literallayout>
           the same volume that the backup was originally taken from,
           or to a new volume. Backup and restore operations can only
           be carried out on volumes which are in an unattached and
-          available state. </para>
+          available state.</para>
         <para><?rax-fo keep-with-next?>When making an API call to
           create, list, or delete backup(s), the following status
           values are possible:</para>
@@ -1470,7 +1470,7 @@ Accept: application/json         </literallayout>
                 <td>&GET;</td>
                 <td>/backups</td>
                 <td>Lists backups defined in Block Storage that the
-                  tenant who submits the request can access. </td>
+                  tenant who submits the request can access.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1505,7 +1505,7 @@ Accept: application/json                   </literallayout>
                 <td>/backups/details</td>
                 <td>Lists detailed information for backups defined in
                   Block Storage that the tenant who submits the
-                  request can access. </td>
+                  request can access.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1539,7 +1539,7 @@ Accept: application/json    </literallayout>
                 <td>&GET;</td>
                 <td>/backups/<parameter>backup-id</parameter></td>
                 <td>Lists detailed information for a specified backup
-                  ID. </td>
+                  ID.</td>
               </tr>
             </tbody>
           </informaltable>

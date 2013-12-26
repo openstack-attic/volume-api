@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<volumes 
-    xmlns:atom="http://www.w3.org/2005/Atom" 
+<volumes
+    xmlns:atom="http://www.w3.org/2005/Atom"
     xmlns="http://docs.openstack.org/api/openstack-block-storage/2.0/content">
     <volume name="vol-004" id="45baf976-c20a-4894-a7c3-c94b7376bf55">
         <attachments/>
