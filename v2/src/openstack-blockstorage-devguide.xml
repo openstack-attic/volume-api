@@ -392,7 +392,7 @@ Host: dfw.blockstorage.api.openstackcloud.com
 X-Auth-Token: eaaafd18-0fed-4b3a-81b4-663c99ec1cbb
 Accept: application/xml</literallayout>
       </example>
-      <para>Therefore an XML response format is returned:</para>
+      <para>An XML response format is returned:</para>
       <example>
         <title>Response with headers</title>
         <literallayout class="monospaced">HTTP/1.1 200 OK
@@ -506,8 +506,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tbody>
             <tr>
               <td colspan="1">Block Storage</td>
-              <td colspan="1">Maximum amount of block storage (in
-                GBs)</td>
+              <td colspan="1">Maximum amount of block storage</td>
               <td colspan="1">1 TB</td>
             </tr>
           </tbody>
@@ -670,12 +669,18 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         requested operation:</para>
       <example>
         <title>Example instanceFault response: XML</title>
-
+        <screen><computeroutput>HTTP/1.1 500 Internal Server Error
+Content-Type: application/xml
+Content-Length: 121
+Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
         <programlisting language="xml"><xi:include href="samples/db-faults-instanceFault.xml" parse="text"/></programlisting>
       </example>
       <example>
         <title>Example fault response: JSON</title>
-
+        <screen><computeroutput>HTTP/1.1 500 Internal Server Error
+Content-Length: 120
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
         <programlisting language="json"><xi:include href="samples/db-faults-instanceFault.json" parse="text"/></programlisting>
       </example>
       <para>The error code (<code>code</code>) is returned in the body
@@ -695,25 +700,37 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
       <example>
         <title>Example badRequest fault on volume size errors:
           XML</title>
-
+        <screen><computeroutput>HTTP/1.1 400 None
+Content-Type: application/xml
+Content-Length: 121
+Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
         <programlisting language="xml"><xi:include href="samples/db-faults-badRequest.xml" parse="text"/></programlisting>
       </example>
       <example>
         <title>Example badRequest fault on volume size errors:
           JSON</title>
-
+        <screen><computeroutput>HTTP/1.1 400 None
+Content-Length: 120
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
         <programlisting language="json"><xi:include href="samples/db-faults-badRequest.json" parse="text"/></programlisting>
       </example>
       <para>The next two examples show <code>itemNotFound</code>
         errors:</para>
       <example>
         <title>Example itemNotFound fault: XML</title>
-
+        <screen><computeroutput>HTTP/1.1 404 Not Found
+Content-Length: 147
+Content-Type: application/xml; charset=UTF-8
+Date: Mon, 28 Nov 2011 19:50:15 GMT</computeroutput></screen>
         <programlisting language="xml"><xi:include href="samples/db-faults-itemNotFound.xml" parse="text"/></programlisting>
       </example>
       <example>
         <title>Example itemNotFound fault: JSON</title>
-
+        <screen><computeroutput>HTTP/1.1 404 Not Found
+Content-Length: 78
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
         <programlisting language="json"><xi:include href="samples/db-faults-itemNotFound.json" parse="text"/></programlisting>
       </example>
     </section>
@@ -740,55 +757,50 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         <tbody>
           <tr>
             <td><para>CREATING</para></td>
-            <td><para>The volume is being created.</para>
-            </td>
+            <td><para>The volume is being created.</para></td>
           </tr>
           <tr>
             <td><para>AVAILABLE</para></td>
             <td><para>The volume is ready to be attached to an
-                instance.</para>
-            </td>
+                instance.</para></td>
           </tr>
           <tr>
             <td><para>ATTACHING</para></td>
-            <td><para>The volume is attaching to an instance.</para>
-            </td>
+            <td><para>The volume is attaching to an
+              instance.</para></td>
           </tr>
           <tr>
             <td><para>IN-USE</para></td>
-            <td><para>The volume is attached to an instance.</para>
-            </td>
+            <td><para>The volume is attached to an
+              instance.</para></td>
           </tr>
           <tr>
             <td><para>DELETING</para></td>
-            <td><para>The volume is being deleted.</para>
-            </td>
+            <td><para>The volume is being deleted.</para></td>
           </tr>
           <tr>
             <td><para>ERROR</para></td>
-            <td><para>An error has occurred with the volume.</para>
-            </td>
+            <td><para>An error has occurred with the
+              volume.</para></td>
           </tr>
           <tr>
             <td><para>ERROR_DELETING</para></td>
-            <td><para>There was an error deleting the volume.</para>
-            </td>
+            <td><para>There was an error deleting the
+              volume.</para></td>
           </tr>
           <tr>
             <td><para>BACKING-UP</para></td>
-            <td><para>The volume is being backed up.</para>
-            </td>
+            <td><para>The volume is being backed up.</para></td>
           </tr>
           <tr>
             <td><para>RESTORING-BACKUP</para></td>
-            <td><para>A backup is being restored to the volume.</para>
-            </td>
+            <td><para>A backup is being restored to the
+              volume.</para></td>
           </tr>
           <tr>
             <td><para>ERROR_RESTORING</para></td>
             <td><para>There was an error restoring a backup to the
-                volume.</para>
-            </td>
+                volume.</para></td>
           </tr>
         </tbody>
       </informaltable>
@@ -827,32 +839,28 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tr>
             <td>
               <para>CREATING</para></td>
-            <td><para>The snapshot is being created.</para>
-            </td>
+            <td><para>The snapshot is being created.</para></td>
           </tr>
           <tr>
             <td>
               <para>AVAILABLE</para></td>
-            <td><para>The snapshot is ready to be used.</para>
-            </td>
+            <td><para>The snapshot is ready to be used.</para></td>
           </tr>
           <tr>
             <td>
               <para>DELETING</para></td>
-            <td><para>The snapshot is being deleted.</para>
-            </td>
+            <td><para>The snapshot is being deleted.</para></td>
           </tr>
           <tr>
             <td>
               <para>ERROR</para></td>
-            <td><para>An error occurred with the snapshot.</para>
-            </td>
+            <td><para>An error occurred with the snapshot.</para></td>
           </tr>
           <tr>
             <td>
               <para>ERROR_DELETING</para></td>
-            <td><para>There was an error deleting the snapshot.</para>
-            </td>
+            <td><para>There was an error deleting the
+              snapshot.</para></td>
           </tr>
         </tbody>
       </informaltable>
@@ -906,41 +914,36 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
             <tr>
               <td>
                 <para>CREATING</para></td>
-              <td><para>The backup is being created.</para>
-              </td>
+              <td><para>The backup is being created.</para></td>
             </tr>
             <tr>
               <td>
                 <para>AVAILABLE</para></td>
               <td><para>The backup is ready to be restored to a
-                  volume.</para>
-              </td>
+                  volume.</para></td>
             </tr>
             <tr>
               <td>
                 <para>DELETING</para></td>
-              <td><para>The backup is being deleted.</para>
-              </td>
+              <td><para>The backup is being deleted.</para></td>
             </tr>
             <tr>
               <td>
                 <para>ERROR</para></td>
-              <td><para>An error has occurred with the backup.</para>
-              </td>
+              <td><para>An error has occurred with the
+                backup.</para></td>
             </tr>
             <tr>
               <td>
                 <para>RESTORING</para></td>
               <td><para>The backup is being restored to a
-                  volume.</para>
-              </td>
+                  volume.</para></td>
             </tr>
             <tr>
               <td>
                 <para>ERROR_RESTORING</para></td>
               <td><para>There was an error restoring a backup to the
-                  volume.</para>
-              </td>
+                  volume.</para></td>
             </tr>
           </tbody>
         </informaltable>
@@ -1028,7 +1031,7 @@ Accept: application/json</literallayout>
             <title>Create backup response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_create_response.json" parse="text"/></programlisting>
           </example>
-          <para>Returns status code 202 on success</para>
+          <para>Returns status code 202 on success.</para>
         </section>
         <section xml:id="List_Backup_Summaries">
           <title>List backups</title>
@@ -1048,7 +1051,7 @@ Accept: application/json</literallayout>
                 <td>&GET;</td>
                 <td>/backups</td>
                 <td>Lists backups defined in Block Storage that the
-                  tenant who submits the request can access. </td>
+                  tenant who submits the request can access.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1083,7 +1086,7 @@ Accept: application/json</literallayout>
                 <td>/backups/details</td>
                 <td>Lists detailed information for backups defined in
                   Block Storage that the tenant who submits the
-                  request can access. </td>
+                  request can access.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1117,7 +1120,7 @@ Accept: application/json</literallayout>
                 <td>&GET;</td>
                 <td>/backups/<parameter>backup-id</parameter></td>
                 <td>Lists detailed information for a specified backup
-                  ID. </td>
+                  ID.</td>
               </tr>
             </tbody>
           </informaltable>

@@ -566,14 +566,20 @@ format="SVG" scale="60"/>
         erred or cannot perform the requested operation:</para>
       <example>
         <title>Example instanceFault Response: XML</title>
-        <?dbfo keep-together="always"?>
+        <screen><computeroutput>HTTP/1.1 500 Internal Server Error
+Content-Type: application/xml
+Content-Length: 121
+Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
         <programlisting language="xml">
           <xi:include href="samples/db-faults-instanceFault.xml" parse="text"/>
       </programlisting>
       </example>
       <example>
         <title>Example Fault Response: JSON</title>
-        <?dbfo keep-together="always"?>
+<screen><computeroutput>HTTP/1.1 500 Internal Server Error
+Content-Length: 120
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
         <programlisting language="json">
           <xi:include href="samples/db-faults-instanceFault.json" parse="text"/>
         </programlisting>
@@ -590,14 +596,18 @@ format="SVG" scale="60"/>
         when the volume size is invalid:</para>
       <example>
         <title>Example badRequest Fault on Volume Size Errors: XML</title>
-        <?dbfo keep-together="always"?>
-        <programlisting language="xml">
-<xi:include href="samples/db-faults-badRequest.xml" parse="text"/>
-                    </programlisting>
+<screen><computeroutput>HTTP/1.1 400 None
+Content-Type: application/xml
+Content-Length: 121
+Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
+        <programlisting language="xml"><xi:include href="samples/db-faults-badRequest.xml" parse="text"/></programlisting>
       </example>
       <example>
         <title>Example badRequest Fault on Volume Size Errors: JSON</title>
-        <?dbfo keep-together="always"?>
+<screen><computeroutput>HTTP/1.1 400 None
+Content-Length: 120
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
         <programlisting language="json">
 <xi:include href="samples/db-faults-badRequest.json" parse="text"/>
                     </programlisting>
@@ -605,14 +615,18 @@ format="SVG" scale="60"/>
       <para>The next two examples show <code>itemNotFound</code> errors:</para>
       <example>
         <title>Example itemNotFound Fault: XML</title>
-        <?dbfo keep-together="always"?>
-        <programlisting language="xml">
-<xi:include href="samples/db-faults-itemNotFound.xml" parse="text"/>
-                    </programlisting>
+       <screen><computeroutput>HTTP/1.1 404 Not Found
+Content-Length: 147
+Content-Type: application/xml; charset=UTF-8
+Date: Mon, 28 Nov 2011 19:50:15 GMT</computeroutput></screen>
+        <programlisting language="xml"><xi:include href="samples/db-faults-itemNotFound.xml" parse="text"/></programlisting>
       </example>
       <example>
         <title>Example itemNotFound Fault: JSON</title>
-        <?dbfo keep-together="always"?>
+       <screen><computeroutput>HTTP/1.1 404 Not Found
+Content-Length: 78
+Content-Type: application/json; charset=UTF-8
+Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
         <programlisting language="json">
 <xi:include href="samples/db-faults-itemNotFound.json" parse="text"/>
                     </programlisting>
