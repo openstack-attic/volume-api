@@ -1,8 +1,16 @@
 .DS_Store
-target/
 *.xpr
+
+# Build results
+target/
+
+# Testenvironment
+.tox
+
+# Editors
+*~
+.*.swp
 .bak
-*.swp
 
 # NetBeans user-specific build actions
 nbactions.xml
