@@ -57,7 +57,7 @@
                 </resource>
 
                 <resource id="snapshots" path="snapshots">
-		   <doc title="Snapshots"/>
+                   <doc title="Snapshots"/>
                     <method href="#createSnapshot" />
                     <method href="#getSnapshotsSimple" />
 

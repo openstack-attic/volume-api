@@ -1048,7 +1048,7 @@ Accept: application/json</literallayout>
                 <td>&GET;</td>
                 <td>/backups</td>
                 <td>Lists backups defined in Block Storage that the
-                  tenant who submits the request can access. </td>
+                  tenant who submits the request can access.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1083,7 +1083,7 @@ Accept: application/json</literallayout>
                 <td>/backups/details</td>
                 <td>Lists detailed information for backups defined in
                   Block Storage that the tenant who submits the
-                  request can access. </td>
+                  request can access.</td>
               </tr>
             </tbody>
           </informaltable>
@@ -1117,7 +1117,7 @@ Accept: application/json</literallayout>
                 <td>&GET;</td>
                 <td>/backups/<parameter>backup-id</parameter></td>
                 <td>Lists detailed information for a specified backup
-                  ID. </td>
+                  ID.</td>
               </tr>
             </tbody>
           </informaltable>
