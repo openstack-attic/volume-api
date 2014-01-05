@@ -732,7 +732,7 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
 GET /v1/volumes
 Content-Type: application/json
 Accept: application/json
-	      </literallayout>
+              </literallayout>
           <programlisting language="json">
           <xi:include href="samples/volume_create_request.json" parse="text"/>
         </programlisting>
@@ -772,7 +772,7 @@ Accept: application/json
           <literallayout class="monospaced">
 GET /v1/volumes
 Accept: application/json
-	                </literallayout>
+                        </literallayout>
         </example>
         <example>
           <title>List Volumes: JSON Response</title>
@@ -884,7 +884,7 @@ Accept: application/json
 PUT /v1/volumes<parameter>2402b902-0b7a-458c-9c07-7435a826f794</parameter>
 Content-Type: application/json
 Accept: application/json
-	      </literallayout>
+              </literallayout>
           <programlisting language="json">
           <xi:include href="samples/volume_update_request.json" parse="text"/>
         </programlisting>
@@ -1210,7 +1210,7 @@ The response body will be empty with status code 202.
           <literallayout class="monospaced">
 GET /v1/types
 Accept: application/json
-	     </literallayout>
+             </literallayout>
         </example>
         <example>
           <title>List Volume Types: JSON Response</title>
