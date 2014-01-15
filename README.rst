@@ -1,7 +1,8 @@
-Volume API Repository
-++++++++++++++++++++++
-
-This repository contains documentation for the OpenStack project.
+Volume API
+++++++++++
+This repository contains the RESTful API information for the OpenStack
+Block Storage, also known as Cinder. The Cinder project provides open
+source block-based storage component for cloud computing.
 
 For more details, see the `OpenStack Documentation wiki page
 <http://wiki.openstack.org/Documentation>`_.
