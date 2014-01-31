@@ -6,7 +6,8 @@
              xmlns:xsdxt="http://docs.rackspacecloud.com/xsd-ext/v1.0"
              xmlns:wadl="http://wadl.dev.java.net/2009/02">
 
-    <resources base="https://volume.example.com/">
+    <resources base="https://volume.example.com/"
+               xml:id="resources_os_volume_v2">
         <resource id="version" path="v2">
             <resource id="tenant_id" path="{tenant_id}">
                 <!-- <param name="tenant_id" style="template">
