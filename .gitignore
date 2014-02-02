@@ -3,6 +3,7 @@
 
 # Build results
 target/
+publish-docs/
 
 # Testenvironment
 .tox
