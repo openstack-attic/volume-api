@@ -590,7 +590,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         <thead>
           <tr align="center">
             <td>Fault Type</td>
-            <td>Associated Error Code</td>
+            <td>Associated error Code</td>
             <td>Description</td>
           </tr>
         </thead>
@@ -669,7 +669,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
         requested operation:</para>
       <example>
         <title>Example instanceFault response: XML</title>
-        <screen><computeroutput>HTTP/1.1 500 Internal Server Error
+        <screen><computeroutput>HTTP/1.1 500 Internal Server error
 Content-Type: application/xml
 Content-Length: 121
 Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
@@ -677,7 +677,7 @@ Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
       </example>
       <example>
         <title>Example fault response: JSON</title>
-        <screen><computeroutput>HTTP/1.1 500 Internal Server Error
+        <screen><computeroutput>HTTP/1.1 500 Internal Server error
 Content-Length: 120
 Content-Type: application/json; charset=UTF-8
 Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
@@ -743,7 +743,7 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
     <section xml:id="Volumes">
       <title>Volumes</title>
       <para>A volume is a detachable block storage device. You can
-        think of it as a USB hard drive. It can only be attached to
+        think of it as a USB hard drive. You can attach a volume to
         one instance at a time.</para>
       <para>When you create, list, or delete volumes, these status
         values are possible:</para>
@@ -756,50 +756,50 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
         </thead>
         <tbody>
           <tr>
-            <td><para>CREATING</para></td>
+            <td><para>creating</para></td>
             <td><para>The volume is being created.</para></td>
           </tr>
           <tr>
-            <td><para>AVAILABLE</para></td>
+            <td><para>available</para></td>
             <td><para>The volume is ready to be attached to an
                 instance.</para></td>
           </tr>
           <tr>
-            <td><para>ATTACHING</para></td>
+            <td><para>attaching</para></td>
             <td><para>The volume is attaching to an
               instance.</para></td>
           </tr>
           <tr>
-            <td><para>IN-USE</para></td>
+            <td><para>in-use</para></td>
             <td><para>The volume is attached to an
               instance.</para></td>
           </tr>
           <tr>
-            <td><para>DELETING</para></td>
+            <td><para>deleting</para></td>
             <td><para>The volume is being deleted.</para></td>
           </tr>
           <tr>
-            <td><para>ERROR</para></td>
-            <td><para>An error has occurred with the
-              volume.</para></td>
+            <td><para>error</para></td>
+            <td><para>An error occurred during volume
+              creation.</para></td>
           </tr>
           <tr>
-            <td><para>ERROR_DELETING</para></td>
-            <td><para>There was an error deleting the
-              volume.</para></td>
+            <td><para>error_deleting</para></td>
+            <td><para>An error occurred during volume
+              deletion.</para></td>
           </tr>
           <tr>
-            <td><para>BACKING-UP</para></td>
+            <td><para>backing-up</para></td>
             <td><para>The volume is being backed up.</para></td>
           </tr>
           <tr>
-            <td><para>RESTORING-BACKUP</para></td>
+            <td><para>restoring-backup</para></td>
             <td><para>A backup is being restored to the
               volume.</para></td>
           </tr>
           <tr>
-            <td><para>ERROR_RESTORING</para></td>
-            <td><para>There was an error restoring a backup to the
+            <td><para>error_restoring</para></td>
+            <td><para>An error occurred during backup restoration to a
                 volume.</para></td>
           </tr>
         </tbody>
@@ -838,29 +838,30 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
         <tbody>
           <tr>
             <td>
-              <para>CREATING</para></td>
+              <para>creating</para></td>
             <td><para>The snapshot is being created.</para></td>
           </tr>
           <tr>
             <td>
-              <para>AVAILABLE</para></td>
+              <para>available</para></td>
             <td><para>The snapshot is ready to be used.</para></td>
           </tr>
           <tr>
             <td>
-              <para>DELETING</para></td>
+              <para>deleting</para></td>
             <td><para>The snapshot is being deleted.</para></td>
           </tr>
           <tr>
             <td>
-              <para>ERROR</para></td>
-            <td><para>An error occurred with the snapshot.</para></td>
+              <para>error</para></td>
+            <td><para>An error occurred during snapshot
+                creation.</para></td>
           </tr>
           <tr>
             <td>
-              <para>ERROR_DELETING</para></td>
-            <td><para>There was an error deleting the
-              snapshot.</para></td>
+              <para>error_deleting</para></td>
+            <td><para>An error occurred during snapshot
+                deletion.</para></td>
           </tr>
         </tbody>
       </informaltable>
@@ -913,37 +914,37 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
           <tbody>
             <tr>
               <td>
-                <para>CREATING</para></td>
+                <para>creating</para></td>
               <td><para>The backup is being created.</para></td>
             </tr>
             <tr>
               <td>
-                <para>AVAILABLE</para></td>
+                <para>available</para></td>
               <td><para>The backup is ready to be restored to a
                   volume.</para></td>
             </tr>
             <tr>
               <td>
-                <para>DELETING</para></td>
+                <para>deleting</para></td>
               <td><para>The backup is being deleted.</para></td>
             </tr>
             <tr>
               <td>
-                <para>ERROR</para></td>
+                <para>error</para></td>
               <td><para>An error has occurred with the
                 backup.</para></td>
             </tr>
             <tr>
               <td>
-                <para>RESTORING</para></td>
+                <para>restoring</para></td>
               <td><para>The backup is being restored to a
                   volume.</para></td>
             </tr>
             <tr>
               <td>
-                <para>ERROR_RESTORING</para></td>
-              <td><para>There was an error restoring a backup to the
-                  volume.</para></td>
+                <para>error_restoring</para></td>
+              <td><para>An error occurred during backup restoration to
+                  a volume.</para></td>
             </tr>
           </tbody>
         </informaltable>
@@ -1199,7 +1200,7 @@ Accept: application/json</literallayout>
             <title>Restore backup response: JSON</title>
             <programlisting language="json"><xi:include href="samples/backup_restore_response.json" parse="text"/></programlisting>
           </example>
-          <para>Returns status code <returnvalue>202</returnvalue> on
+          <para>Returns the <returnvalue>202</returnvalue> status code on
             success.</para>
         </section>
       </section>
