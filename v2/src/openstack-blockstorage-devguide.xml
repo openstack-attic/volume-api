@@ -807,16 +807,16 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
       </informaltable>
       <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#volumes">
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#volumes">
           <wadl:method href="createVolume"/>
           <wadl:method href="getVolumesSimple"/>
         </wadl:resource>
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#detail">
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#detail">
           <wadl:method href="getVolumesDetail"/>
         </wadl:resource>
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#volume_id">
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#volume_id">
           <wadl:method href="getVolume"/>
           <wadl:method href="updateVolume"/>
           <wadl:method href="deleteVolume"/>
@@ -868,11 +868,11 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
       </informaltable>
       <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#snapshots"/>
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#snapshots"/>
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#detail-snapshot"/>
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#detail-snapshot"/>
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#snapshot_id"
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#snapshot_id"
         />
       </wadl:resources>
     </section>
@@ -880,11 +880,11 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
       <title>Volume types</title>
       <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#types">
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#types">
           <wadl:method href="getVolumeTypes"/>
         </wadl:resource>
         <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api.wadl#volume_type_id">
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#volume_type_id">
           <wadl:method href="getVolumeType"/>
         </wadl:resource>
       </wadl:resources>
