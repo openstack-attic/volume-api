@@ -78,6 +78,17 @@ format="SVG" scale="60"/>
     <revhistory>
       <revision>
         <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
+        <date>2014-05-01</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Add Block Storage extensions to the API operations
+                chapter.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
         <date>2014-02-23</date>
         <revdescription>
           <itemizedlist spacing="compact">
@@ -888,6 +899,53 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
           <wadl:method href="getVolumeType"/>
         </wadl:resource>
       </wadl:resources>
+    </section>
+    <section xml:id="qos-cinder-v2">
+      <title>Quality of service (QoS) specifications
+        (qos-specs)</title>
+      <para>Administrators only, depending on policy settings. Create,
+        list, show details for, associate, disassociate, and delete
+        quality of service (QoS) specifications.</para>
+      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-qos-v2.wadl#qos-specs">
+          <wadl:method href="#createQoSSpec"/>
+          <wadl:method href="#listQoSSpecs"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-qos-v2.wadl#qos_id"/>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-qos-v2.wadl#associate">
+          <wadl:method href="#associateQoSSpec"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-qos-v2.wadl#disassociate">
+          <wadl:method href="#disassociateQoSSpec"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-qos-v2.wadl#disassociate_all">
+          <wadl:method href="#disassociateQoSSpecAll"/>
+        </wadl:resource>
+        <wadl:resource
+          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-qos-v2.wadl#associations">
+          <wadl:method href="#getQoSAssociations"/>
+        </wadl:resource>
+      </wadl:resources>
+    </section>
+    <section xml:id="ext-os-quota-sets-cinder">
+      <title>Quota sets extension (os-quota-sets)</title>
+      <para>Administrators only, depending on policy settings. View,
+        update, and delete quotas for a tenant.</para>
+      <wadl:resources
+        href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-quota-sets.wadl"
+        xmlns:wadl="http://wadl.dev.java.net/2009/02"/>
+    </section>
+    <section xml:id="ext-os-limits-cinder">
+      <title>Limits extension (limits)</title>
+      <para>Show absolute limits for a tenant.</para>
+      <wadl:resources
+        href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/os-limits.wadl"
+        xmlns:wadl="http://wadl.dev.java.net/2009/02"/>
     </section>
     <section xml:id="Backups">
       <title>Backups extension</title>
