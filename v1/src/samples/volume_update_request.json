@@ -1,9 +1,9 @@
 {
-   "volume":{
-      "display_name":"vol-002",
-      "display_description":"This is yet, another volume.",
-      "metadata":{
-         "contents":"junk"
-      }
-   }
+    "volume": {
+        "display_name": "vol-002",
+        "display_description": "This is yet, another volume.",
+        "metadata": {
+            "contents": "junk"
+        }
+    }
 }
