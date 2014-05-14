@@ -1,31 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+  <parent>
+    <groupId>org.openstack.docs</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>org.openstack.docs</groupId>
-  <artifactId>openstack-block-storage-api-guide</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <artifactId>openstack-v1</artifactId>
   <packaging>jar</packaging>
-  <name>OpenStack Block Storage Service Developer Guide v1.0</name>
+  <name>OpenStack Block Storage API v1 Reference</name>
+  <properties>
+    <!-- This is set by Jenkins according to the branch. -->
+    <release.path.name>local</release.path.name>
+    <comments.enabled>1</comments.enabled>
+  </properties>
   <!-- ################################################ -->
   <!-- USE "mvn clean generate-sources" to run this POM -->
   <!-- ################################################ -->
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <plugins>
-
+    <plugins>    
       <plugin>
         <groupId>com.rackspace.cloud.api</groupId>
         <artifactId>clouddocs-maven-plugin</artifactId>
-        <version>1.15.0</version>
+        <!-- <version>1.15.0</version>-->
+        <!-- version is in ../pom.xml -->
         <executions>
           <execution>
             <id>generate-webhelp</id>
@@ -43,24 +44,23 @@
                 appendix  toc,title
                 article/appendix  nop
                 article   toc,title
-                book      title,figure,table,example,equation
-                chapter   toc,title
+                book      toc,title,figure,table,example,equation
+                chapter   toc
+                section   toc
                 part      toc,title
-                preface   toc,title
+                preface   toc
                 qandadiv  toc
                 qandaset  toc
                 reference toc,title
                 set       toc,title
               </generateToc>
-              <!-- The following elements sets the autonumbering of sections in output for chapter numbers but no numbered sections-->
-              <!--<sectionAutolabel>0</sectionAutolabel>
-              <sectionLabelIncludesComponentLabel>0</sectionLabelIncludesComponentLabel>-->
-
+              <chapterAutolabel>1</chapterAutolabel>
+              <sectionAutolabel>0</sectionAutolabel>
+              <tocSectionDepth>1</tocSectionDepth>
               <webhelpDirname>1.0</webhelpDirname>
               <targetDirectory>${basedir}/target/docbkx/webhelp/api/openstack-block-storage</targetDirectory>
               <includeDateInPdfFilename>0</includeDateInPdfFilename>
-              <pdfFilenameBase>openstack-blockstorage-devguide-1.0</pdfFilenameBase>
-
+              <pdfFilenameBase>openstack-blockstorage-devguide-1.0</pdfFilenameBase>     
             </configuration>
           </execution>
           <execution>
@@ -80,8 +80,7 @@
                 </delete>
               </postProcess>
             </configuration>
-          </execution>
-
+          </execution>      
         </executions>
         <configuration>
           <!-- These parameters apply to pdf and webhelp -->
@@ -93,30 +92,7 @@
           <profileSecurity>reviewer</profileSecurity>
           <branding>openstack</branding>
         </configuration>
-      </plugin>
-
+      </plugin>  
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>Rackspace Research Repositories</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>rackspace-research</id>
-          <name>Rackspace Research Repository</name>
-          <url>http://maven.research.rackspacecloud.com/content/groups/public/</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>rackspace-research</id>
-          <name>Rackspace Research Repository</name>
-          <url>http://maven.research.rackspacecloud.com/content/groups/public/</url>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-  </profiles>
 </project>

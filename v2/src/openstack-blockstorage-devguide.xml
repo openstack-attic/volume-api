@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book [
-<!-- Some useful entities borrowed from HTML -->
-<!ENTITY ndash  "&#x2013;">
-<!ENTITY mdash  "&#x2014;">
-<!ENTITY hellip "&#x2026;">
-
 <!-- Useful for describing APIs -->
 <!ENTITY GET    '<command xmlns="http://docbook.org/ns/docbook">GET</command>'>
 <!ENTITY PUT    '<command xmlns="http://docbook.org/ns/docbook">PUT</command>'>
@@ -14,19 +9,12 @@
 <!ENTITY API   'Block Storage API v2.0'>
 <!ENTITY VERSION   'v2'>
 <!ENTITY PRODABBV "">
-
-<!-- changing authentication endpoints; define entities for US & UK rather than maintaining in text -->
-<!ENTITY ENDPOINT-US "https://auth.api.openstackcloud.com/v2.0/">
-<!ENTITY ENDPOINT-UK "https://lon.identity.api.openstackcloud.com/v1.1/">
-
 <!ENTITY CHECK  '<inlinemediaobject xmlns="http://docbook.org/ns/docbook">
 <imageobject>
 <imagedata fileref="img/Check_mark_23x20_02.svg"
 format="SVG" scale="60"/>
 </imageobject>
 </inlinemediaobject>'>
-
-
 <!ENTITY ARROW  '<inlinemediaobject xmlns="http://docbook.org/ns/docbook">
 <imageobject>
 <imagedata fileref="img/Arrow_east.svg"
