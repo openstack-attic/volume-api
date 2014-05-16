@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>openstack-v2</artifactId>
   <packaging>jar</packaging>
-  <name>OpenStack Block Storage API v2 and Extensions Reference</name>
+  <name>OpenStack Block Storage API v2 Reference</name>
   <properties>
     <!-- This is set by Jenkins according to the branch. -->
     <release.path.name>local</release.path.name>
@@ -25,7 +25,6 @@
       <plugin>
         <groupId>com.rackspace.cloud.api</groupId>
         <artifactId>clouddocs-maven-plugin</artifactId>
-       <!-- <version>1.15.0</version>-->
         <!-- version is in ../pom.xml -->
         <executions>
           <execution>

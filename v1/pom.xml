@@ -25,7 +25,6 @@
       <plugin>
         <groupId>com.rackspace.cloud.api</groupId>
         <artifactId>clouddocs-maven-plugin</artifactId>
-        <!-- <version>1.15.0</version>-->
         <!-- version is in ../pom.xml -->
         <executions>
           <execution>
