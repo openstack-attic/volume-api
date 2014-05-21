@@ -59,7 +59,7 @@
               <webhelpDirname>1.0</webhelpDirname>
               <targetDirectory>${basedir}/target/docbkx/webhelp/api/openstack-block-storage</targetDirectory>
               <includeDateInPdfFilename>0</includeDateInPdfFilename>
-              <pdfFilenameBase>openstack-blockstorage-devguide-1.0</pdfFilenameBase>
+              <pdfFilenameBase>openstack-blockstorage-api-ref</pdfFilenameBase>
             </configuration>
           </execution>
           <execution>
@@ -84,9 +84,9 @@
         <configuration>
           <!-- These parameters apply to pdf and webhelp -->
           <xincludeSupported>true</xincludeSupported>
-          <sourceDirectory>src</sourceDirectory>
+          <sourceDirectory>.</sourceDirectory>
           <includes>
-            openstack-blockstorage-devguide.xml
+            bk_blockstorage_api_ref_v1.xml
           </includes>
           <profileSecurity>reviewer</profileSecurity>
           <branding>openstack</branding>

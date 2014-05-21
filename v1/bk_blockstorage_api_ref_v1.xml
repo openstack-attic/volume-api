@@ -299,13 +299,12 @@ format="SVG" scale="60"/>
         representation that can be used to efficiently determine when
         the state of services has changed.</para>
       <table rules="all">
-        <caption>Response Formats</caption>
-        <?dbfo keep-together="always"?>
+        <caption>Response formats</caption>
         <thead>
           <tr align="center">
             <td>Format</td>
-            <td>Accept Header</td>
-            <td>Query Extension</td>
+            <td>Accept header</td>
+            <td>Query extension</td>
             <td>Default</td>
           </tr>
         </thead>
@@ -384,7 +383,7 @@ format="SVG" scale="60"/>
           for all API operations for all &GET;, &POST;, &PUT;, and
           &DELETE; calls for volumes:</para>
         <table rules="all">
-          <caption>Default Rate Limits</caption>
+          <caption>Default rate limits</caption>
           <thead>
             <tr align="center">
               <td colspan="1">Verb</td>
@@ -442,7 +441,7 @@ format="SVG" scale="60"/>
         <para>Refer to the following table for the absolute limits
           that are set.</para>
         <table rules="all">
-          <caption>Absolute Limits</caption>
+          <caption>Absolute limits</caption>
           <col width="120pt"/>
           <col width="201pt"/>
           <col width="50pt"/>
@@ -479,7 +478,7 @@ format="SVG" scale="60"/>
         <programlisting>2011-05-19T08:07:08-05:00</programlisting>
       </example>
       <table rules="all">
-        <caption>Explanation of Date/Time Format Codes</caption>
+        <caption>Date and time format codes</caption>
         <thead>
           <tr>
             <td>Code</td>

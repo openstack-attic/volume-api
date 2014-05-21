@@ -5,7 +5,7 @@
 <!ENTITY PUT    '<command xmlns="http://docbook.org/ns/docbook">PUT</command>'>
 <!ENTITY POST   '<command xmlns="http://docbook.org/ns/docbook">POST</command>'>
 <!ENTITY DELETE '<command xmlns="http://docbook.org/ns/docbook">DELETE</command>'>
-<!ENTITY PRODNAME "OpenStack Block Storage Service">
+<!ENTITY PRODNAME "OpenStack Block Storage">
 <!ENTITY API   'Block Storage API v2.0'>
 <!ENTITY VERSION   'v2'>
 <!ENTITY PRODABBV "">
@@ -30,9 +30,9 @@ format="SVG" scale="60"/>
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:db="http://docbook.org/ns/docbook" version="5.0"
   xml:id="openstack-blockstorage-devguide">
-  <title>OpenStack Block Storage Service API v2 Reference</title>
+  <title>OpenStack Block Storage API v2 Reference</title>
   <?rax title.font.size="28px" subtitle.font.size="28px"?>
-  <titleabbrev>Block Storage Service API Reference</titleabbrev>
+  <titleabbrev>Block Storage API Reference</titleabbrev>
   <info>
     <author>
       <personname>
@@ -48,8 +48,8 @@ format="SVG" scale="60"/>
       <year>2014</year>
       <holder>OpenStack Foundation</holder>
     </copyright>
-    <releaseinfo>API v2</releaseinfo>
-    <productname>OpenStack Block Storage Service</productname>
+    <releaseinfo>API v2 and extensions</releaseinfo>
+    <productname>OpenStack Block Storage</productname>
     <pubdate/>
     <legalnotice role="apache2">
       <annotation>
@@ -59,9 +59,8 @@ format="SVG" scale="60"/>
     </legalnotice>
     <abstract>
       <para>This document is for software developers who develop
-        applications by using the OpenStack Block Storage Service
-        Application Programming Interface
-        (<abbrev>API</abbrev>).</para>
+        applications by using the OpenStack Block Storage Application
+        Programming Interface (<abbrev>API</abbrev>).</para>
     </abstract>
     <revhistory>
       <revision>
@@ -182,8 +181,8 @@ format="SVG" scale="60"/>
     xmlns:m="http://www.w3.org/1998/Math/MathML"
     xmlns:html="http://www.w3.org/1999/xhtml">
     <title>Overview</title>
-    <para>OpenStack Block Storage Service is a block-level storage
-      solution that enables you to: <itemizedlist>
+    <para>OpenStack Block Storage is a block-level storage solution
+      that enables you to: <itemizedlist>
         <listitem>
           <para>Mount drives to OpenStack Cloud Servers<trademark/> to
             scale storage without paying for more compute
@@ -515,9 +514,8 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     </section>
     <section xml:id="datetimeformat">
       <title>Date and time format</title>
-      <para>The Block Storage Service uses an ISO-8601 compliant date
-        format for the display and consumption of date time
-        values.</para>
+      <para>Block Storage uses an ISO-8601 compliant date format for
+        the display and consumption of date time values.</para>
       <example>
         <title>DB service date and time format</title>
         <programlisting>yyyy-MM-dd'T'HH:mm:ss.SSSZ</programlisting>
@@ -577,10 +575,10 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
     </section>
     <section xml:id="DB_faults">
       <title>Faults</title>
-      <para>When an error occurs, the Block Storage Service returns a
-        fault object containing an HTTP error response code that
-        denotes the type of error. The response body returns
-        additional information about the fault.</para>
+      <para>When an error occurs, Block Storage returns a fault object
+        containing an HTTP error response code that denotes the type
+        of error. The response body returns additional information
+        about the fault.</para>
       <para>The following table lists possible fault types with their
         associated error codes and descriptions.</para>
       <informaltable rules="all" width="100%">
@@ -660,7 +658,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
           <tr>
             <td><code>serviceUnavailable</code></td>
             <td>503</td>
-            <td>The Block Storage Service is not available.</td>
+            <td>Block Storage is not available.</td>
           </tr>
         </tbody>
       </informaltable>
