@@ -400,7 +400,7 @@ Content-Length: 187
 Content-Type: application/xml
 X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
 
-&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;?xml version='1.0' encoding='UTF-7'?&gt;
   &lt;volume_types&gt;
       &lt;volume_type id="1" name="SATA"&gt;
           &lt;extra_specs/&gt;
@@ -410,6 +410,74 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
       &lt;/volume_type&gt;
   &lt;/volume_types&gt;</literallayout>
       </example>
+    </section>
+    <section xml:id="Response_status_codes-d1e904">
+      <title>HTTP response status codes</title>
+      <para>When an error occurs, Block Storage returns a response code
+        containing an HTTP error response code that denotes the type
+        of error. The response body returns additional information
+        about the fault.</para>
+      <para>The following table lists possible
+        error codes and descriptions.</para>
+      <informaltable rules="all" width="100%">
+        <col width="20%"/>
+        <col width="40%"/>
+        <col width="40%"/>
+        <thead>
+          <tr align="center">
+            <td>Response status code</td>
+            <td>Description</td>
+            <td>Expected response</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>200</td>
+            <td>Generic successful response, expect a body.</td>
+            <td>Expect a response body.</td>
+          </tr>
+          <tr>
+            <td>201</td>
+            <td>Entity created, expect a body and a location header.</td>
+            <td>Entity created. Expect a location header and a response body.</td>
+          </tr>
+          <tr>
+            <td>204</td>
+            <td>Successful response without body.</td>
+            <td>No response body.</td>
+          </tr>
+          <tr>
+            <td>301</td>
+            <td>Redirection.</td>
+            <td>Redirection.</td>
+          </tr>
+          <tr>
+            <td>400</td>
+            <td>Invalid request (syntax, value, etc).</td>
+            <td>Request was not valid.</td>
+          </tr>
+          <tr>
+            <td>401</td>
+            <td>Unauthenticated client.</td>
+            <td>Unauthenticated client.</td>
+          </tr>
+          <tr>
+            <td>403</td>
+            <td>Authenticated client unable to perform action.</td>
+            <td>Authenticated client unable to perform action.</td>
+          </tr>
+          <tr>
+            <td>409</td>
+            <td>That action is impossible due to some (possibly permanent) circumstance.</td>
+            <td>Action cannot be completed due to situation that is possibly permanent.</td>
+          </tr>
+          <tr>
+            <td>415</td>
+            <td>Unsupported type.</td>
+            <td>Type details.</td>
+          </tr>
+        </tbody>
+      </informaltable>
     </section>
     <section xml:id="Limits-d1e1208">
       <title>Limits</title>
