@@ -64,13 +64,24 @@ format="SVG" scale="60"/>
     </abstract>
     <revhistory>
       <revision>
+        <date>2014-06-17</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Added common response status codes returned by
+                Block Storage.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
         <!-- ... continue addding more revisions here as you change this document using the markup shown below... -->
         <date>2014-05-01</date>
         <revdescription>
           <itemizedlist spacing="compact">
             <listitem>
-              <para>Add Block Storage extensions to the API operations
-                chapter.</para>
+              <para>Added Block Storage extensions to the API
+                operations chapter.</para>
             </listitem>
           </itemizedlist>
         </revdescription>
@@ -400,7 +411,7 @@ Content-Length: 187
 Content-Type: application/xml
 X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
 
-&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;?xml version='1.0' encoding='UTF-7'?&gt;
   &lt;volume_types&gt;
       &lt;volume_type id="1" name="SATA"&gt;
           &lt;extra_specs/&gt;
@@ -411,6 +422,7 @@ X-Compute-Request-Id: req-8e0295cd-a283-46e4-96da-cae05cbfd1c7
   &lt;/volume_types&gt;</literallayout>
       </example>
     </section>
+    <xi:include href="section_http_status_codes.xml"/>
     <section xml:id="Limits-d1e1208">
       <title>Limits</title>
       <para>All accounts, by default, have a preconfigured set of

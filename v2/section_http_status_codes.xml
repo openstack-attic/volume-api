@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:m="http://www.w3.org/1998/Math/MathML"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:db="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="Response_status_codes-d1e904">
+    <title>HTTP response status codes</title>
+    <para>When an error occurs, Block Storage returns an HTTP error
+        response code that denotes the type of error. Some errors
+        returns a response body, which returns additional information
+        about the error.</para>
+    <para>The following table describes the possible status
+        codes:</para>
+    <informaltable rules="all" width="100%">
+        <col width="20%"/>
+        <col width="40%"/>
+        <col width="40%"/>
+        <thead>
+            <tr>
+                <th>Response status code</th>
+                <th>Description</th>
+                <th>Response body?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>200</td>
+                <td>Generic successful response.</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>201</td>
+                <td>Entity created.</td>
+                <td>Yes. Expect a location header and a response
+                    body.</td>
+            </tr>
+            <tr>
+                <td>204</td>
+                <td>Successful response without body.</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>301</td>
+                <td>Redirection.</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>Invalid request (syntax, value, and so on).</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>401</td>
+                <td>Unauthenticated client.</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>403</td>
+                <td>Authenticated client unable to perform
+                    action.</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>409</td>
+                <td>Action cannot be completed due to situation that
+                    is possibly permanent.</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>415</td>
+                <td>Unsupported type.</td>
+                <td>Yes, with type details.</td>
+            </tr>
+        </tbody>
+    </informaltable>
+</section>
