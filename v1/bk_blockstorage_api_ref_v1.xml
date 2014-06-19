@@ -69,11 +69,22 @@ format="SVG" scale="60"/>
       xmlns:m="http://www.w3.org/1998/Math/MathML"
       xmlns:html="http://www.w3.org/1999/xhtml">
       <revision>
+        <date>2014-06-17</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Added common response status codes returned by
+                Block Storage.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
         <date>2013-02-18</date>
         <revdescription>
           <itemizedlist spacing="compact">
             <listitem>
-              <para>Updating v1 documentation; .</para>
+              <para>Updated v1 documentation.</para>
             </listitem>
           </itemizedlist>
         </revdescription>
@@ -83,7 +94,7 @@ format="SVG" scale="60"/>
         <revdescription>
           <itemizedlist spacing="compact">
             <listitem>
-              <para>Edits to initial version; .</para>
+              <para>Edits to initial version.</para>
             </listitem>
           </itemizedlist>
         </revdescription>
@@ -360,6 +371,7 @@ format="SVG" scale="60"/>
      </literallayout>
       </example>
     </section>
+    <xi:include href="../v2/section_http_status_codes.xml"/>
     <section xml:id="Limits-d1e1208">
       <title>Limits</title>
       <para>All accounts, by default, have a preconfigured set of
@@ -628,9 +640,7 @@ format="SVG" scale="60"/>
 Content-Type: application/xml
 Content-Length: 121
 Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
-        <programlisting language="xml">
-          <xi:include href="samples/db-faults-instanceFault.xml" parse="text"/>
-      </programlisting>
+        <programlisting language="xml"><xi:include href="samples/db-faults-instanceFault.xml" parse="text"/></programlisting>
       </example>
       <example>
         <title>Example fault: JSON response</title>
@@ -638,9 +648,7 @@ Date: Mon, 28 Nov 2011 18:19:37 GMT</computeroutput></screen>
 Content-Length: 120
 Content-Type: application/json; charset=UTF-8
 Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
-        <programlisting language="json">
-          <xi:include href="samples/db-faults-instanceFault.json" parse="text"/>
-        </programlisting>
+        <programlisting language="json"><xi:include href="samples/db-faults-instanceFault.json" parse="text"/></programlisting>
       </example>
       <para>The error code (<code>code</code>) is returned in the body
         of the response for convenience. The <code>message</code>
@@ -656,7 +664,7 @@ Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
         of error.</para>
       <para><?rax-fo keep-with-next?>The following
           <code>badRequest</code> examples show errors when the volume
-        size is not valie:</para>
+        size is not valid:</para>
       <example>
         <title>Example badRequest fault and volume size errors: XML
           request</title>
@@ -675,7 +683,7 @@ Content-Type: application/json; charset=UTF-8
 Date: Tue, 29 Nov 2011 00:33:48 GMT</computeroutput></screen>
         <programlisting language="json"><xi:include href="samples/db-faults-badRequest.json" parse="text"/></programlisting>
       </example>
-      <para>The next two examples show <code>itemNotFound</code>
+      <para>The following examples show <code>itemNotFound</code>
         errors:</para>
       <example>
         <title>Example itemNotFound fault: XML response</title>
