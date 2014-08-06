@@ -69,6 +69,16 @@ format="SVG" scale="60"/>
       xmlns:m="http://www.w3.org/1998/Math/MathML"
       xmlns:html="http://www.w3.org/1999/xhtml">
       <revision>
+        <date>2014-08-05</date>
+        <revdescription>
+          <itemizedlist spacing="compact">
+            <listitem>
+              <para>Removes WADL references.</para>
+            </listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+      <revision>
         <date>2014-06-17</date>
         <revdescription>
           <itemizedlist spacing="compact">
@@ -708,115 +718,8 @@ Date: Tue, 29 Nov 2011 00:35:24 GMT</computeroutput></screen>
     xmlns:m="http://www.w3.org/1998/Math/MathML"
     xmlns:html="http://www.w3.org/1999/xhtml">
     <title>API operations</title>
-    <section xml:id="Volumes">
-      <title>Volumes</title>
-      <para>A volume is a detachable block storage device. You can
-        think of it as a USB hard drive. It can only be attached to
-        one instance at a time.</para>
-      <para><?rax-fo keep-with-next?>When making an API call to
-        create, list, or delete volume(s), the following status values
-        are possible:</para>
-      <itemizedlist spacing="compact">
-        <listitem>
-          <para>CREATING &ndash; The volume is being created.</para>
-        </listitem>
-        <listitem>
-          <para>AVAILABLE &ndash; The volume is read to be attached to
-            an instance.</para>
-        </listitem>
-        <listitem>
-          <para>ATTACHING &ndash; The volume is attaching to an
-            instance.</para>
-        </listitem>
-        <listitem>
-          <para>IN-USE &ndash; The volume is attached to an
-            instance.</para>
-        </listitem>
-        <listitem>
-          <para>DELETING &ndash; The volume is being deleted.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR &ndash; An error has occurred with the
-            volume.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR_DELETING &ndash; There was an error deleting the
-            volume.</para>
-        </listitem>
-      </itemizedlist>
-      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/volume-api-v1.wadl#volumes">
-          <wadl:method href="createVolume"/>
-          <wadl:method href="getVolumesSimple"/>
-        </wadl:resource>
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/volume-api-v1.wadl#detail-volume">
-          <wadl:method href="getVolumesDetail"/>
-        </wadl:resource>
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/volume-api-v1.wadl#volume_id">
-          <wadl:method href="getVolume"/>
-          <wadl:method href="deleteVolume"/>
-        </wadl:resource>
-      </wadl:resources>
-    </section>
-    <section xml:id="Snapshots">
-      <title>Snapshots</title>
-      <para><?rax-fo keep-with-next?>A snapshot is a point in time
-        copy of the data contained in a volume.</para>
-      <para>When making an API call to create, list, or delete
-        snapshot(s), the following status values are possible:</para>
-      <itemizedlist spacing="compact">
-        <listitem>
-          <para>CREATING &ndash; The snapshot is being created.</para>
-        </listitem>
-        <listitem>
-          <para>AVAILABLE &ndash; The snapshot is ready to be
-            used.</para>
-        </listitem>
-        <listitem>
-          <para>DELETING &ndash; The snapshot is being deleted.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR &ndash; An error occurred with the
-            snapshot.</para>
-        </listitem>
-        <listitem>
-          <para>ERROR_DELETING &ndash; There was an error deleting the
-            snapshot.</para>
-        </listitem>
-      </itemizedlist>
-      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/volume-api-v1.wadl#snapshots"/>
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/volume-api-v1.wadl#detail-snapshots"/>
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/volume-api-v1.wadl#snapshot_id"
-        />
-      </wadl:resources>
-    </section>
-    <section xml:id="Volume_Types">
-      <title>Volume types</title>
-      <wadl:resources xmlns:wadl="http://wadl.dev.java.net/2009/02">
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#types">
-          <wadl:method href="getVolumeTypes"/>
-        </wadl:resource>
-        <wadl:resource
-          href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v2/volume-api-v2.wadl#volume_type_id">
-          <wadl:method href="getVolumeType"/>
-        </wadl:resource>
-      </wadl:resources>
-    </section>
-    <section xml:id="ext-os-quota-sets-cinder">
-      <title>Quota sets extension (os-quota-sets)</title>
-      <para>Administrators only, depending on policy settings. View,
-        update, and delete quotas for a tenant.</para>
-      <wadl:resources
-        href="http://git.openstack.org/cgit/openstack/api-site/plain/api-ref/src/wadls/volume-api/src/v1/os-quota-sets.wadl"
-        xmlns:wadl="http://wadl.dev.java.net/2009/02"/>
-    </section>
+    <para>For information about Block Storage API operations, see <link
+      xlink:href="http://developer.openstack.org/api-ref-blockstorage-v1.html"
+      ><citetitle>Block Storage API v1 (CURRENT)</citetitle></link>.</para>
   </chapter>
 </book>
