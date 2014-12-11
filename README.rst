@@ -1,6 +1,13 @@
 Volume API
 ++++++++++
-This repository contains the RESTful API information for the OpenStack
+
+This repository is now frozen-in-time and will not accept new patches. To
+update Block Storage API information, please submit patches to
+http://git.openstack.org/cgit/openstack/cinder-specs for a new API feature
+and to http://git.openstack.org/cgit/openstack/api-site for implemented API
+information.
+
+It was the original holder for API information for the OpenStack
 Block Storage, also known as Cinder. The Cinder project provides open
 source block-based storage component for cloud computing.
 
